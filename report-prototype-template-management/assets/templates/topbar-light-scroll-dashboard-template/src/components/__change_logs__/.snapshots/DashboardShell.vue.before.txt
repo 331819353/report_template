@@ -5,13 +5,7 @@ import { customActionRegistry } from '../actions/registry';
 import { resolveDataSource } from '../dataSources/registry';
 import type { DashboardActionConfig, DashboardExpressionValue, DashboardWidgetActionEvent } from '../types/actions';
 import type { DashboardFilterScope } from '../types/data-source';
-import type {
-  DashboardConfig,
-  DashboardFilterGroup,
-  DashboardFilterOption,
-  DashboardPageConfig,
-  ThemeMode,
-} from '../types/dashboard';
+import type { DashboardConfig, DashboardFilterGroup, DashboardFilterOption, ThemeMode } from '../types/dashboard';
 import { resolveDashboardParams, resolveDashboardValue } from '../utils/dashboardExpressions';
 import WidgetRenderer from '../widgets/WidgetRenderer.vue';
 import {
@@ -51,15 +45,16 @@ interface BlockState {
 
 interface PersistedDashboardState {
   filters?: Record<string, string>;
-  topbarNavId?: string;
   scrollX?: number;
   scrollY?: number;
 }
 
 const emptyGridMarks = new Set(['.', ' ']);
-const fallbackPageId = 'single-page';
+const pageId = 'single-page';
+const pageTitle = computed(() => props.config.screen.title);
 const dashboardStateStorageKey = 'topbar-light-scroll-dashboard:runtime-state';
 const topbarNavItems = computed(() => props.config.screen.topbarNav ?? []);
+const activeTopbarNavId = ref(props.config.screen.defaultTopbarNavId ?? topbarNavItems.value[0]?.id ?? '');
 
 const getStaticFilterOptions = (group: DashboardFilterGroup) => group.options ?? [];
 
@@ -176,19 +171,6 @@ const buildLayoutBlocks = (rowsToBuild: string[]) => {
 const persistedDashboardState = readPersistedDashboardState();
 const defaultFilters = getDefaultFiltersFromGroups(props.config.filters);
 
-const getDefaultTopbarNavId = () => props.config.screen.defaultTopbarNavId ?? topbarNavItems.value[0]?.id ?? fallbackPageId;
-
-const isKnownTopbarNavId = (navId?: string) =>
-  Boolean(navId && (props.config.pages?.[navId] || topbarNavItems.value.some((item) => item.id === navId)));
-
-const getInitialTopbarNavId = () => {
-  if (isKnownTopbarNavId(persistedDashboardState.topbarNavId)) {
-    return persistedDashboardState.topbarNavId as string;
-  }
-
-  return getDefaultTopbarNavId();
-};
-
 const getInitialFilters = () =>
   Object.fromEntries(
     props.config.filters.map((group) => [
@@ -199,7 +181,6 @@ const getInitialFilters = () =>
 
 const getInitialTheme = (): ThemeMode => props.config.screen.defaultTheme;
 
-const activeTopbarNavId = ref(getInitialTopbarNavId());
 const activeFilters = ref<Record<string, string>>(getInitialFilters());
 const filterOptionMap = ref<Record<string, DashboardFilterOption[]>>({});
 const widgetDataMap = ref<Record<string, unknown[]>>({});
@@ -209,11 +190,7 @@ const theme = ref<ThemeMode>(getInitialTheme());
 const pageScrollX = ref(0);
 const scrollTargets: EventTarget[] = [];
 
-const activeTopbarNavItem = computed(() => topbarNavItems.value.find((item) => item.id === activeTopbarNavId.value));
-const activePageId = computed(() => (props.config.pages?.[activeTopbarNavId.value] ? activeTopbarNavId.value : fallbackPageId));
-const activePage = computed<DashboardPageConfig>(() => props.config.pages?.[activeTopbarNavId.value] ?? props.config.page);
-const activePageLabel = computed(() => activeTopbarNavItem.value?.label ?? props.config.screen.title);
-const layoutRows = computed(() => normalizeLayoutRows(activePage.value.layoutRows));
+const layoutRows = computed(() => normalizeLayoutRows(props.config.page.layoutRows));
 const layoutColumnCount = computed(() => Math.max(...layoutRows.value.map((row) => Array.from(row).length), 1));
 const layoutRowCount = computed(() => Math.max(layoutRows.value.length, 1));
 const layoutBlocks = computed<LayoutBlock[]>(() => buildLayoutBlocks(layoutRows.value));
@@ -251,7 +228,7 @@ let filterLoadToken = 0;
 let widgetDataLoadToken = 0;
 let hasInitializedFilters = false;
 
-const getWidgetForBlock = (blockId: string): RegisteredWidgetConfig | undefined => activePage.value.widgets?.[blockId];
+const getWidgetForBlock = (blockId: string): RegisteredWidgetConfig | undefined => props.config.page.widgets?.[blockId];
 
 const isFilterVisibleForWidget = (group: DashboardFilterGroup, widget?: RegisteredWidgetConfig) => {
   const filterScopes = normalizeScope(group.scope);
@@ -276,7 +253,7 @@ const getWidgetFilterScope = (widget?: RegisteredWidgetConfig) => normalizeScope
 
 const getWidgetDataKey = (ownerId: string, blockId: string) => `page:${ownerId}:${blockId}`;
 
-const getWidgetOwnerId = () => activePageId.value;
+const getWidgetOwnerId = () => pageId;
 
 const getWidgetInstanceKey = (blockId: string) => getWidgetDataKey(getWidgetOwnerId(), blockId);
 
@@ -288,9 +265,7 @@ const getBlockState = (blockId: string): BlockState | null => {
   if (!widget) {
     return {
       kind: 'unbound',
-      label: activePageLabel.value,
       title: '建设中',
-      message: `已预留 ${blockId} 模块位。`,
     };
   }
 
@@ -314,8 +289,8 @@ const getLocalFilterOptions = (blockId: string) => (filter: WidgetLocalFilterCon
 
 const getWidgetContext = (blockId: string, widget = getWidgetForBlock(blockId)): WidgetContext => ({
   area: 'page',
-  navId: activePageId.value,
-  navLabel: activePageLabel.value,
+  navId: pageId,
+  navLabel: pageTitle.value,
   blockId,
   filters: getScopedFilters(widget),
   allFilters: activeFilters.value,
@@ -548,14 +523,13 @@ const resolveWidgetData = async (
 const loadWidgetData = async () => {
   const currentToken = ++widgetDataLoadToken;
   const jobs: Array<Promise<readonly [string, unknown[]]>> = [];
-  const ownerId = activePageId.value;
 
-  Object.entries(activePage.value.widgets ?? {}).forEach(([blockId, widget]) => {
+  Object.entries(props.config.page.widgets ?? {}).forEach(([blockId, widget]) => {
     if (!widget) {
       return;
     }
 
-    jobs.push(resolveWidgetData(ownerId, blockId, widget, getWidgetContext(blockId, widget)));
+    jobs.push(resolveWidgetData(pageId, blockId, widget, getWidgetContext(blockId, widget)));
   });
   const entries = await Promise.all(jobs);
 
@@ -613,15 +587,7 @@ const toggleFiltersPanel = () => {
 };
 
 const setActiveTopbarNav = (navId: string) => {
-  if (activeTopbarNavId.value === navId) {
-    return;
-  }
-
   activeTopbarNavId.value = navId;
-  widgetDataMap.value = {};
-  closePanels();
-  window.scrollTo(window.scrollX, 0);
-  syncPageScroll();
 };
 
 
@@ -631,7 +597,6 @@ const persistDashboardState = () => {
       dashboardStateStorageKey,
       JSON.stringify({
         filters: activeFilters.value,
-        topbarNavId: activeTopbarNavId.value,
         scrollX: window.scrollX,
         scrollY: window.scrollY,
       } satisfies PersistedDashboardState),
@@ -770,18 +735,7 @@ watch(
 
 
 watch(
-  topbarNavItems,
-  () => {
-    if (!isKnownTopbarNavId(activeTopbarNavId.value)) {
-      activeTopbarNavId.value = getDefaultTopbarNavId();
-    }
-  },
-  { deep: true },
-);
-
-
-watch(
-  () => activePage.value,
+  () => props.config.page,
   () => {
     void loadWidgetData();
   },
@@ -904,10 +858,10 @@ watch(
       </aside>
 
       <section class="canvas-shell">
-        <section class="placeholder-grid" :aria-label="`${activePageLabel} ${layoutColumnCount}乘${layoutRowCount}内容占位区`">
+        <section class="placeholder-grid" :aria-label="`${layoutColumnCount}乘${layoutRowCount}内容占位区`">
           <div
             v-for="block in layoutBlocks"
-            :key="`${activePageId}:${block.id}`"
+            :key="block.id"
             class="placeholder-cell"
             :style="{
               gridColumn: `${block.columnStart} / ${block.columnEnd}`,

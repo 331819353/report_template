@@ -1,8 +1,7 @@
-# Topbar Scroll Dashboard Templates
+# Topbar Scroll Dashboard Template
 
 Use these assets for standalone, compact, single-theme reports:
 
-- `assets/templates/topbar-dark-scroll-dashboard-template`: dark topbar, Haier-branded overview/diagnostic cockpit feel, one scrollable `8 * N` content grid.
 - `assets/templates/topbar-light-scroll-dashboard-template`: light topbar, office-readable enterprise report feel, one scrollable `8 * N` content grid.
 
 ## Shell
@@ -38,7 +37,7 @@ filters: [],
 
 ## Shared Layout Contract
 
-- This family follows `template-layout-design-system.md`; change shared spacing/radius/title placement there first, then apply it consistently to both light and dark assets.
+- This family follows `template-layout-design-system.md`; change shared spacing/radius/title placement there first, then apply it consistently to the topbar asset.
 - Default content range is `88 -> 1064`; topbar height is `72px`; block gap is `contentGap: 14`.
 - Default block anatomy is `placeholder-cell` -> `placeholder-cell-inner` -> body viewport -> `widget-renderer`; visible block titles and local controls are component-owned.
 - Card padding and card radius are both `8px`; `cellPadding` is `0` for the clean enterprise-card surface.
@@ -47,7 +46,7 @@ filters: [],
 
 - Change `screen.title` for title.
 - Change `assets.logoSrc` for logo.
-- Keep original color logo on the light template and white/light logo on the dark template.
+- Keep original color logo on the light template.
 - Keep filter access through the right-side filter drawer.
 - Do not add tabs, side menus, breadcrumbs, or page switching unless explicitly extending the shell.
 - Edit `page.layoutRows`; widget keys in `page.widgets` must match block characters.
@@ -62,4 +61,4 @@ filters: [],
 - One detail/query dashboard without chapters.
 - Meeting preview or shareable standalone report.
 
-Choose the light template for long reading, operational handoff, detail queries, and table-heavy but single-page reports. Choose the dark template for executive summaries, overview cockpits, anomaly/status pages, and stronger visual atmosphere without fixed big-screen constraints.
+Choose the light template for long reading, operational handoff, detail queries, and table-heavy but single-page reports.

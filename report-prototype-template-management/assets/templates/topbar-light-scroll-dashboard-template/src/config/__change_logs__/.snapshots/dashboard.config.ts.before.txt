@@ -1,7 +1,7 @@
 import type { DashboardConfig } from '../types/dashboard';
 
-// 顶部栏滚动报表模板的唯一入口配置。
-// 新页面通常只需要改这个文件：换 logo、改标题、调整 pages[id].layoutRows、配置筛选项和组件挂载关系。
+// 单页顶部栏报表模板的唯一入口配置。
+// 新页面通常只需要改这个文件：换 logo、改标题、调整 page.layoutRows、配置筛选项和组件挂载关系。
 export const cockpitConfig: DashboardConfig = {
   assets: {
     // 顶部栏左一 logo。浅色背景使用原色 logo。
@@ -12,7 +12,7 @@ export const cockpitConfig: DashboardConfig = {
   screen: {
     // 顶部栏左侧标题。
     title: '经营驾驶舱',
-    // 顶部栏中间导航项。id 会优先绑定到同名 pages[id]；缺省时回退到 page。
+    // 顶部栏中间导航项。当前模板保持单页壳，导航先作为视觉/视角入口预留。
     topbarNav: [
       { id: 'overview', label: '经营概览' },
       { id: 'sales', label: '销售分析' },
@@ -57,7 +57,7 @@ export const cockpitConfig: DashboardConfig = {
     },
   },
 
-  // 默认内容配置。layoutRows 采用 8*N 规则：
+  // 单页内容配置。layoutRows 采用 8*N 规则：
   // 1. 每个字符串代表一行，每个字符代表一列，每行建议保持 8 个字符。
   // 2. 相邻且相同的字符会合并成一个矩形块，例如 "AAAA" 会横向跨四列。
   // 3. 同一个字符上下相邻也会合并，例如两行同列都是 "A" 会纵向合并。
@@ -80,34 +80,6 @@ export const cockpitConfig: DashboardConfig = {
   page: {
     layoutRows: ['AAAABBBB', 'CCDDEEFF', 'gghhiijj'],
     widgets: {},
-  },
-
-  // 轻量多页面配置。每个 key 对应 topbarNav 的 id，先提供不同占位布局，后续可逐页补 widgets。
-  pages: {
-    overview: {
-      layoutRows: ['AAAABBBB', 'CCDDEEFF', 'gghhiijj'],
-      widgets: {},
-    },
-    sales: {
-      layoutRows: ['AAAABBBB', 'CCCCDDDD', 'EEFFGGHH'],
-      widgets: {},
-    },
-    customers: {
-      layoutRows: ['AAAABBCC', 'AAAADDCC', 'EEFFGGHH'],
-      widgets: {},
-    },
-    products: {
-      layoutRows: ['AABBCCDD', 'EEEEFFFF', 'GGGGHHHH'],
-      widgets: {},
-    },
-    channels: {
-      layoutRows: ['AAAABBBB', 'AAAABBBB', 'CCDDEEFF'],
-      widgets: {},
-    },
-    regions: {
-      layoutRows: ['AAAABBCC', 'DDDDBBCC', 'EEEEFFFF'],
-      widgets: {},
-    },
   },
 
   // 筛选项配置。模板默认保持空白，只保留全局传参入口。

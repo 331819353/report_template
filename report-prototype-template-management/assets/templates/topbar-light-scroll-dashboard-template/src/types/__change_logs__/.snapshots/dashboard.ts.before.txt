@@ -86,7 +86,6 @@ export interface DashboardScreenConfig {
 export interface DashboardConfig {
   assets: DashboardAssetConfig;
   screen: DashboardScreenConfig;
-  pages?: Record<string, DashboardPageConfig>;
   page: DashboardPageConfig;
   filters: DashboardFilterGroup[];
 }

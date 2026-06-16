@@ -2,11 +2,11 @@
 
 Use this file when extracting, applying, or reviewing common layout design from bundled report templates. It turns layout details currently scattered across `dashboard.config.ts`, `DashboardShell.vue`, `WidgetRenderer.vue`, and `src/styles.css` into one reusable template contract.
 
-The current bundled assets contain four directories but three layout families:
+The current bundled assets contain three directories and three layout families:
 
 | Layout family | Template assets | Primary use |
 | --- | --- | --- |
-| Topbar scroll dashboard | `topbar-dark-scroll-dashboard-template`, `topbar-light-scroll-dashboard-template` | Single-page scrollable dashboard with top title/control bar. |
+| Topbar scroll dashboard | `topbar-light-scroll-dashboard-template` | Single-page scrollable dashboard with top title/control bar. |
 | Left-nav analytics workbench | `left-nav-analytics-workbench-template` | Multi-page workbench with persistent navigation and scrollable right content. |
 | Frozen-title cockpit | `frozen-title-sci-fi-cockpit-template` | Fixed 1920 * 1080 cockpit with image-backed title band and dark visual framing. |
 

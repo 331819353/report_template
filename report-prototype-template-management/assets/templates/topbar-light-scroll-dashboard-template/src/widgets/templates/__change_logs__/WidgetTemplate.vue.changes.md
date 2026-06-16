@@ -61,3 +61,37 @@
 - Related files: src/components/DashboardShell.vue, src/styles/index.scss, src/widgets/types.ts, src/config/dashboard.config.ts, src/widgets/templates/WidgetTemplate.vue, src/types/actions.ts
 - File snapshot: 276 lines, sha256 `957039630b2303df906e802ea05de2f1ae46f3a362a996390eff3c076f6034c4`
 - Follow-up: none
+
+### v20260616075618 - 2026-06-16T07:56:18.108Z
+
+- Change ID: ad-hoc
+- Actor: codex
+- Change type: update
+- Summary: 同步组件模板上下文注释，说明 navId/navLabel 已跟随当前页面导航。
+- Modified functionality: widget-template-context-comment
+- Code ranges: 173-179
+- Modified content: 将 navId/navLabel 从单页固定说明改为当前页面/导航语义，并标注未配置 pages/topbarNav 时的回退。
+- Affected contracts: none
+- Verification: npm run build:preview passed; Browser QA on http://localhost:5302/#/ clicked six nav items and confirmed context-facing page label behavior through placeholder badges and grid aria labels.
+- Rollback note: revert this file and listed related files together if needed
+- Related files: none
+- Before snapshot: 276 lines, sha256 `957039630b2303df906e802ea05de2f1ae46f3a362a996390eff3c076f6034c4`, captured `2026-06-16T07:55:40.064Z`
+- After snapshot: 276 lines, sha256 `f8e57a30dd0d70ce6f96b016851775cc4905467ebc1d6e8742e7e8cfd48925c8`
+- Change evidence: inline unified diff:
+
+```diff
+--- a/src/widgets/templates/WidgetTemplate.vue
++++ b/src/widgets/templates/WidgetTemplate.vue
+@@ -174,8 +174,8 @@
+    * context 是模板自动提供的上下文，不需要在配置文件里写。
+    * 常用字段：
+    * - context.area：当前区域，模板主画布固定为 page
+-   * - context.navId：兼容字段，单页模板固定为 single-page
+-   * - context.navLabel：兼容字段，单页模板为当前页面标题
++   * - context.navId：当前页面/导航 id；未配置 pages 时回退为 single-page
++   * - context.navLabel：当前导航标签；未配置导航时回退为页面标题
+    * - context.blockId：当前分块字符，例如 A、B、g
+    * - context.filters：当前组件作用域内的筛选项选中值
+    * - context.allFilters：全量筛选项选中值
+```
+- Follow-up: none

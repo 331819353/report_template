@@ -33,7 +33,7 @@
   --dashboard-vignette-background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.86), transparent 24%, rgba(229, 234, 242, 0.34));
   --dashboard-texture-background: none;
-  --topbar-background: #ffffff;
+  --topbar-background: rgba(255, 255, 255, 0.92);
   --title-shadow: none;
   --cell-header-background: #f8fafc;
   --cell-body-background: transparent;
@@ -128,7 +128,7 @@ button {
   position: fixed;
   top: 0;
   left: var(--shell-left);
-  z-index: 120;
+  z-index: 20;
   display: grid;
   grid-template-columns: minmax(360px, 1fr) auto minmax(360px, 1fr);
   gap: 24px;
@@ -141,7 +141,6 @@ button {
   background: var(--topbar-background);
   backdrop-filter: blur(18px);
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 28px rgba(15, 23, 42, 0.06);
-  isolation: isolate;
 }
 
 .topbar-brand,
@@ -289,7 +288,7 @@ button {
 .panel-dismiss-layer {
   position: fixed;
   inset: 0;
-  z-index: 130;
+  z-index: 80;
   padding: 0;
   border: 0;
   background: transparent;
@@ -300,7 +299,7 @@ button {
   position: fixed;
   top: calc(var(--topbar-height) + 14px);
   right: calc(var(--shell-left) + 32px);
-  z-index: 140;
+  z-index: 90;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   width: 420px;
@@ -500,11 +499,9 @@ button {
 
 .canvas-shell {
   position: relative;
-  z-index: 1;
   display: grid;
   height: var(--canvas-height);
   margin-top: var(--content-start-y);
-  isolation: isolate;
 }
 
 .placeholder-grid {

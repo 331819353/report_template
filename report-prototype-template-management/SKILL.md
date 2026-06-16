@@ -1,6 +1,6 @@
 ---
 name: report-prototype-template-management
-description: "用于管理可运行报表原型模板资产，选择、复制、二开和校验 Vue/Vite 报表模板。报表原型默认走内置模板，只有用户明确自定义/精确复刻/保留现有壳或模板无法满足时才走 custom。用户提到报表模板、页面模板、模板布局token、模板筛选、选择模板、复制模板、模板二开、topbar、left nav、暗色/亮色模板、固定1920大屏、Haier logo、dashboard.config.ts、dashboard.dataset.json、validate-dashboard-contract、启动预览URL时触发。"
+description: "用于管理可运行报表原型模板资产，选择、复制、二开和校验 Vue/Vite 报表模板。报表原型默认走内置模板，只有用户明确自定义/精确复刻/保留现有壳或模板无法满足时才走 custom。用户提到报表模板、页面模板、模板布局token、模板筛选、选择模板、复制模板、模板二开、topbar、left nav、亮色模板、固定1920大屏、Haier logo、dashboard.config.ts、dashboard.dataset.json、validate-dashboard-contract、启动预览URL时触发。"
 ---
 
 # Report Prototype Template Management
@@ -17,7 +17,6 @@ Default routing: choose `pageShellPath: template` for runnable report prototypes
 
 Template assets live under `assets/templates/<template-id>/`:
 
-- `topbar-dark-scroll-dashboard-template`
 - `topbar-light-scroll-dashboard-template`
 - `left-nav-analytics-workbench-template`
 - `frozen-title-sci-fi-cockpit-template`
