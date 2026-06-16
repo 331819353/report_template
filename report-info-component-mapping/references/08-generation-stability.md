@@ -14,7 +14,7 @@ The same business input should produce the same:
 - Component IDs, parent block IDs, sub-block IDs, dataset IDs, filter IDs, and action names.
 - `visualType`, control semantics, component schema impact, layout span category, row grain, and required fields.
 - `conclusionCardPattern` for conclusion/evidence/action cards when a lead conclusion is combined with KPI evidence, findings, and recommended actions.
-- `kpiCardPattern` for KPI/metric-card variants when a reusable card expression is selected.
+- `kpiCardPattern` and `kpiCardOrientation` for KPI/metric-card variants when a reusable card expression is selected, including landscape/horizontal KPI cards.
 - `targetActualCardPattern` for target/actual comparison card variants when a KPI headline and target comparison bar chart are combined.
 - `targetActualTrendCardPattern` for target/actual trend card variants when a KPI headline and target/comparison line chart are combined.
 - `targetActualRadarCardPattern` for target/actual radar card variants when a KPI headline and target/comparison radar chart are combined.
@@ -59,7 +59,8 @@ Use these values unless the target project explicitly defines a different vocabu
 - `componentType`: `card`, `chart`, `table`, `text-summary`, `drawer`, `task`, `action`, `custom`.
 - `visualType`: `line`, `bar`, `combo`, `candlestick`, `heatmap`, `pie`, `radar`, `path`, `sunburst`, `gauge`, `scatter`, `boxplot`, `parallel`, `map`, `graph`, `tree`, `treemap`, `sankey`, `funnel`, `metric-card`, `text-summary`, `table`, `pivot`, `ranking-list`, `operational-list`, `overlay-panel`, `composite-panel`, `micro-dashboard`, `state-feedback`, `other`.
 - `conclusionCardPattern`: `metric-evidence-conclusion`, `finding-action-conclusion`, `compact-conclusion-summary`. Use inside `analysisInsightContract` with `subtype: conclusion-card` and `visualType: text-summary`.
-- `kpiCardPattern`: `plain-metric`, `target-wave`, `mini-bar-trend`, `highlight-line-trend`. Use only with `visualType: metric-card`.
+- `kpiCardPattern`: `plain-metric`, `target-wave`, `mini-bar-trend`, `highlight-line-trend`, `horizontal-trend-compare`, `horizontal-ring-progress`, `horizontal-target-progress`, `horizontal-status-trend-compare`, `horizontal-grain-bar-switch`, `horizontal-period-summary-strip`, `horizontal-pp-assist-info`, `horizontal-warning-status-band`. Use only with `visualType: metric-card`.
+- `kpiCardOrientation`: `portrait`, `landscape`, `compact-row`, `wide-banner`. Use with `visualType: metric-card`; set `landscape`, `compact-row`, or `wide-banner` when a horizontal KPI pattern is selected.
 - `targetActualCardPattern`: `standard-summary-panel`, `emphasis-header-summary`, `soft-chip-summary`. Use with `visualType: bar` and `chartSubtype: target-actual-comparison`.
 - `targetActualTrendCardPattern`: `emphasis-wave-trend`, `standard-summary-trend`, `soft-chip-trend`. Use with `visualType: line` and `chartSubtype: target-actual-trend`.
 - `targetActualRadarCardPattern`: `emphasis-wave-radar`, `standard-action-radar`. Use with `visualType: radar` and `chartSubtype: target-actual-radar`.
@@ -163,10 +164,19 @@ For conclusion/evidence/action cards, keep `componentType: text-summary`, `visua
 
 For KPI cards, choose the stable `kpiCardPattern` from `$report-component-style-design` `references/04a-kpi-card-patterns.md`:
 
-1. `target-wave` when target attainment or bounded progress is the main judgment and target data exists.
-2. `highlight-line-trend` when one KPI is the lead card and trend movement is part of the first-viewport answer.
-3. `mini-bar-trend` when recent period volatility is supporting evidence inside a peer KPI card.
-4. `plain-metric` when the card only needs current value, comparison, and compact status.
+1. For landscape, wide, or row-based KPI cards with `W >= 360px`, choose a horizontal pattern first when the evidence can fit inside one KPI card.
+2. Use `horizontal-trend-compare` when current value plus prior/baseline comparison and a compact trend line are the job.
+3. Use `horizontal-ring-progress` when one bounded status/progress metric such as OEE, utilization, SLA, or completion is best read through a ring.
+4. Use `horizontal-target-progress` when target attainment and distance to target are best read through a linear track.
+5. Use `horizontal-status-trend-compare` for business-negative metrics such as defect, complaint, overdue, risk, cost, or failure where lower-is-better semantics are declared.
+6. Use `horizontal-grain-bar-switch` when one local time-grain switch and mini bars are required.
+7. Use `horizontal-period-summary-strip` when current, previous, and target values are the complete evidence and a chart would be unnecessary.
+8. Use `horizontal-pp-assist-info` when the visible delta is percentage points (`currentRate - baselineRate`), not percent growth.
+9. Use `horizontal-warning-status-band` when the KPI has a threshold warning, status badge, and warning reason/action path.
+10. Use `target-wave` when target attainment or bounded progress is the main judgment and target data exists but the card is portrait or narrow.
+11. Use `highlight-line-trend` when one KPI is the lead card and trend movement is part of the first-viewport answer.
+12. Use `mini-bar-trend` when recent period volatility is supporting evidence inside a peer KPI card.
+13. Use `plain-metric` when the card only needs current value, comparison, and compact status.
 
 For target/actual comparison cards, keep `visualType: bar`, set `chartSubtype: target-actual-comparison`, and choose `targetActualCardPattern` from `$report-component-style-design` `references/04b-target-actual-comparison-cards.md`:
 
@@ -324,7 +334,7 @@ For state feedback components, keep `componentType: custom`, set `visualType: st
 - Unknown template support: use `other` only with a named custom widget and explicit reason; otherwise choose from known `visualType` values.
 - Unknown screenshot/sample style: do not store the image as the durable standard. Try existing controlled patterns, then composed patterns; if neither fits, set `styleGeneralization.generalizationStatus: requires-pattern-extension` and route to the owning component-family reference before implementation. Use `out-of-scope-one-off` only when the surface is explicitly non-reusable or kept for exact restoration/audit/runtime asset purposes.
 - Unknown or unsupported conclusion card pattern: keep `componentType: text-summary`, `visualType: text-summary`, use `analysisInsightContract.subtype: conclusion-card`, choose `conclusionCardPattern: compact-conclusion-summary`, and move unsupported KPI evidence, findings, or actions to tooltip/detail.
-- Unknown or unsupported KPI card pattern: keep `visualType: metric-card`, use `kpiCardPattern: plain-metric`, and move unsupported visual evidence to tooltip, drawer, or a full chart block.
+- Unknown or unsupported KPI card pattern: keep `visualType: metric-card`, use `kpiCardPattern: plain-metric`, set `kpiCardOrientation: portrait` unless a project contract requires a row card, and move unsupported visual evidence to tooltip, drawer, or a full chart block.
 - Unknown or unsupported target/actual card pattern: keep `visualType: bar`, use `chartSubtype: target-actual-comparison`, choose `targetActualCardPattern: standard-summary-panel`, and move decorative variants to project-specific style tokens.
 - Unknown or unsupported target/actual trend card pattern: keep `visualType: line`, use `chartSubtype: target-actual-trend`, choose `targetActualTrendCardPattern: standard-summary-trend`, and move decorative variants to project-specific style tokens.
 - Unknown or unsupported target/actual radar card pattern: keep `visualType: radar`, use `chartSubtype: target-actual-radar`, choose `targetActualRadarCardPattern: standard-action-radar`, and move decorative variants to project-specific style tokens.

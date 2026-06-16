@@ -1,4 +1,4 @@
 interface:
   display_name: "报表视觉布局设计"
-  short_description: "设计或修复报表页面规范，覆盖页面壳、导航、筛选、8*N网格、区块尺寸、响应式、遮挡和溢出。"
-  default_prompt: "Use $report-visual-layout-design for report page-level layout, page standards, shell, navigation, filters, 8*N grid, block sizing, responsive behavior, overlap, overflow, and layout readiness."
+  short_description: "设计或修复报表页面规范，覆盖页面壳、导航、筛选、8*N网格、横向指标卡跨度、区块尺寸、响应式、遮挡和溢出。"
+  default_prompt: "Use $report-visual-layout-design for report page-level layout, page standards, shell, navigation, filters, 8*N grid, horizontal KPI card spans, block sizing, responsive behavior, overlap, overflow, and layout readiness."

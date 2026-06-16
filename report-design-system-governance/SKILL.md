@@ -1,6 +1,6 @@
 ---
 name: report-design-system-governance
-description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分析/明细查询/专题分析页面的全流程设计系统与开发基线。用户提到提高前端设计、前端设计提升、报表设计系统、页面设计规范、页面规范、组件规范、组件设计规范、视觉规范、tokens、KPI、图表、表格、筛选、指标口径、单位/百分比显示、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、报表前端实现、报表联调验收、数据对账、导出/性能、报表风格一致、可复用报表规范时触发；不替代单个组件修复或模板工程复制。"
+description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分析/明细查询/专题分析页面的全流程设计系统与开发基线。用户提到提高前端设计、前端设计提升、报表设计系统、页面设计规范、页面规范、组件规范、组件设计规范、视觉规范、tokens、KPI、横向指标卡/横版KPI/宽指标卡、图表、表格、筛选、指标口径、单位/百分比显示、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、报表前端实现、报表联调验收、数据对账、导出/性能、报表风格一致、可复用报表规范时触发；不替代单个组件修复或模板工程复制。"
 ---
 
 # Report Design System Governance
@@ -57,7 +57,7 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 
 1. Run the Preflight understanding gate before creating, auditing, merging, applying, or accepting standards. Name mode, source-of-truth hierarchy, affected surfaces, owning specialty skills, hard constraints, missing evidence, and start decision.
 2. Select mode and source-of-truth hierarchy: company standard, report extension, template standard, project exception, or legacy override. For Haier/enterprise report pages, default hierarchy is `Haier company UI baseline -> report design-system extension -> template/project exception`.
-3. Inventory design surfaces: shell, navigation, filters, KPI cards, charts, tables, Composite Panels, Micro Dashboard Cards, drawers, modals, buttons, tags, empty/loading/error/no-permission/building states, export, responsive layouts, and custom graphics.
+3. Inventory design surfaces: shell, navigation, filters, KPI cards including horizontal KPI cards, charts, tables, Composite Panels, Micro Dashboard Cards, drawers, modals, buttons, tags, empty/loading/error/no-permission/building states, export, responsive layouts, and custom graphics.
 4. Classify whether the work is report/dashboard/BI/data-screen, common enterprise app, or mixed. Load Haier company UI baseline for Haier/enterprise app surfaces and report design-system references for report surfaces before judging or defining rules.
 5. Run the generic anti-AI gate and report decision gate before stabilizing tokens or accepting a visual standard.
 6. For sample-derived standards, run the style generalization goal: every reusable visual sample must map to controlled patterns, composed patterns, or `requires-pattern-extension`; raw images and embeddings are not durable skill knowledge.

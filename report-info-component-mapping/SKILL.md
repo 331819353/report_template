@@ -1,6 +1,6 @@
 ---
 name: report-info-component-mapping
-description: "用于把报表业务问题映射为组件、数据集、筛选、交互和绑定矩阵。用户提到指标怎么放、业务问题怎么变组件、图表选择、组件规划、页面信息架构、组件设计规范前置、卡片/表格/图形组合、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、数据集设计、mock字段、筛选查询、联动状态、钻取路径、组件绑定矩阵、实现配置、页面信息架构落地时触发；不负责页面模板复制或组件视觉细节。"
+description: "用于把报表业务问题映射为组件、数据集、筛选、交互和绑定矩阵。用户提到指标怎么放、业务问题怎么变组件、图表选择、组件规划、页面信息架构、组件设计规范前置、横向指标卡/横版KPI/宽指标卡选择、卡片/表格/图形组合、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、数据集设计、mock字段、筛选查询、联动状态、钻取路径、组件绑定矩阵、实现配置、页面信息架构落地时触发；不负责页面模板复制或组件视觉细节。"
 ---
 
 # Report Info Component Mapping
@@ -30,7 +30,7 @@ Read only the files needed for the current task. Files are ordered by workflow s
 | Report-type routing, layout/style constraints, output checklist | `references/07-routing-layout-quality.md` |
 | Controlled vocabularies, stable IDs, deterministic generation | `references/08-generation-stability.md` |
 | Detailed implementation gates for mapping decisions | `references/09-component-mapping-gates.md` |
-| Micro Dashboard and state feedback pattern routing | `$report-component-style-design` `references/12f6-placement-micro-dashboard-card.md` and `references/13-state-feedback-patterns.md` |
+| KPI, horizontal KPI, Micro Dashboard, and state feedback pattern routing | `$report-component-style-design` `references/04a-kpi-card-patterns.md`, `references/12f6-placement-micro-dashboard-card.md`, and `references/13-state-feedback-patterns.md` |
 | Number precision/display baseline | `$metric-number-display-contract` |
 | Report requirement/metric/layout baseline | `$report-design-system-governance` relevant guideline references |
 

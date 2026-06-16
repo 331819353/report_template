@@ -1,6 +1,6 @@
 ---
 name: report-component-style-design
-description: "用于报表组件级设计规范、组件规范、视觉样式、响应式和可读性设计/评审/修复。用户提到提高前端设计、前端设计提升、组件设计规范、组件优化、KPI卡/指标卡、文本总结、分析洞察、Composite Panel、多组件组合、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、筛选控件、按钮/标签/弹窗/抽屉、ECharts图表、AntV S2表格、透视表、复杂表头、图例/标签/tooltip、hover/focus动效、图形变形、组件溢出/裁切/对齐、移动端适配、视觉优化时触发；不负责整页布局或模板工程。"
+description: "用于报表组件级设计规范、组件规范、视觉样式、响应式和可读性设计/评审/修复。用户提到提高前端设计、前端设计提升、组件设计规范、组件优化、KPI卡/指标卡、横向指标卡/横版KPI/宽指标卡、文本总结、分析洞察、Composite Panel、多组件组合、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、筛选控件、按钮/标签/弹窗/抽屉、ECharts图表、AntV S2表格、透视表、复杂表头、图例/标签/tooltip、hover/focus动效、图形变形、组件溢出/裁切/对齐、移动端适配、视觉优化时触发；不负责整页布局或模板工程。"
 ---
 
 # Report Component Style Design
@@ -26,7 +26,7 @@ Start with `references/00-component-reference-index.md`, then load the smallest 
 | Filter bars, query controls, chips, advanced filters | `references/02-filter-controls.md`; use `$report-filter-control-design-spec` `references/02-filter-selector-patterns.md` when selecting reusable filter control patterns such as dropdown, tag multi-select, date range, searchable select, tree path, drawer, or combined chipbar |
 | Text summaries, conclusions, Analysis & Insight | `references/03-text-summary.md` |
 | Conclusion/evidence/action cards | `references/03a-conclusion-evidence-action-cards.md`, plus `references/03-text-summary.md`, `references/04a-kpi-card-patterns.md`, and `references/12b-placement-insight-kpi.md` |
-| KPI cards, metric groups, comparison tiles | `references/04-kpi-metric-cards.md`; use `references/04a-kpi-card-patterns.md` when selecting reusable KPI card expressions such as target completion, mini trend bars, lead trend cards, or anti-AI KPI card generation |
+| KPI cards, metric groups, comparison tiles | `references/04-kpi-metric-cards.md`; use `references/04a-kpi-card-patterns.md` when selecting reusable KPI card expressions such as target completion, mini trend bars, lead trend cards, landscape/horizontal KPI cards, compact KPI rows, wide KPI banners, or anti-AI KPI card generation |
 | Target/actual comparison cards | `references/04b-target-actual-comparison-cards.md`, plus `references/05a-echarts-foundation-bars-lines.md` and `references/12c1-placement-target-actual-bars.md` |
 | Target/actual trend cards | `references/04c-target-actual-trend-cards.md`, plus `references/05a-echarts-foundation-bars-lines.md` and `references/12c2-placement-line-trends.md` |
 | Target/actual radar cards | `references/04d-target-actual-radar-cards.md`, plus `references/05b-echarts-combo-pie-radar-gauge.md` and `references/12d1-placement-radar.md` |

@@ -64,7 +64,7 @@ These pattern fields are the current reusable vocabulary. Prefer controlled valu
 | Pattern field | Covered surface |
 | --- | --- |
 | `conclusionCardPattern` | Conclusion, evidence, action, and executive summary cards |
-| `kpiCardPattern` | Plain KPI, target wave, mini bar trend, and lead line trend cards |
+| `kpiCardPattern` | Plain KPI, target wave, mini bar trend, lead line trend, and landscape/horizontal KPI cards |
 | `targetActualCardPattern` | KPI headline plus target/actual comparison bars |
 | `targetActualTrendCardPattern` | KPI headline plus actual/comparison/target trends |
 | `targetActualRadarCardPattern` | KPI headline plus product/object radar profiles |

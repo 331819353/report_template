@@ -5,7 +5,7 @@
 | Top-level block span, viewport fit, common block height/width limits | `$report-visual-layout-design` `references/block-size-constraints.md` |
 | `8 * N` grid and parent container placement | `$report-visual-layout-design` `references/grid-containers.md` |
 | Parent block with internal sub-blocks or multiple child components | `$report-visual-layout-design` `references/block-composition.md` |
-| Component minimums including Composite Panel, Micro Dashboard Card, state feedback, tables, and charts | `$report-visual-layout-design` `references/block-size-constraints-02-component-requirements.md` |
+| Component minimums including horizontal KPI cards, Composite Panel, Micro Dashboard Card, state feedback, tables, and charts | `$report-visual-layout-design` `references/block-size-constraints-02-component-requirements.md` |
 | Acceptance before implementation-ready layout | `$report-visual-layout-design` `references/layout-acceptance-gates.md` |
 | Component-internal slot/coordinate fit | `$report-component-placement-spec` |
 

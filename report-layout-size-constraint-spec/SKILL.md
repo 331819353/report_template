@@ -1,6 +1,6 @@
 ---
 name: report-layout-size-constraint-spec
-description: "用于报表页面区块尺寸、容器尺寸、高度预算、首屏层级、8*N网格、图表/表格容器高度、固定高度卡片、Composite Panel/Micro Dashboard Card多组件最小尺寸、状态反馈几何、裁切、溢出、重叠和响应式尺寸约束设计/评审。用户提到区块尺寸、容器尺寸、卡片高度、首屏放不下、图表太挤、表格太矮、多组件组合挤压、1920x1080、1280x768、高度预算、scrollHeight/clientHeight、overflow、裁切、重叠、响应式布局时触发；不负责组件内部图表细节。"
+description: "用于报表页面区块尺寸、容器尺寸、高度预算、首屏层级、8*N网格、图表/表格容器高度、固定高度卡片、横向指标卡/横版KPI最小尺寸、Composite Panel/Micro Dashboard Card多组件最小尺寸、状态反馈几何、裁切、溢出、重叠和响应式尺寸约束设计/评审。用户提到区块尺寸、容器尺寸、卡片高度、首屏放不下、图表太挤、表格太矮、横向卡片挤压、多组件组合挤压、1920x1080、1280x768、高度预算、scrollHeight/clientHeight、overflow、裁切、重叠、响应式布局时触发；不负责组件内部图表细节。"
 ---
 
 # Report Layout Size Constraint Spec
@@ -18,7 +18,7 @@ Use `$report-visual-layout-design` for full page layout decisions; use this skil
 | Preflight understanding before implementation/repair/acceptance | `$quality-gate-validation` `references/preflight-understanding-gate.md` |
 | Size source map | `references/01-size-reference-map.md` |
 | Parent layout references | `$report-visual-layout-design` references: `block-size-constraints.md`, `grid-containers.md`, `block-composition.md`, `layout-acceptance-gates.md` |
-| Component minimums for Composite Panel, Micro Dashboard Card, state feedback, dense tables/charts | `$report-visual-layout-design` `references/block-size-constraints-02-component-requirements.md` |
+| Component minimums for horizontal KPI cards, Composite Panel, Micro Dashboard Card, state feedback, dense tables/charts | `$report-visual-layout-design` `references/block-size-constraints-02-component-requirements.md` |
 
 ## Anti-Laziness Gate
 

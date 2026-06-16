@@ -61,7 +61,8 @@ A report design system is incomplete unless it covers all of these:
 ### KPI And Metric Cards
 
 - Card anatomy: title, value, unit, trend/comparison, helper, status/action when needed.
-- Implementation-ready KPI rules must include the internal placement algorithm: content box variables, top-left title, top-right definition/help entry, centered `value + unit` group, centered comparison/target group, optional sparkline placement, bottom metadata, size tiers, and fallback order.
+- Implementation-ready KPI rules must include the internal placement algorithm: content box variables, top-left title, top-right definition/help entry, centered `value + unit` group or declared landscape primary value zone, centered comparison/target group, optional sparkline/right evidence zone, bottom metadata/evidence band, size tiers, and fallback order.
+- Horizontal KPI card standards must declare `kpiCardOrientation`, a controlled `horizontal-*` `kpiCardPattern`, auxiliary evidence ownership, minimum `360x128` collapsed size and `420x180` standard size, and the fallback before mini evidence squeezes the primary value.
 - Value and unit must remain visible. Long titles may wrap or disclose, but critical values cannot be ellipsis-only.
 - Trend direction and color semantics must be explicit. For Chinese report UI, rate/change/completion labels use `%` unless an approved exception says otherwise.
 - Cards need loading, empty, error, no-permission, and stale-data variants.

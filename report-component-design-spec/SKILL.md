@@ -1,6 +1,6 @@
 ---
 name: report-component-design-spec
-description: "用于创建、审计、合并或沉淀可复用的报表组件设计规范/组件规范/组件设计标准。用户提到组件设计规范、组件规范、图表规范、表格规范、KPI卡规范、筛选控件规范、Analysis & Insight规范、Composite Panel规范、Micro Dashboard Card/微型看板卡规范、状态反馈/空态/loading/error/no-permission/building规范、透视表/复杂表头规范、ECharts组件规范、AntV S2组件规范、组件库沉淀、前端组件设计标准、提高前端设计中的组件规范时触发；不替代单个组件修复、整页布局或完整报表设计系统治理。"
+description: "用于创建、审计、合并或沉淀可复用的报表组件设计规范/组件规范/组件设计标准。用户提到组件设计规范、组件规范、图表规范、表格规范、KPI卡规范、横向指标卡/横版KPI/宽指标卡规范、筛选控件规范、Analysis & Insight规范、Composite Panel规范、Micro Dashboard Card/微型看板卡规范、状态反馈/空态/loading/error/no-permission/building规范、透视表/复杂表头规范、ECharts组件规范、AntV S2组件规范、组件库沉淀、前端组件设计标准、提高前端设计中的组件规范时触发；不替代单个组件修复、整页布局或完整报表设计系统治理。"
 ---
 
 # Report Component Design Spec

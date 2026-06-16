@@ -224,6 +224,9 @@ Recommended card ranges:
 | Standard card | `220-320px` | `120-160px` | value, comparison, target |
 | Enhanced card | `320-480px` | `160-220px` | value, comparison, target, sparkline or summary |
 | Wide card | `480px+` | `160-240px` | split primary and auxiliary information |
+| Landscape KPI card | `420-560px` | `180-240px` | value, comparison/status, one auxiliary evidence visual |
+| Compact KPI row | `360-420px` | `128-160px` | value, one comparison/status, compact icon/progress |
+| Wide KPI banner | `560-760px` | `160-240px` | split primary value zone plus right/bottom evidence zone |
 
 ### Title Ownership
 
@@ -315,6 +318,54 @@ requiredContentHeight <= H
 If the budget fails, remove or move optional content in this order: description, summary, sparkline, second comparison, target progress bar. Do not shrink primary value text below readable size.
 
 The fit proof must measure the actual rendered value group, not only the row allocation. A grid row such as `minmax(42px, 1fr)` is not sufficient if the numeral sits at the row's top edge.
+
+### Landscape Metric Card Split
+
+Use this algorithm when `kpiCardOrientation` is `landscape`, `compact-row`, or `wide-banner`, or when `kpiCardPattern` starts with `horizontal-`.
+
+```text
+headerH = clamp(28px, H * 0.18, 40px)
+footerBandH =
+  0 when no bottom evidence band exists
+  clamp(44px, H * 0.26, 68px) when comparison strip, mini bars, or warning band exists
+
+bodyY = P + headerH
+bodyH = H - P - bodyY - footerBandH
+primaryW = clamp(140px, CW * 0.46, 220px)
+auxW = CW - primaryW - 16px
+primaryX = P
+auxX = P + primaryW + 16px
+primaryCenterX = primaryX + primaryW / 2
+```
+
+Slot rules:
+
+- Header owns title and one local control. It must not create a second filter row.
+- Primary value, unit, and main comparison/status center inside the primary zone or left-align only when `alignmentIntent: scan-left` is declared.
+- Auxiliary zone owns exactly one evidence visual: sparkline, ring, progress track, semantic icon, or mini bar group.
+- Bottom evidence band owns previous/current/target cells, warning reason, prior-period value, or auxiliary mini bars. It cannot contain a second chart.
+- If the auxiliary visual is a ring/progress/gauge-like shape, reserve a fit box of at least `108x96px` and preserve aspect ratio.
+- If the auxiliary visual is a linear progress track, reserve at least `200x24px` for track plus marker and labels.
+- If the auxiliary visual is a mini line/bar band, reserve `48-72px` height and use tooltip for exact values.
+
+Landscape fit check:
+
+```text
+primaryW >= 140px
+auxW >= 96px when auxiliary visual exists
+bodyH >= 72px
+footerBandH == 0 or footerBandH >= 44px
+requiredHeaderW = titleTextW + localControlW + 12px
+requiredHeaderW <= CW
+```
+
+When the fit check fails, degrade in this order:
+
+1. Collapse segmented local control to compact dropdown.
+2. Remove decorative icon or background illustration.
+3. Move secondary comparison or prior-period value to tooltip.
+4. Hide mini chart evidence before shrinking the primary value.
+5. Switch to portrait `plain-metric`, a full chart block, or a detail drawer.
 
 ### Slot Position Rules
 

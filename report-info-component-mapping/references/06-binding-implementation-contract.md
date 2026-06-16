@@ -201,7 +201,21 @@ type KpiCardPattern =
   | 'plain-metric'
   | 'target-wave'
   | 'mini-bar-trend'
-  | 'highlight-line-trend';
+  | 'highlight-line-trend'
+  | 'horizontal-trend-compare'
+  | 'horizontal-ring-progress'
+  | 'horizontal-target-progress'
+  | 'horizontal-status-trend-compare'
+  | 'horizontal-grain-bar-switch'
+  | 'horizontal-period-summary-strip'
+  | 'horizontal-pp-assist-info'
+  | 'horizontal-warning-status-band';
+
+type KpiCardOrientation =
+  | 'portrait'
+  | 'landscape'
+  | 'compact-row'
+  | 'wide-banner';
 
 type TargetActualCardPattern =
   | 'standard-summary-panel'
@@ -382,6 +396,7 @@ type ComponentMapping = {
   componentType: 'card' | 'chart' | 'table' | 'text-summary' | 'drawer' | 'task' | 'action' | 'custom';
   visualType: string;
   kpiCardPattern?: KpiCardPattern;
+  kpiCardOrientation?: KpiCardOrientation;
   targetActualCardPattern?: TargetActualCardPattern;
   targetActualTrendCardPattern?: TargetActualTrendCardPattern;
   targetActualRadarCardPattern?: TargetActualRadarCardPattern;

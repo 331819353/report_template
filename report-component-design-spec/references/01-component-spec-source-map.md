@@ -9,7 +9,7 @@ Use this map to load only the source references needed for the component familie
 | Page/global and component-local filters | `$report-filter-control-design-spec`, especially `references/02-filter-selector-patterns.md` when reusable filter selector patterns are needed |
 | Analysis & Insight / text summaries | `$report-component-style-design` `references/03-text-summary.md`, `references/12b-placement-insight-kpi.md` |
 | Conclusion/evidence/action cards | `$report-component-style-design` `references/03a-conclusion-evidence-action-cards.md`, `$report-component-style-design` `references/03-text-summary.md`, `$report-component-style-design` `references/12b-placement-insight-kpi.md` |
-| KPI and metric cards | `$report-component-style-design` `references/04-kpi-metric-cards.md`, `references/04a-kpi-card-patterns.md`, `references/12b-placement-insight-kpi.md` |
+| KPI and metric cards, including landscape/horizontal KPI cards | `$report-component-style-design` `references/04-kpi-metric-cards.md`, `references/04a-kpi-card-patterns.md`, `references/12b-placement-insight-kpi.md` |
 | Target/actual comparison cards | `$report-component-style-design` `references/04b-target-actual-comparison-cards.md`, `$report-chart-design-spec`, `$report-component-style-design` `references/12c1-placement-target-actual-bars.md` |
 | Target/actual trend cards | `$report-component-style-design` `references/04c-target-actual-trend-cards.md`, `$report-chart-design-spec`, `$report-component-style-design` `references/12c2-placement-line-trends.md` |
 | Target/actual radar cards | `$report-component-style-design` `references/04d-target-actual-radar-cards.md`, `$report-chart-design-spec`, `$report-component-style-design` `references/12d1-placement-radar.md` |

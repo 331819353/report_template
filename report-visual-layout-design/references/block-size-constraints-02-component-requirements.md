@@ -17,6 +17,8 @@ Classify every component into one of the following component types. `min_outer_w
 | `mini_chart_kpi` | 320 | 180 | `3x2` | KPI with sparkline or mini chart |
 | `progress_kpi` | 260 | 140 | `2x2_or_3x2` | KPI with progress bar |
 | `gauge_kpi` | 300 | 220 | `3x3` | Gauge-style KPI |
+| `landscape_kpi` | 420 | 180 | `4x2_or_5x2` | Horizontal KPI card with primary value plus right/bottom evidence visual |
+| `wide_kpi_banner` | 560 | 160 | `5x2_or_8x2` | Wide KPI banner with split value/evidence zones |
 | `kpi_group` | 600 | 180 | `8x2` | Group of KPI cards |
 | `composite_panel` | 640 | 360 | `6x4_or_8x4` | Multi-component analysis card with one shared topic and one primary child |
 | `micro_dashboard_card` | 680 | 620 | `8x7_or_larger` | Large single-topic mini dashboard card with KPI strip, multiple child charts, status/detail evidence, and shared filters |
@@ -70,6 +72,15 @@ Classify every component into one of the following component types. `min_outer_w
 | `duPont_chart` | 720 | 420 | `8x5` | DuPont financial decomposition chart |
 | `map` | 480 | 360 | `4x4_or_8x4` | Map visualization |
 | `geo_heatmap` | 560 | 420 | `6x5_or_8x5` | Geographic heatmap |
+
+### KPI Card Size Rules
+
+- `landscape_kpi` covers horizontal KPI cards whose `kpiCardPattern` starts with `horizontal-` and whose `kpiCardOrientation` is `landscape`, `compact-row`, or `wide-banner`.
+- Do not validate a horizontal KPI card as `simple_kpi` when it contains a ring, mini trend, progress track, bottom comparison strip, percentage-point badge, or warning band.
+- Minimum horizontal KPI useful size is `360x128` only after auxiliary evidence is collapsed. Standard horizontal KPI size is `420-560px` wide and `180-240px` high.
+- Required internal minimums after padding: primary value zone `140px` wide, auxiliary visual zone `96x72`, ring/progress fit box `108x96`, bottom evidence band `44px` high when present, mini line/bar evidence `48px` high.
+- If the parent span cannot satisfy those minimums, degrade in this order: collapse local control, remove decorative icon, move secondary comparison to tooltip, hide mini chart evidence, switch to `plain-metric`, or route the evidence to a full chart/table/detail block.
+- A KPI strip may combine portrait and landscape KPI cards only when row heights align and every card's primary value baseline remains stable. Otherwise split the strip into rows or use a larger summary block.
 
 ### Analysis & Insight Component Rules
 
