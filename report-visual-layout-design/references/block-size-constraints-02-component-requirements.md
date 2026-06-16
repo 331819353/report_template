@@ -19,6 +19,8 @@ Classify every component into one of the following component types. `min_outer_w
 | `gauge_kpi` | 300 | 220 | `3x3` | Gauge-style KPI |
 | `kpi_group` | 600 | 180 | `8x2` | Group of KPI cards |
 | `composite_panel` | 640 | 360 | `6x4_or_8x4` | Multi-component analysis card with one shared topic and one primary child |
+| `micro_dashboard_card` | 680 | 620 | `8x7_or_larger` | Large single-topic mini dashboard card with KPI strip, multiple child charts, status/detail evidence, and shared filters |
+| `state_feedback` | 220 | 160 | `component_body_or_block` | Empty/loading/error/no-permission/building state; inline states may use 180x120 if geometry is preserved |
 | `line_chart` | 420 | 280 | `4x3` | Line chart |
 | `area_chart` | 420 | 300 | `4x3` | Area or stacked area chart |
 | `bar_chart` | 420 | 300 | `4x3` | Vertical bar chart |
@@ -92,6 +94,28 @@ Classify every component into one of the following component types. `min_outer_w
 - Detail preview stays short: `3-6` rows and `3-5` columns. Larger details need a full Detail Table block, drawer, fullscreen, or route.
 - Child minimums: metric `120x72`, line `220x140`, bar `240x160`, pie/donut `180x160`, Top list `140x120`, detail preview `240x120`, heatmap `240x160`, map `280x220`, gauge `180x160`.
 - Split the block when children answer different questions, need independent full title/filter/action bands, or internal scrolling becomes the main way to understand the panel.
+
+### Micro Dashboard Card Rules
+
+- `micro_dashboard_card` blocks are larger than `composite_panel` blocks. They contain one themed management topic with a KPI strip, `4-8` bounded child sections, and a compact exact-value/status path.
+- Require `microDashboardCardPattern` and `microDashboardContract` before span acceptance. Do not accept this pattern as a normal Composite Panel exception.
+- Recommended portrait size is `720-960px` wide and `760-980px` high. Recommended wide size is `960-1280px` wide and `560-760px` high. Absolute minimum is `680x620`.
+- Header and shared filter/action area should consume `36-52px`; KPI strip consumes `76-96px`; internal gaps are `8-12px`; parent padding is `12-16px`.
+- Child minimums after all padding and labels: KPI tile `120x64`, primary chart `220x150`, small axis chart `180x128`, donut/pie/ring `150x140`, funnel `180x140`, heatmap `220x130`, sparkline group `160x96`, compact table preview `320x150`, status strip item `96x56`.
+- The primary trend/combo/chart child must remain visually dominant when present and must not be squeezed below its plot floor. If a table/status section competes for height, collapse the table/status section into tabs, drawer, or detail route before shrinking the primary chart.
+- No more than `8` visible analytical child sections may render simultaneously. `9+` sections require tabs, split cards, or fullscreen.
+- If `W < 680` or `H < 620`, render a summary card plus one primary child and move the rest to tabs/drawer/fullscreen. Do not scale down typography, axes, or table rows to force the full board.
+
+### State Feedback Rules
+
+- `state_feedback` surfaces include empty, filtered-empty, loading, error, no-permission, stale, partial-data, disabled, success, and building states.
+- Inline chart/table body states may use `180x120` only when the surrounding component header, filters, and body geometry stay stable. Standard component states need at least `320x220`; full-page states need at least `720x480`.
+- Reserve visual, title, reason, optional impact, action row, and optional status metadata before accepting the span.
+- A state cannot collapse the parent card, chart, table, drawer, or page body. Preserve the affected component geometry to avoid layout jump.
+- No-permission states must not leak restricted row counts, totals, silhouettes, trend shapes, or object names. Use safe scope wording and a request/switch/return action when supported.
+- Loading states must use skeletons for tables/lists and stable centered progress for charts/cards. Motion must be reduced-motion aware and must not shift layout.
+- Error states need affected surface, concise cause, and retry only when retry is wired.
+- If a state reason needs more than `2` lines inside a component or `3` lines in a full-page state, move detail to help/log/drawer instead of shrinking text.
 
 ### Detail Table Rules
 

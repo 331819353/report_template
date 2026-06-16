@@ -132,7 +132,7 @@ Split into separate parent grid blocks, tabs, drawer, fullscreen, or drilldown w
 - sub-blocks answer different business questions;
 - each sub-block needs an independent block-level title, filter, action, or drilldown path;
 - any sub-block's final validated size cannot be safely represented inside the parent block;
-- there are more than four analytical sub-blocks visible at once unless they are repeated peers that pass the internal `M * N` and parent-height checks;
+- there are more than four analytical sub-blocks visible at once unless they are repeated peers that pass the internal `M * N` and parent-height checks, or the parent is a declared `micro-dashboard` with `microDashboardCardPattern`, parent minimum `680x620`, and child minimum-size proof;
 - internal scrolling becomes the main way to understand the block.
 
 KPI/status peers should use the exact internal sub-block layout rule only when `actualTotal > 4`; for `actualTotal <= 4`, use a small-group layout. When the algorithm applies, prime `actualTotal` first becomes `layoutTotal = actualTotal + 1`, `layoutTotal = M * N`, `M >= N`, and `M - N` is minimal among valid factor pairs. Every tile/sub-block still needs pixel validation; split the group when the factor pair is unreadable.
@@ -172,6 +172,7 @@ If the current parent body height is smaller, expand the parent block's row span
 - Do not accept fixed-height navigation/cards whose measured DOM has `scrollHeight > clientHeight + 2` or `scrollWidth > clientWidth + 2`, even if the screenshot looks acceptable.
 - Do not duplicate block titles inside chart/table/KPI bodies.
 - Do not make peer components too narrow, tiny, crowded, or unreadable; when `actualTotal > 4`, use internal exact `M * N` layouts, expand the parent block, split sections, or move details to drawer/fullscreen.
+- Do not treat a dense Micro Dashboard Card as a normal Composite Panel. Use `micro_dashboard_card` sizing rules, child minimums, and lower-priority collapse; otherwise split, tab, drawer, or fullscreen.
 - Do not use a generic `chart`, `table`, `map`, or `other` label when a precise component type exists.
 - Do not use more than one internal scroll area in one block.
 - If a title, legend, axis label, table column, toolbar, or status tag does not fit, increase the span or simplify the component.

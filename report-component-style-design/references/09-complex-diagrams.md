@@ -2,6 +2,8 @@
 
 Use for decomposition trees, relation graphs, Sankey, flows, DuPont, attribution paths, process chains, and org/path diagrams.
 
+Use `09a-flow-hierarchy-diagram-card-patterns.md` when visual samples or requirements need reusable card-level flow/hierarchy patterns such as funnel, Sankey, journey map, tree, relation network, sunburst, treemap, or path conversion flow.
+
 For relation/network graphs implemented as standard chart components, also apply `05-echarts-charts.md` and `12-internal-placement-algorithms.md`. Use ECharts `graph` before custom SVG/canvas unless the component is explicitly approved as a custom diagram with a reason.
 
 For path/user/process path charts, also apply `05-echarts-charts.md` and `12-internal-placement-algorithms.md`. Path charts must keep ordered start-to-end flow, main path emphasis, Top N branch limits, and exact transition evidence; do not let them drift into unordered relation graphs or decorative process arrows.

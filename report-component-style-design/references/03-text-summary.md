@@ -9,6 +9,8 @@ Use for executive conclusions, diagnostic findings, risk explanations, abstracts
 - What should happen next.
 - Whether the data and metric definition are trustworthy.
 
+For conclusion cards that combine a lead conclusion, KPI evidence, key findings, and action suggestions, also load `03a-conclusion-evidence-action-cards.md`.
+
 ## Component Family
 
 Analysis & Insight components form a separate component family even when they are implemented as `visualType: 'text-summary'`.

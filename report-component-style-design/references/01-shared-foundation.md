@@ -103,6 +103,7 @@ requiredContentHeight <= componentHeight
 ## Empty, Loading, Error
 
 - Preserve the same component geometry in empty, loading, and error states.
+- For reusable state expressions, select `stateFeedbackPattern` from `13-state-feedback-patterns.md` and declare state kind, scope, reason, action, accessibility, and no-permission leakage behavior.
 - Center simple empty/loading states inside the body viewport.
 - For components inside an internal sub-block, do not decide no-data mask scope in isolation. If every sibling sub-block under the same parent block is no-data, the parent block owns one whole-block mask. If only this sub-block is no-data, the sub-block owns the mask.
 - A sub-block no-data mask must cover the complete sub-block surface, including its local label/title/control strip and the component body. Do not mask only the ECharts/S2/SVG/canvas/table viewport.

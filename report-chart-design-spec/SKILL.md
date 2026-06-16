@@ -9,6 +9,8 @@ description: "用于报表/仪表盘/BI/数据大屏中的图表设计规范、E
 
 Use this as the direct front door for chart-family design standards and chart readability. It promotes chart references that were previously reachable only through `$report-component-style-design`.
 
+When chart references come from screenshots or visual samples, route them through the shared style generalization goal first: the chart must map to a controlled chart pattern, a valid composed card pattern, or a documented extension gap before it becomes implementation guidance.
+
 Use `$report-component-style-design` when the task covers mixed component families; use this skill when the task is clearly about chart choice, chart anatomy, ECharts option fidelity, label/legend/tooltip density, or chart placement.
 
 ## Reference Map
@@ -16,6 +18,7 @@ Use `$report-component-style-design` when the task covers mixed component famili
 | Need | Read |
 | --- | --- |
 | Preflight understanding before implementation/repair/acceptance | `$quality-gate-validation` `references/preflight-understanding-gate.md` |
+| Screenshot/sample-derived chart style generalization | `$report-component-style-design` `references/00a-style-generalization-goal.md` and `$artifact-readability-standard` `references/visual-source-abstraction-standard.md` |
 | Chart source map and exact placement files | `references/01-chart-reference-map.md` |
 | Shared chart visual rules | `$report-component-style-design` `references/05-echarts-charts.md` |
 | Report chart/table format baseline | `$report-design-system-governance` `references/05-report-charts-tables-format-guidelines.md` |
@@ -28,20 +31,22 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 ## Workflow
 
 1. Run the Preflight understanding gate for implementation, repair, or acceptance work; name chart family candidates, data/metric contracts, parent container, affected labels/legend/axis/tooltip surfaces, hard constraints, missing evidence, and start decision.
-2. Identify chart family, business question, grain, series count, category/time density, exact-value need, interaction, and container size.
-3. Before selecting or accepting a renderer, run the action reflection loop from `$quality-gate-validation` `references/preflight-understanding-gate.md`; confirm the renderer matches the chart family, source authority, data contract, and design reasonableness.
-4. If the source evidence is HTML with SVG/canvas/DOM chart marks, treat those marks as visual/config clues only. Extract labels, approximate layout, categories, series names, and colors when useful, then define an ECharts data-driven implementation for standard charts.
-5. Load `references/01-chart-reference-map.md`, then load only the chart-family visual and placement files it names.
-6. Confirm chart type is fit for the task before styling labels or colors.
-7. Define chart anatomy: title, subtitle/definition, unit, metric strip, legend, axes, plot area, labels, tooltip, local filters, footer/source, and states.
-8. Verify ECharts ownership and lifecycle: standard ECharts charts must use ECharts series/options/runtime behavior rather than hand-drawn SVG/canvas marks, and must initialize, update, resize, and dispose from a measurable chart body viewport.
-9. Run acceptance gates before marking dense or implementation-ready charts as ready.
+2. For sample-derived chart visuals, classify the style as an existing controlled pattern, a composed card pattern, an extension gap, or an out-of-scope one-off.
+3. Identify chart family, business question, grain, series count, category/time density, exact-value need, interaction, and container size.
+4. Before selecting or accepting a renderer, run the action reflection loop from `$quality-gate-validation` `references/preflight-understanding-gate.md`; confirm the renderer matches the chart family, source authority, data contract, and design reasonableness.
+5. If the source evidence is HTML with SVG/canvas/DOM chart marks, treat those marks as visual/config clues only. Extract labels, approximate layout, categories, series names, and colors when useful, then define an ECharts data-driven implementation for standard charts.
+6. Load `references/01-chart-reference-map.md`, then load only the chart-family visual and placement files it names.
+7. Confirm chart type is fit for the task before styling labels or colors.
+8. Define chart anatomy: title, subtitle/definition, unit, metric strip, legend, axes, plot area, labels, tooltip, local filters, footer/source, and states.
+9. Verify ECharts ownership and lifecycle: standard ECharts charts must use ECharts series/options/runtime behavior rather than hand-drawn SVG/canvas marks, and must initialize, update, resize, and dispose from a measurable chart body viewport.
+10. Run acceptance gates before marking dense or implementation-ready charts as ready.
 
 ## Required Output
 
 - Preflight understanding result when the work is implementation/repair/acceptance, plus chart family and selected references.
 - Renderer/action reflection result, including any HTML/SVG source conversion decision.
 - Chart choice rationale and rejected alternatives when relevant.
+- Style generalization result when chart style is sample-derived: controlled pattern field, status, adaptive variables, fallback, and text-only reproducibility.
 - Anatomy, placement, label/legend/tooltip, density, state, and responsive rules.
 - Data contract: fields, units, precision, grain, filters, and exact-value path.
 - Option/runtime proof obligations when implementation or URL exists: renderer owner, `option`/series fields, legend/axis/grid/tooltip settings, chart body dimensions, plot-height floor, axis-label overlap checks, resize trigger/cleanup path, before/after resize geometry, DOM/SVG collision checks, screenshot/crop evidence, and non-default state coverage.
@@ -50,6 +55,7 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 ## Quality Gate
 
 - Do not choose a decorative chart when a simpler chart answers the business question better.
+- Do not accept a sample-derived chart style that remains image-only or lacks a controlled chart/card pattern, composed pattern decision, or documented `requires-pattern-extension` gap.
 - Do not repair or accept chart visuals before the chart family, parent container, data grain, units, renderer ownership, and affected chart anatomy are known.
 - Do not copy hand-authored chart SVG/canvas/DOM from an HTML prototype into a standard report chart implementation. Use ECharts options/series/runtime behavior, or document an explicit data-driven custom-diagram exception before implementation.
 - Do not accept labels, legends, axis names, or tooltips that overlap, truncate critical evidence, or hide units/precision.

@@ -2,6 +2,8 @@
 
 Use for row detail, object profile, evidence drawer, source trace, log panel, attachment panel, and modal detail.
 
+For reusable overlay variants such as right filter drawer, bottom action sheet, confirmation modal, fullscreen detail modal, top notification bar, left navigation drawer, side detail drawer, or large analytical side panel, also load `08a-overlay-drawer-modal-patterns.md`.
+
 In Vue report prototypes, use Element Plus `ElDrawer`, `ElDialog`, `ElTabs`, `ElDescriptions`, `ElForm`, `ElButton`, `ElTag`, `ElTable`, `ElTooltip`, and `ElPopover` for standard drawer, modal, evidence, and detail interactions unless an existing project design system supersedes Element Plus. Keep custom DOM only for unsupported visualizations or highly specialized content.
 
 ## Structure

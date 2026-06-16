@@ -53,6 +53,7 @@ Create internal sub-blocks inside one parent block when they answer one business
 - Main chart + small reason tags.
 - Two alternate views shown by tabs or segmented control.
 - Composite Panel: one shared topic with KPI/metric strip, one primary child, one or two auxiliary children, optional short detail preview, shared local filter, shared legend/unit, and linked hover/click behavior.
+- Micro Dashboard Card: one large parent card that contains one themed management topic with a KPI strip, multiple bounded child sections, and one compact exact-value/status path.
 
 Split into separate `8 * N` parent blocks when:
 
@@ -63,6 +64,7 @@ Split into separate `8 * N` parent blocks when:
 - A sub-block/component needs more space than the parent block can safely provide.
 - The combined sub-block/component count exceeds the limits in `block-size-constraints.md`.
 - The intended Composite Panel lacks one primary child, has unrelated child questions, or needs more than four visible analytical child components without a split/tab/fullscreen reason.
+- The intended Micro Dashboard Card has more than eight visible analytical children, lacks a shared topic, lacks child minimum sizes, or tries to fit in a parent smaller than `680x620`.
 
 ## Title Design
 
@@ -157,6 +159,19 @@ Body:
 - Optional detail preview: 3-6 rows and 3-5 columns, with a route to full detail when needed.
 
 Use when the panel answers one small loop such as current result -> trend -> driver -> exception/detail. Keep default children at 2-3 and normal maximum at 4. If all children feel equally important, the block is not ready; choose a primary child or split the panel.
+
+### 4a. Micro Dashboard Card
+
+Header: one management topic plus shared period/filter/action.
+
+Body:
+
+- KPI strip: 3-4 primary metrics, occasionally up to 6 in wide layouts.
+- Primary evidence: the largest trend/combo/chart/table section.
+- Secondary evidence: composition, ranking, target/progress, funnel, heatmap, supplier/status, or cash/status section.
+- Exact-value path: compact table, status strip, or detail route.
+
+Use when a single large card should behave like a compact management board, such as sales analysis, user operations, supply-chain monitoring, or finance analysis. This is not a normal Composite Panel because it intentionally contains `4-8` child sections. It must declare `microDashboardContract`, child priorities, child minimums, and responsive fallback. If any child cannot meet its minimum size, collapse lower-priority sections before shrinking the primary evidence.
 
 ### 5. Tabs Or Segmented Views
 
@@ -253,6 +268,7 @@ In bundled templates, one page-grid parent block maps to one configured widget. 
 - Internal sub-block labels are subordinate to the parent block title.
 - No duplicate visible component title appears inside the body when the block already has a title.
 - Peer sub-blocks/components follow internal exact `M * N` distribution only when `actualTotal > 4`; prime `actualTotal` first becomes `layoutTotal = actualTotal + 1`, `layoutTotal = M * N`, `M >= N`, and `M - N` is minimal among valid factor pairs; the parent block passes the expansion check with `heightExpansionRows = ceil(N * 2 / 3)`.
+- Micro Dashboard Cards have one topic, declared `microDashboardCardPattern`, parent size at least `680x620`, no more than `8` visible analytical children, and child minimum sizes proven before acceptance.
 - No nested card shadows or boxed mini-card titles.
 - Every internal sub-block and component has a stable container.
 - Empty/no-data masks follow parent-child scope: all children empty -> one parent mask; partial empty -> affected child sub-block masks including child label/control area and component body.

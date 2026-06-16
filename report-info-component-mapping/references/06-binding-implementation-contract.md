@@ -13,6 +13,17 @@ type ControlSemantics =
   | 'local-filter'
   | 'drilldown-param';
 
+type ActionType =
+  | 'openModal'
+  | 'closeModal'
+  | 'setFilters'
+  | 'resetFilters'
+  | 'navigateUrl'
+  | 'print'
+  | 'fullscreen'
+  | 'refresh'
+  | 'custom';
+
 type ComponentSchemaImpact =
   | 'none'
   | 'row-scope-only'
@@ -71,6 +82,40 @@ type PatternRole =
   | 'governance'
   | 'acceptance-only';
 
+type VisualSourceRole =
+  | 'temporary-evidence'
+  | 'exact-restoration-source'
+  | 'visual-regression-baseline'
+  | 'runtime-asset'
+  | 'audit-evidence'
+  | 'reusable-inspiration';
+
+type StyleGeneralizationStatus =
+  | 'covered-by-existing-pattern'
+  | 'covered-by-composed-patterns'
+  | 'requires-pattern-extension'
+  | 'out-of-scope-one-off';
+
+type StyleGeneralizationContract = {
+  sourceRole: VisualSourceRole;
+  generalizationStatus: StyleGeneralizationStatus;
+  canonicalPatternRef: string;
+  patternFields: string[];
+  componentFamily: string;
+  businessTrigger: string;
+  dataShapeTrigger: string;
+  adaptiveVariables: string[];
+  minContainer: string;
+  responsiveFallback: string[];
+  rendererOwner: string;
+  textOnlyReproduction: true;
+};
+
+type ConclusionCardPattern =
+  | 'metric-evidence-conclusion'
+  | 'finding-action-conclusion'
+  | 'compact-conclusion-summary';
+
 type AnalysisInsightContract = {
   subtype:
     | 'conclusion-card'
@@ -95,6 +140,7 @@ type AnalysisInsightContract = {
     | 'task-card'
     | 'permission-no-result-delay-note';
   insightFamily: 'conclusion' | 'insight' | 'diagnosis' | 'recommendation' | 'explanation' | 'state';
+  conclusionCardPattern?: ConclusionCardPattern;
   conclusion: string;
   evidence?: string[];
   affectedObjects?: string[];
@@ -151,6 +197,169 @@ type NumericFormatContract = {
   formatterOwner: 'frontend' | 'backend-export' | 'shared-contract' | 'project-defined';
 };
 
+type KpiCardPattern =
+  | 'plain-metric'
+  | 'target-wave'
+  | 'mini-bar-trend'
+  | 'highlight-line-trend';
+
+type TargetActualCardPattern =
+  | 'standard-summary-panel'
+  | 'emphasis-header-summary'
+  | 'soft-chip-summary';
+
+type TargetActualTrendCardPattern =
+  | 'emphasis-wave-trend'
+  | 'standard-summary-trend'
+  | 'soft-chip-trend';
+
+type TargetActualRadarCardPattern =
+  | 'emphasis-wave-radar'
+  | 'standard-action-radar';
+
+type TargetActualDonutCardPattern =
+  | 'emphasis-filter-donut'
+  | 'standard-filter-donut';
+
+type TargetActualScatterCardPattern =
+  | 'emphasis-filter-scatter'
+  | 'standard-filter-scatter';
+
+type TargetActualTablePattern =
+  | 'standard-audit-table'
+  | 'compact-audit-table';
+
+type TargetActualPivotTablePattern =
+  | 'standard-hierarchy-pivot'
+  | 'share-matrix-pivot'
+  | 'tree-expand-pivot';
+
+type TableCardPattern =
+  | 'plain-detail-ledger-table'
+  | 'filtered-operational-status-table'
+  | 'grouped-header-summary-table'
+  | 'metric-matrix-table'
+  | 's2-cross-pivot-table'
+  | 'fixed-column-scroll-table'
+  | 'grouped-subtotal-summary-table'
+  | 'tree-hierarchy-table';
+
+type RankingCardPattern =
+  | 'medal-horizontal-ranking'
+  | 'bar-progress-ranking'
+  | 'compact-list-ranking';
+
+type BasicChartCardPattern =
+  | 'single-series-bar-card'
+  | 'comparison-line-trend-card'
+  | 'area-trend-card'
+  | 'bar-line-combo-card'
+  | 'pie-composition-card'
+  | 'donut-composition-card'
+  | 'stacked-bar-composition-card'
+  | 'multi-metric-combo-card'
+  | 'filtered-bar-card'
+  | 'tooltip-line-trend-card';
+
+type SpecializedChartCardPattern =
+  | 'gauge-progress-card'
+  | 'choropleth-ranking-map-card'
+  | 'time-heatmap-card'
+  | 'candlestick-volume-card'
+  | 'boxplot-distribution-card'
+  | 'parallel-profile-card'
+  | 'bubble-opportunity-card';
+
+type FlowHierarchyDiagramCardPattern =
+  | 'conversion-funnel-card'
+  | 'multi-stage-sankey-card'
+  | 'journey-stage-map-card'
+  | 'hierarchy-tree-card'
+  | 'hub-relation-network-card'
+  | 'sunburst-composition-card'
+  | 'treemap-composition-card'
+  | 'path-conversion-flow-card';
+
+type ListStatusPattern =
+  | 'simple-info-list'
+  | 'progress-task-list'
+  | 'severity-alert-list'
+  | 'exception-record-list'
+  | 'status-chip-set'
+  | 'event-timeline'
+  | 'user-object-list'
+  | 'mixed-info-list';
+
+type FilterControlPattern =
+  | 'single-select-dropdown'
+  | 'multi-tag-select'
+  | 'date-range-selector'
+  | 'searchable-select'
+  | 'tree-path-selector'
+  | 'advanced-filter-drawer'
+  | 'combined-filter-chipbar';
+
+type OverlayPanelPattern =
+  | 'right-filter-drawer'
+  | 'bottom-action-sheet'
+  | 'center-confirmation-modal'
+  | 'fullscreen-detail-modal'
+  | 'top-notification-bar'
+  | 'left-navigation-drawer'
+  | 'side-detail-drawer'
+  | 'large-detail-side-panel';
+
+type MicroDashboardCardPattern =
+  | 'sales-fresh-analysis-board'
+  | 'user-operations-purple-board'
+  | 'supply-chain-orange-monitoring-board'
+  | 'finance-blue-analysis-board';
+
+type StateFeedbackPattern =
+  | 'fresh-line-state-set'
+  | 'soft-illustration-state-set'
+  | 'minimal-line-state-set'
+  | 'dark-tech-state-set'
+  | 'glass-card-state-set'
+  | 'playful-healing-state-set'
+  | 'business-blue-state-set'
+  | 'immersive-fullscreen-state-set';
+
+type StateFeedbackKind =
+  | 'empty'
+  | 'filtered-empty'
+  | 'loading'
+  | 'error'
+  | 'no-permission'
+  | 'building'
+  | 'stale'
+  | 'partial-data'
+  | 'disabled'
+  | 'success';
+
+type StateFeedbackScope =
+  | 'page'
+  | 'parent-block'
+  | 'sub-block'
+  | 'component-body'
+  | 'overlay'
+  | 'card';
+
+type SubBlockRole =
+  | 'summary'
+  | 'evidence'
+  | 'primaryEvidence'
+  | 'secondaryEvidence'
+  | 'detail'
+  | 'control'
+  | 'peer'
+  | 'state'
+  | 'feedback'
+  | 'status'
+  | 'kpiStrip'
+  | 'exactValuePath'
+  | 'microGroup';
+
 type ComponentMapping = {
   id: string;
   // Metadata for the layout/block title. Do not render this again inside the component body.
@@ -160,6 +369,7 @@ type ComponentMapping = {
   displayTheme?: DisplayTheme;
   sourcePatternIds?: string[];
   patternRoles?: PatternRole[];
+  styleGeneralization?: StyleGeneralizationContract;
   businessQuestion: string;
   answerAtom: string;
   semanticRole: string;
@@ -168,10 +378,28 @@ type ComponentMapping = {
   parentBlockId?: string;
   // Optional local region inside the parent block body. Not a page-grid block.
   subBlockId?: string;
-  subBlockRole?: 'summary' | 'evidence' | 'detail' | 'control' | 'peer' | 'state' | 'microGroup';
+  subBlockRole?: SubBlockRole;
   componentType: 'card' | 'chart' | 'table' | 'text-summary' | 'drawer' | 'task' | 'action' | 'custom';
   visualType: string;
+  kpiCardPattern?: KpiCardPattern;
+  targetActualCardPattern?: TargetActualCardPattern;
+  targetActualTrendCardPattern?: TargetActualTrendCardPattern;
+  targetActualRadarCardPattern?: TargetActualRadarCardPattern;
+  targetActualDonutCardPattern?: TargetActualDonutCardPattern;
+  targetActualScatterCardPattern?: TargetActualScatterCardPattern;
+  targetActualTablePattern?: TargetActualTablePattern;
+  targetActualPivotTablePattern?: TargetActualPivotTablePattern;
+  tableCardPattern?: TableCardPattern;
+  rankingCardPattern?: RankingCardPattern;
+  basicChartCardPattern?: BasicChartCardPattern;
+  specializedChartCardPattern?: SpecializedChartCardPattern;
+  flowHierarchyDiagramCardPattern?: FlowHierarchyDiagramCardPattern;
+  listStatusPattern?: ListStatusPattern;
+  overlayPanelPattern?: OverlayPanelPattern;
+  microDashboardCardPattern?: MicroDashboardCardPattern;
+  stateFeedbackPattern?: StateFeedbackPattern;
   chartSubtype?: string;
+  tableSubtype?: string;
   dataSource: string;
   apiId?: string;
   apiEndpoint?: string;
@@ -226,6 +454,66 @@ type ComponentMapping = {
     responsiveFallback: string[];
     stateRules: string[];
   };
+  microDashboardContract?: {
+    topic: string;
+    themeTone: 'fresh-green' | 'operation-purple' | 'warning-orange' | 'finance-blue' | 'neutral-blue';
+    layoutPattern: 'portrait-kpi-grid' | 'portrait-kpi-grid-status' | 'wide-kpi-grid' | 'wide-kpi-grid-status';
+    primarySequence: Array<'status' | 'trend' | 'structure' | 'ranking' | 'conversion' | 'progress' | 'warning' | 'detail' | 'cash' | 'action'>;
+    kpiCount: number;
+    parentMinW: number;
+    parentMinH: number;
+    childCountLimit: number;
+    sections: Array<{
+      id: string;
+      role:
+        | 'kpi-strip'
+        | 'primary-trend'
+        | 'composition'
+        | 'ranking'
+        | 'target-progress'
+        | 'funnel'
+        | 'heatmap'
+        | 'sparkline-group'
+        | 'status-strip'
+        | 'warning-table'
+        | 'detail-preview'
+        | 'cash-status'
+        | 'supplier-sla';
+      componentType: 'card' | 'chart' | 'table' | 'text-summary' | 'drawer' | 'task' | 'action' | 'custom';
+      visualType: string;
+      patternField?: string;
+      priority: 'P1' | 'P2' | 'P3' | 'P4';
+      minW: number;
+      minH: number;
+      datasetId?: string;
+      requiredFields?: string[];
+      fallback: 'keep' | 'collapse-to-tab' | 'move-to-drawer' | 'move-to-fullscreen' | 'split-block' | 'hide-optional';
+    }>;
+    sharedFilters?: string[];
+    linkedInteraction?: 'none' | 'hover-highlight' | 'click-select' | 'hover-and-click';
+    detailRoute?: string;
+    responsiveFallback: string[];
+    stateRules: string[];
+  };
+  stateFeedbackContract?: {
+    stateKind: StateFeedbackKind;
+    scope: StateFeedbackScope;
+    title: string;
+    reason?: string;
+    impact?: string;
+    primaryAction?: { label: string; actionType: ActionType; customActionId?: string; payload?: string[] };
+    secondaryAction?: { label: string; actionType: ActionType; customActionId?: string; payload?: string[] };
+    statusMeta?: string[];
+    minW: number;
+    minH: number;
+    preserveGeometry: boolean;
+    permissionLeakageRule?: 'no-counts-no-silhouettes' | 'safe-scope-only' | 'not-applicable';
+    retryPolicy?: 'wired-retry' | 'no-retry' | 'deferred';
+    motionPolicy?: 'none' | 'reduced-motion-safe' | 'skeleton-only' | 'project-defined';
+    accessibility: string[];
+    responsiveFallback: string[];
+    validationRules: string[];
+  };
   pivotContract?: {
     rowDimensions: string[];
     columnDimensions: string[];
@@ -272,6 +560,7 @@ type ComponentMapping = {
   navigationMetricLineage?: NavigationMetricLineage[];
   globalFilters: string[];
   filterMap: Record<string, string>;
+  filterControlPatterns?: Record<string, FilterControlPattern>;
   filterExecutionStage?: 'sql-where' | 'source-query' | 'provider-query' | 'repository-query' | 'resolver-param' | 'redis-cache' | 'precompute-cache' | 'component-local' | 'bounded-local' | 'blocked';
   ignoredFilters?: string[];
   localControls?: string[];
@@ -292,10 +581,30 @@ Rules:
 - Use stable IDs such as `attritionTrend`, `riskEmployeeTable`, or `revenueGapWaterfall`.
 - For sample/source restoration, set `sampleModuleRole`. Only `businessRequired` modules should become `must-have`; `sampleStructure` preserves visible sample structure, and `optionalEnhancement` must be labeled as an enhancement.
 - When a display-theme pattern library is used, set `displayTheme`, `sourcePatternIds`, and `patternRoles` on every affected mapping row. Pattern IDs should be stable values such as `detail-table-01`.
+- For screenshot/sample-derived reusable styles, set `styleGeneralization`. Use `covered-by-existing-pattern` when one controlled pattern field is enough, `covered-by-composed-patterns` when the design is a valid composition of several controlled pattern fields, `requires-pattern-extension` when the sample is reusable but not yet covered, and `out-of-scope-one-off` only for non-reusable, audit-only, or exact-restoration-only surfaces. Reusable style knowledge must have `textOnlyReproduction: true`.
 - `visualType` must match runnable template/widget capability where a template is used.
+- Conclusion/evidence/action cards should keep `componentType: 'text-summary'`, `visualType: 'text-summary'`, set `analysisInsightContract.subtype: 'conclusion-card'`, `analysisInsightContract.insightFamily: 'conclusion'`, and set `analysisInsightContract.conclusionCardPattern` to `metric-evidence-conclusion`, `finding-action-conclusion`, or `compact-conclusion-summary` from `$report-component-style-design` `references/03a-conclusion-evidence-action-cards.md`.
+- Metric cards that use `visualType: 'metric-card'` should set `kpiCardPattern` when the card's expression matters. Use `plain-metric`, `target-wave`, `mini-bar-trend`, or `highlight-line-trend` from `$report-component-style-design` `references/04a-kpi-card-patterns.md`; do not create new enum values for visual variants.
+- Target/actual comparison cards should keep `visualType: 'bar'`, set `chartSubtype: 'target-actual-comparison'`, and set `targetActualCardPattern` to `standard-summary-panel`, `emphasis-header-summary`, or `soft-chip-summary` from `$report-component-style-design` `references/04b-target-actual-comparison-cards.md`.
+- Target/actual trend cards should keep `visualType: 'line'`, set `chartSubtype: 'target-actual-trend'`, and set `targetActualTrendCardPattern` to `emphasis-wave-trend`, `standard-summary-trend`, or `soft-chip-trend` from `$report-component-style-design` `references/04c-target-actual-trend-cards.md`.
+- Target/actual radar cards should keep `visualType: 'radar'`, set `chartSubtype: 'target-actual-radar'`, and set `targetActualRadarCardPattern` to `emphasis-wave-radar` or `standard-action-radar` from `$report-component-style-design` `references/04d-target-actual-radar-cards.md`.
+- Target/actual donut cards should keep `visualType: 'pie'`, set `chartSubtype: 'target-actual-donut'`, and set `targetActualDonutCardPattern` to `emphasis-filter-donut` or `standard-filter-donut` from `$report-component-style-design` `references/04e-target-actual-donut-cards.md`.
+- Target/actual scatter cards should keep `visualType: 'scatter'`, set `chartSubtype: 'target-actual-scatter'`, and set `targetActualScatterCardPattern` to `emphasis-filter-scatter` or `standard-filter-scatter` from `$report-component-style-design` `references/04f-target-actual-scatter-cards.md`.
+- Target/actual detail table cards should keep `componentType: 'table'`, `visualType: 'table'`, set `tableSubtype: 'target-actual-detail'`, and set `targetActualTablePattern` to `standard-audit-table` or `compact-audit-table` from `$report-component-style-design` `references/06a-target-actual-detail-tables.md`.
+- Target/actual pivot table cards should keep `componentType: 'table'`, `visualType: 'pivot'`, set `tableSubtype: 'target-actual-pivot'`, and set `targetActualPivotTablePattern` to `standard-hierarchy-pivot`, `share-matrix-pivot`, or `tree-expand-pivot` from `$report-component-style-design` `references/06b-target-actual-pivot-tables.md`.
+- Reusable table card patterns should keep `componentType: 'table'`, keep `visualType` as `table` or `pivot`, and set `tableCardPattern` to `plain-detail-ledger-table`, `filtered-operational-status-table`, `grouped-header-summary-table`, `metric-matrix-table`, `s2-cross-pivot-table`, `fixed-column-scroll-table`, `grouped-subtotal-summary-table`, or `tree-hierarchy-table` from `$report-component-style-design` `references/06c-table-card-patterns.md`.
+- Top ranking cards should keep `componentType: 'card'`, `visualType: 'ranking-list'`, and set `rankingCardPattern` to `medal-horizontal-ranking`, `bar-progress-ranking`, or `compact-list-ranking` from `$report-component-style-design` `references/07a-top-ranking-cards.md`.
+- Basic chart cards should keep `componentType: 'chart'`, keep `visualType` as the real chart family (`bar`, `line`, `combo`, or `pie`), and set `basicChartCardPattern` to `single-series-bar-card`, `comparison-line-trend-card`, `area-trend-card`, `bar-line-combo-card`, `pie-composition-card`, `donut-composition-card`, `stacked-bar-composition-card`, `multi-metric-combo-card`, `filtered-bar-card`, or `tooltip-line-trend-card` from `$report-component-style-design` `references/05d-basic-chart-card-patterns.md`.
+- Specialized chart cards should keep `componentType: 'chart'`, keep `visualType` as the real chart family (`gauge`, `map`, `heatmap`, `candlestick`, `boxplot`, `parallel`, or `scatter`), and set `specializedChartCardPattern` to `gauge-progress-card`, `choropleth-ranking-map-card`, `time-heatmap-card`, `candlestick-volume-card`, `boxplot-distribution-card`, `parallel-profile-card`, or `bubble-opportunity-card` from `$report-component-style-design` `references/05e-specialized-chart-card-patterns.md`.
+- Flow/hierarchy diagram cards should keep `componentType: 'chart'`, keep `visualType` as the real diagram family (`funnel`, `sankey`, `path`, `tree`, `graph`, `sunburst`, or `treemap`), and set `flowHierarchyDiagramCardPattern` to `conversion-funnel-card`, `multi-stage-sankey-card`, `journey-stage-map-card`, `hierarchy-tree-card`, `hub-relation-network-card`, `sunburst-composition-card`, `treemap-composition-card`, or `path-conversion-flow-card` from `$report-component-style-design` `references/09a-flow-hierarchy-diagram-card-patterns.md`.
+- Reusable operational information lists, task lists, alert lists, exception lists, status chip groups, timelines, user/object lists, or mixed work-item lists should use `visualType: 'operational-list'` and set `listStatusPattern` to `simple-info-list`, `progress-task-list`, `severity-alert-list`, `exception-record-list`, `status-chip-set`, `event-timeline`, `user-object-list`, or `mixed-info-list` from `$report-component-style-design` `references/07b-operational-list-status-patterns.md`.
+- Reusable overlay, drawer, modal, notification, action sheet, or detail panel components should use `visualType: 'overlay-panel'` and set `overlayPanelPattern` to `right-filter-drawer`, `bottom-action-sheet`, `center-confirmation-modal`, `fullscreen-detail-modal`, `top-notification-bar`, `left-navigation-drawer`, `side-detail-drawer`, or `large-detail-side-panel` from `$report-component-style-design` `references/08a-overlay-drawer-modal-patterns.md`.
+- Micro Dashboard Cards should use `componentType: 'custom'`, `visualType: 'micro-dashboard'`, set `microDashboardCardPattern` to `sales-fresh-analysis-board`, `user-operations-purple-board`, `supply-chain-orange-monitoring-board`, or `finance-blue-analysis-board`, and declare `microDashboardContract` from `$report-component-style-design` `references/12f6-placement-micro-dashboard-card.md`. Use this only for one large single-topic card that passes child minimum sizes; otherwise use `compositePanelContract`, tabs, split blocks, drawer, or fullscreen.
+- Reusable empty/loading/error/no-permission/building states should use `componentType: 'custom'`, `visualType: 'state-feedback'`, set `stateFeedbackPattern`, and declare `stateFeedbackContract` from `$report-component-style-design` `references/13-state-feedback-patterns.md`. State contracts must preserve geometry and must not leak restricted data in no-permission states.
 - `parentBlockId` groups components that live in the same top-level `8 * N` parent block. `subBlockId` identifies the internal sub-block viewport that owns the component. Leave `subBlockId` empty only for single-component parent blocks.
 - `parentLayoutSpan` is the top-level `columns * rows` span. `subBlockLayout` describes local grid/flex placement such as `area:evidence`, `local:2x1`, `track:minmax(240px,1fr)`, or `tab:trend`, and must preserve `subBlockInset:5px` plus `subBlockGap:5px` when sub-blocks exist.
 - `filterMap` must map UI filter IDs to dataset fields or query params.
+- `filterControlPatterns` should map visible filter IDs to `single-select-dropdown`, `multi-tag-select`, `date-range-selector`, `searchable-select`, `tree-path-selector`, `advanced-filter-drawer`, or `combined-filter-chipbar` when filter visual design is part of the handoff.
 - `controlSemantics` must classify controls that affect the component as `perspective-switch`, `global-filter`, `local-filter`, or `drilldown-param`.
 - `componentSchemaImpact` must explicitly state whether a control changes metric names, component collection, table headers, dimensions, metric formulas/口径, domain vocabulary, or only narrows rows.
 - `navigationMetricLineage` is required when perspective navigation displays percentages, rankings, or status lights. Each item must declare `sourceDataset`, `field/formula`, `grain`, `affectedFilters`, and `periodBehavior`.
@@ -316,14 +625,39 @@ Use these values unless an existing project explicitly defines a different local
 
 - `priority`: `must-have`, `should-have`, `optional`.
 - `componentType`: `card`, `chart`, `table`, `text-summary`, `drawer`, `task`, `action`, `custom`.
-- `visualType`: `line`, `bar`, `combo`, `candlestick`, `heatmap`, `pie`, `radar`, `path`, `sunburst`, `gauge`, `scatter`, `boxplot`, `parallel`, `map`, `graph`, `tree`, `treemap`, `sankey`, `funnel`, `metric-card`, `text-summary`, `table`, `pivot`, `composite-panel`, `other`.
-- Built-in action type: `openModal`, `closeModal`, `setFilters`, `resetFilters`, `navigateUrl`, `print`, `fullscreen`, `refresh`. Avoid `switchNav` for new components unless maintaining legacy config.
+- `visualType`: `line`, `bar`, `combo`, `candlestick`, `heatmap`, `pie`, `radar`, `path`, `sunburst`, `gauge`, `scatter`, `boxplot`, `parallel`, `map`, `graph`, `tree`, `treemap`, `sankey`, `funnel`, `metric-card`, `text-summary`, `table`, `pivot`, `ranking-list`, `operational-list`, `overlay-panel`, `composite-panel`, `micro-dashboard`, `state-feedback`, `other`.
+- `conclusionCardPattern`: `metric-evidence-conclusion`, `finding-action-conclusion`, `compact-conclusion-summary`.
+- `kpiCardPattern`: `plain-metric`, `target-wave`, `mini-bar-trend`, `highlight-line-trend`.
+- `targetActualCardPattern`: `standard-summary-panel`, `emphasis-header-summary`, `soft-chip-summary`.
+- `targetActualTrendCardPattern`: `emphasis-wave-trend`, `standard-summary-trend`, `soft-chip-trend`.
+- `targetActualRadarCardPattern`: `emphasis-wave-radar`, `standard-action-radar`.
+- `targetActualDonutCardPattern`: `emphasis-filter-donut`, `standard-filter-donut`.
+- `targetActualScatterCardPattern`: `emphasis-filter-scatter`, `standard-filter-scatter`.
+- `tableSubtype`: `target-actual-detail` for target/actual detail table cards; `target-actual-pivot` for target/actual pivot table cards.
+- `targetActualTablePattern`: `standard-audit-table`, `compact-audit-table`.
+- `targetActualPivotTablePattern`: `standard-hierarchy-pivot`, `share-matrix-pivot`, `tree-expand-pivot`.
+- `tableCardPattern`: `plain-detail-ledger-table`, `filtered-operational-status-table`, `grouped-header-summary-table`, `metric-matrix-table`, `s2-cross-pivot-table`, `fixed-column-scroll-table`, `grouped-subtotal-summary-table`, `tree-hierarchy-table`.
+- `rankingCardPattern`: `medal-horizontal-ranking`, `bar-progress-ranking`, `compact-list-ranking`.
+- `basicChartCardPattern`: `single-series-bar-card`, `comparison-line-trend-card`, `area-trend-card`, `bar-line-combo-card`, `pie-composition-card`, `donut-composition-card`, `stacked-bar-composition-card`, `multi-metric-combo-card`, `filtered-bar-card`, `tooltip-line-trend-card`.
+- `specializedChartCardPattern`: `gauge-progress-card`, `choropleth-ranking-map-card`, `time-heatmap-card`, `candlestick-volume-card`, `boxplot-distribution-card`, `parallel-profile-card`, `bubble-opportunity-card`.
+- `flowHierarchyDiagramCardPattern`: `conversion-funnel-card`, `multi-stage-sankey-card`, `journey-stage-map-card`, `hierarchy-tree-card`, `hub-relation-network-card`, `sunburst-composition-card`, `treemap-composition-card`, `path-conversion-flow-card`.
+- `listStatusPattern`: `simple-info-list`, `progress-task-list`, `severity-alert-list`, `exception-record-list`, `status-chip-set`, `event-timeline`, `user-object-list`, `mixed-info-list`.
+- `overlayPanelPattern`: `right-filter-drawer`, `bottom-action-sheet`, `center-confirmation-modal`, `fullscreen-detail-modal`, `top-notification-bar`, `left-navigation-drawer`, `side-detail-drawer`, `large-detail-side-panel`.
+- `microDashboardCardPattern`: `sales-fresh-analysis-board`, `user-operations-purple-board`, `supply-chain-orange-monitoring-board`, `finance-blue-analysis-board`.
+- `stateFeedbackPattern`: `fresh-line-state-set`, `soft-illustration-state-set`, `minimal-line-state-set`, `dark-tech-state-set`, `glass-card-state-set`, `playful-healing-state-set`, `business-blue-state-set`, `immersive-fullscreen-state-set`.
+- `stateFeedbackKind`: `empty`, `filtered-empty`, `loading`, `error`, `no-permission`, `building`, `stale`, `partial-data`, `disabled`, `success`.
+- `subBlockRole`: `summary`, `evidence`, `primaryEvidence`, `secondaryEvidence`, `detail`, `control`, `peer`, `state`, `feedback`, `status`, `kpiStrip`, `exactValuePath`, `microGroup`. Use the specific role instead of overloading `state` or `microGroup` when the sub-block is a feedback state, status strip, KPI strip, primary evidence chart, secondary evidence chart, or exact-value path.
+- Built-in action type: `openModal`, `closeModal`, `setFilters`, `resetFilters`, `navigateUrl`, `print`, `fullscreen`, `refresh`. Use `custom` only with `customActionId`, event owner, and payload contract. Avoid `switchNav` for new components unless maintaining legacy config.
 - `controlSemantics`: `perspective-switch`, `global-filter`, `local-filter`, `drilldown-param`.
 - `componentSchemaImpact`: `none`, `row-scope-only`, `metric-name`, `metric-set`, `component-set`, `table-schema`, `dimension-set`, `definition-change`, `domain-vocabulary`, `mixed`.
 - `navigationMetricKind`: `percentage`, `ranking`, `status-light`.
 - `periodBehavior`: `selected-period`, `current-period`, `comparison-period`, `rolling-window`, `latest-snapshot`, `static-display-copy`.
 - `filterExecutionStage`: `sql-where`, `source-query`, `provider-query`, `repository-query`, `resolver-param`, `redis-cache`, `precompute-cache`, `component-local`, `bounded-local`, or `blocked`.
+- `filterValueType`: `single`, `multiple`, `range`, `keyword`, `date`, `treePath`, `enum`, `toggle`, `mixed`.
+- `filterControlPattern`: `single-select-dropdown`, `multi-tag-select`, `date-range-selector`, `searchable-select`, `tree-path-selector`, `advanced-filter-drawer`, `combined-filter-chipbar`.
 - `dataPolicy`: `static` only for explicit narrative/static content, `external` only when the component manages runtime data outside normal datasets.
+- `visualSourceRole`: `temporary-evidence`, `exact-restoration-source`, `visual-regression-baseline`, `runtime-asset`, `audit-evidence`, `reusable-inspiration`.
+- `styleGeneralizationStatus`: `covered-by-existing-pattern`, `covered-by-composed-patterns`, `requires-pattern-extension`, `out-of-scope-one-off`.
 
 ## Binding Matrix
 
@@ -333,6 +667,7 @@ Minimum columns:
 
 - Component ID, parent block ID, optional sub-block ID, and layout/block title metadata.
 - Display theme, source pattern IDs, and pattern roles when the workflow selected reusable pattern cards.
+- Style generalization status, canonical pattern reference, pattern fields, adaptive variables, renderer owner, and text-only reproduction flag when the component style is sample-derived or reusable.
 - Priority.
 - Component type, `visualType`, planned parent `columns * rows` span, and sub-block layout when present.
 - Sub-block spacing: `subBlockInset:5px` and `subBlockGap:5px` when the component lives inside a composed parent block.
@@ -351,6 +686,7 @@ Minimum columns:
 - Ignored filters and visible scope label.
 - Local filters or internal tabs.
 - Filter-to-field or filter-to-query mapping.
+- Filter control pattern for every visible filter when visual filter design is in scope.
 - Filter/sort/page execution stage.
 - Interaction state: selected row, chart mark, drill path, drawer, modal, or jump context.
 - Action payload or emitted event.

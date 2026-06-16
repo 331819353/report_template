@@ -15,7 +15,7 @@ Every implementation-ready component spec must include a `Positioning And Alignm
 | Basic charts | `12c-placement-basic-charts.md`, then exact `12c1`-`12c4` file |
 | Specialized charts | `12d-placement-specialized-charts.md`, then exact `12d1`-`12d8` file |
 | Flow/hierarchy charts | `12e-placement-flow-hierarchy-charts.md`, then exact `12e1`-`12e7` file |
-| Composite Panel and tables | `12f-placement-composite-tables.md`, then exact `12f1`-`12f5` file |
+| Composite Panel, Micro Dashboard Card, and tables | `12f-placement-composite-tables.md`, then exact `12f1`-`12f6` file |
 
 ## Loading Guidance
 

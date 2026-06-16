@@ -2,6 +2,10 @@
 
 Use for repeated object cards, ranking lists, anomaly cards, task cards, status chips, and timeline rows.
 
+For TOP N ranking cards, leaderboard cards, medal cards, or progress-bar ranking summaries, also load `07a-top-ranking-cards.md`.
+
+For reusable operational information lists, task progress lists, alert/exception lists, status chip sets, event timelines, user/object lists, or mixed work-item lists, also load `07b-operational-list-status-patterns.md`.
+
 ## Card And List Structure
 
 - Same card/list type uses consistent height, padding, metadata order, icon style, and status placement.

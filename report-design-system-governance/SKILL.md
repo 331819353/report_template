@@ -1,6 +1,6 @@
 ---
 name: report-design-system-governance
-description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分析/明细查询/专题分析页面的全流程设计系统与开发基线。用户提到提高前端设计、前端设计提升、报表设计系统、页面设计规范、页面规范、组件规范、组件设计规范、视觉规范、tokens、KPI、图表、表格、筛选、指标口径、单位/百分比显示、报表前端实现、报表联调验收、数据对账、权限/空态/loading/error、导出/性能、报表风格一致、可复用报表规范时触发；不替代单个组件修复或模板工程复制。"
+description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分析/明细查询/专题分析页面的全流程设计系统与开发基线。用户提到提高前端设计、前端设计提升、报表设计系统、页面设计规范、页面规范、组件规范、组件设计规范、视觉规范、tokens、KPI、图表、表格、筛选、指标口径、单位/百分比显示、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、报表前端实现、报表联调验收、数据对账、导出/性能、报表风格一致、可复用报表规范时触发；不替代单个组件修复或模板工程复制。"
 ---
 
 # Report Design System Governance
@@ -8,6 +8,8 @@ description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分�
 ## Overview
 
 Use this skill to create, audit, merge, apply, or validate reusable report design-system standards across design, implementation, runtime QA, testing, acceptance, and handoff.
+
+When the standard is built from user-provided component screenshots or samples, governance owns the outcome target: all reusable sample styles must become text-only, controlled, adaptive pattern contracts. The acceptance target is `100% routable coverage` of the provided sample universe, with unsupported samples recorded as `requires-pattern-extension` instead of being left as screenshots.
 
 It governs the shared baseline. Use `$report-visual-layout-design` for a page layout fix, `$report-layout-size-constraint-spec` for block/viewport fit, `$report-component-style-design` for mixed component repair, `$report-component-design-spec` for reusable component-family standards, `$report-chart-design-spec` for charts, `$report-table-design-spec` for tables, `$report-filter-control-design-spec` for filters, `$report-component-placement-spec` for implementation-ready component coordinates, and `$report-prototype-template-management` for bundled template assets.
 
@@ -40,6 +42,7 @@ Always choose the mode and then load only the matching references.
 | Generic anti-AI design gate | `references/08-anti-ai-design-gate.md` |
 | Report decision anti-AI gate | `references/09-report-decision-anti-ai-gate.md` |
 | Detailed reusable-standard acceptance gates | `references/10-design-system-acceptance-gates.md` |
+| Screenshot/sample-derived component style generalization | `$report-component-style-design` `references/00a-style-generalization-goal.md` and `$artifact-readability-standard` `references/visual-source-abstraction-standard.md` |
 | Number precision, rounding, unit scaling, and exact-value display | `$metric-number-display-contract` |
 | Bundled template layout tokens | `$report-prototype-template-management` `references/template-layout-design-system.md` |
 | Chart/table/filter-specific standards | `$report-chart-design-spec`, `$report-table-design-spec`, `$report-filter-control-design-spec` |
@@ -54,20 +57,22 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 
 1. Run the Preflight understanding gate before creating, auditing, merging, applying, or accepting standards. Name mode, source-of-truth hierarchy, affected surfaces, owning specialty skills, hard constraints, missing evidence, and start decision.
 2. Select mode and source-of-truth hierarchy: company standard, report extension, template standard, project exception, or legacy override. For Haier/enterprise report pages, default hierarchy is `Haier company UI baseline -> report design-system extension -> template/project exception`.
-3. Inventory design surfaces: shell, navigation, filters, KPI cards, charts, tables, drawers, modals, buttons, tags, empty/loading/error/no-permission states, export, responsive layouts, and custom graphics.
+3. Inventory design surfaces: shell, navigation, filters, KPI cards, charts, tables, Composite Panels, Micro Dashboard Cards, drawers, modals, buttons, tags, empty/loading/error/no-permission/building states, export, responsive layouts, and custom graphics.
 4. Classify whether the work is report/dashboard/BI/data-screen, common enterprise app, or mixed. Load Haier company UI baseline for Haier/enterprise app surfaces and report design-system references for report surfaces before judging or defining rules.
 5. Run the generic anti-AI gate and report decision gate before stabilizing tokens or accepting a visual standard.
-6. Define semantic tokens and reusable rules: color roles, typography, spacing/grid, radius, border, shadow, density, icon size, z-index, responsive breakpoints, states, accessibility, and motion limits.
-7. Define page, component, visualization, numeric precision/display, filter, state, performance, and handoff standards. Delegate numeric display details to `$metric-number-display-contract`; delegate implementation-ready component families to `$report-component-design-spec` and `$report-component-style-design`.
-8. Classify rule strength before acceptance: `MUST/fail` for correctness/trust/runtime/renderer/filter/permission/export/accessibility/readiness constraints, `SHOULD/exception-required` for strong defaults that may vary by business scenario, and `MAY/optional` for enhancements. Every `MUST` gets a proof method and failure ID; every `SHOULD` gets an exception condition.
-9. Define governance: stable vs experimental rules, allowed variants, deprecated patterns, exception process, versioning, migration status, owners, and review checklist.
-10. Route implementation or remediation to layout, component, frontend, runtime QA, testing, or template skills.
+6. For sample-derived standards, run the style generalization goal: every reusable visual sample must map to controlled patterns, composed patterns, or `requires-pattern-extension`; raw images and embeddings are not durable skill knowledge.
+7. Define semantic tokens and reusable rules: color roles, typography, spacing/grid, radius, border, shadow, density, icon size, z-index, responsive breakpoints, states, accessibility, and motion limits.
+8. Define page, component, visualization, numeric precision/display, filter, state, performance, and handoff standards. Delegate numeric display details to `$metric-number-display-contract`; delegate implementation-ready component families to `$report-component-design-spec` and `$report-component-style-design`.
+9. Classify rule strength before acceptance: `MUST/fail` for correctness/trust/runtime/renderer/filter/permission/export/accessibility/readiness constraints, `SHOULD/exception-required` for strong defaults that may vary by business scenario, and `MAY/optional` for enhancements. Every `MUST` gets a proof method and failure ID; every `SHOULD` gets an exception condition.
+10. Define governance: stable vs experimental rules, allowed variants, deprecated patterns, exception process, versioning, migration status, owners, and review checklist.
+11. Route implementation or remediation to layout, component, frontend, runtime QA, testing, or template skills.
 
 ## Required Output
 
 - Preflight understanding result, mode, source-of-truth hierarchy, input inventory, and scope.
 - Inherited Haier baseline decisions for color, typography, spacing, radius, shadow, icon/base component, brand/logo, state, and cross-platform behavior.
 - Token, page-layout, component, visualization, numeric precision/display, filter, state, accessibility, interaction, and performance standards.
+- Sample-derived style generalization coverage: controlled pattern fields, covered/composed/extension statuses, non-retained image policy, and text-only reproducibility result.
 - Report guideline mapping: requirements, metric dictionary, calculation口径, page hierarchy, chart/table/filter/state rules, engineering handoff, and acceptance checklist.
 - Anti-AI and report-decision gate result with `AI-*` and `RPT-*` findings or explicit pass status.
 - Rule strength matrix: `MUST/fail`, `SHOULD/exception-required`, and `MAY/optional` rules, with proof method, failure ID, and allowed exception condition for any advisory wording.
@@ -82,6 +87,7 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 - Do not create one-off colors, spacings, hover effects, chart semantics, or component variants without semantic tokens or approved exceptions.
 - Do not accept generic "modern SaaS", "高级科技感", purple-blue gradients, glass cards, glow buttons, floating decoration, oversized radius, or abstract AI imagery as default report style.
 - Reusable standards must cover responsive behavior, edge states, accessibility, data density, numeric display contracts, exact-value access, engineering tokens, and migration impact.
+- Reusable screenshot/sample-derived standards must reach `100% routable coverage` for the provided sample set: every reusable sample is covered by existing patterns, composed patterns, or a named extension gap, and no long-lived standard depends on raw image paths, image embeddings, or OCR-only extraction.
 - Reusable standards must not leave high-risk rules as vague advice. Renderer ownership, filter scope, query/export/permission impact, data contracts, runtime fit, overflow, accessibility, and readiness evidence must be written as `MUST/fail` with proof obligations.
 - Report standards must preserve metric口径, metric tree/driver path, realistic data states, drilldown/detail/action, trust metadata, and industry vocabulary.
 - Load `10-design-system-acceptance-gates.md` before accepting a reusable standard, audit result, merge, or migration plan.

@@ -11,6 +11,7 @@ This file is now a routing index. Load the smallest matching split file instead 
 | Pivot tables | `12f3-placement-pivot-table.md` |
 | Detail tables | `12f4-placement-detail-table.md` |
 | Composite and table acceptance checks | `12f5-placement-table-acceptance-checks.md` |
+| Micro Dashboard Cards | `12f6-placement-micro-dashboard-card.md` |
 
 ## Loading Guidance
 

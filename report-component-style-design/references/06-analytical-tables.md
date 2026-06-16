@@ -2,6 +2,8 @@
 
 Use for AntV S2, pivot tables, cross tables, wide metric matrices, financial grids, and detailed record tables. AntV S2 is an on-demand runtime dependency, not a default template dependency; install `@antv/s2` and `@antv/s2-vue` only when the implemented table actually needs S2 behavior.
 
+Use `06c-table-card-patterns.md` when visual samples or requirements need reusable table card patterns such as detail ledger, operational status table, grouped header summary, metric matrix, S2 cross table, fixed-column scroll table, grouped subtotal summary table, or tree hierarchy table.
+
 ## Detail Tables
 
 Use Detail Tables for row-level records such as orders, customers, products, stores, transactions, tickets, budget rows, metric details, and audit evidence. The table's job is record lookup, row-to-row comparison, anomaly/status location, detail drill-through, and light row action. It is not a decorative dense database dump.

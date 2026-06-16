@@ -2,6 +2,8 @@
 
 Use for KPI cards, pyramid KPI cards, metric groups, comparison tiles, submetric tiles, and mini trends.
 
+Use `04a-kpi-card-patterns.md` after this file when the task needs reusable KPI card expressions such as target completion wave cards, mini bar trend cards, lead line trend cards, or anti-AI KPI card generation. Use `04b-target-actual-comparison-cards.md`, `04c-target-actual-trend-cards.md`, `04d-target-actual-radar-cards.md`, `04e-target-actual-donut-cards.md`, or `04f-target-actual-scatter-cards.md` when the KPI headline becomes a complete target/actual chart card with axes, radar geometry, donut composition, scatter relationship, legend, target evidence, and bottom summary. This file owns the base KPI contract, fit, typography, and alignment; `04a` owns KPI-card expression selection, while `04b`, `04c`, `04d`, `04e`, and `04f` own full target/actual chart-card patterns.
+
 ## Structure
 
 - Required zones: value, unit, status/trend, and optional baseline/target. A visible metric label/title is required only when the KPI card is standalone or when no surrounding block/container title already identifies the metric.
