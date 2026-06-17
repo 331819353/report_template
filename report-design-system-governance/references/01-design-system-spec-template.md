@@ -21,6 +21,7 @@ Use this template to produce a complete, non-empty report design system specific
 | Enterprise density | Prioritize scanning, comparison, and repeated work over marketing-style decoration | First viewport answers a business question without decorative-only blocks |
 | Anti-AI realism | Product context, real content, states, accessibility, and engineering constraints outrank generic polish | `AI-*` findings are absent, remediated, or documented as scoped exceptions |
 | Report decision usefulness | Report pages must support judgment, diagnosis, trust, and action instead of only looking like dashboards | `RPT-*` findings are absent, remediated, or documented as scoped exceptions |
+| Modern BI clarity | When requested, modern SaaS / BI Dashboard / UI Kit style means light analytical surfaces, white-card hierarchy, restrained UI Kit controls, no component pileup, and lightweight charts | `VIS-MODERN-BI-BASELINE-MISSING`, `VIS-GENERIC-SAAS-SHELL`, `VIS-COMPONENT-PILEUP`, `VIS-CHART-OVERWEIGHT`, and `VIS-HIERARCHY-FLAT` are absent or scoped |
 | Semantic tokens | Use role-based tokens instead of one-off raw styles | Every raw color/spacing/shadow maps to a token or exception |
 | Stable geometry | Hover/focus/loading/error states preserve layout size | No cards, buttons, charts, or tables shift on interaction |
 | Measurable component placement | Implementation-ready components define internal coordinates and alignment before visual polish | Each component family has slot x/y rules, main visual center, size tiers, and state geometry |
@@ -36,6 +37,10 @@ Minimum rows: color, typography, spacing, grid, radius, border, shadow, state, d
 | --- | --- | --- | --- | --- | --- |
 | Color | `surface.page` | Inherited or value | Page background | Contrast against body text | stable/variant/gap |
 | Color | `surface.card` | Inherited or value | KPI/chart/table containers | Contrast against borders/text | stable/variant/gap |
+| Color | `surface.card.muted` | Inherited or value | Internal sub-blocks, table header fills, quiet supporting panels | Must not look like nested cards | stable/variant/gap |
+| Border | `border.subtle/card/focus` | Inherited or value | White-card outlines, dividers, focus rings | Thin but visible on light page canvas | stable/variant/gap |
+| Radius | `radius.card` | `6-8px` default or inherited value | Analytical cards and report blocks | No oversized SaaS cards unless source requires | stable/variant/gap |
+| Shadow | `shadow.card` | Inherited or subtle value | White-card depth on light page canvas | Must not dominate data reading | stable/variant/gap |
 | Color | `text.primary` | Inherited or value | Page/block titles and primary values | Must pass text contrast | stable/variant/gap |
 | Color | `text.secondary` | Inherited or value | Descriptions, helper text, secondary labels | Must remain readable in dense cards | stable/variant/gap |
 | Color | `state.success/warning/error/info` | Inherited or value | Status tags, alerts, trend indicators | Semantic color cannot be decorative | stable/variant/gap |
@@ -184,6 +189,18 @@ Use this when creating, auditing, or migrating a report design system.
 | `AI-GENERIC-COPY` | Headings/CTA/states | Empty slogan or placeholder copy | P0/P1/P2/P3 | Require concrete action/object/condition/evidence | Owner | open/fixed/waived |
 | `AI-FIRSTSCREEN-ONLY` | Layout/QA | Missing mobile, scroll, states, long content | P0/P1/P2/P3 | Add responsive and state acceptance | Owner | open/fixed/waived |
 | `AI-ENGINEERING-SAMPLE` | Frontend implementation | Hardcoded styles, fake rows, no labels/focus | P0/P1/P2/P3 | Add tokens, typed view model, states, accessibility | Owner | open/fixed/waived |
+
+## Modern BI Style Gate Matrix
+
+Use this matrix when the user asks for modern SaaS Dashboard, BI Dashboard, UI Kit, light gray-white, white-card, linear, clean, or high-end report style.
+
+| Finding ID | Surface | Evidence | Severity | Required constraint/token/component rule | Exception owner | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| `VIS-MODERN-BI-BASELINE-MISSING` | Tokens/page/card/chart | Style words exist but no source hierarchy or semantic tokens | P0/P1/P2/P3 | Map page/card/border/radius/shadow/typography/chart tokens to inherited source or `12-modern-saas-bi-style-contract.md` | Owner | open/fixed/waived |
+| `VIS-GENERIC-SAAS-SHELL` | Page/layout/report logic | Interchangeable dashboard shell with weak task path | P0/P1/P2/P3 | Bind style to report question, metric tree, diagnostic path, trust detail, and action route | Owner | open/fixed/waived |
+| `VIS-COMPONENT-PILEUP` | Layout/component/card | Unrelated widgets, nested cards, or equal-weight collage | P0/P1/P2/P3 | Reduce visible components, split blocks, or use governed Composite Panel/Micro Dashboard Card contracts | Owner | open/fixed/waived |
+| `VIS-CHART-OVERWEIGHT` | Chart/card/first viewport | Too many chart families, heavy labels, saturated colors, or mini-chart clutter | P0/P1/P2/P3 | Reduce chart count, simplify chart family, lighten chart options, and provide exact-value/table/detail path | Owner | open/fixed/waived |
+| `VIS-HIERARCHY-FLAT` | Page/card/text/charts | Everything has similar visual weight and reading order is unclear | P0/P1/P2/P3 | Declare primary/supporting/detail roles and encode them through size, order, density, and action placement | Owner | open/fixed/waived |
 
 ## Report Decision Anti-AI Gate Matrix
 

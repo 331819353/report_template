@@ -8,7 +8,7 @@ Use these rounded values for planning visible block size. Exact implementation m
 
 ### Full-Width 1920 Viewport
 
-Applies to custom pages, `topbar-dark-scroll-dashboard-template`, and `topbar-light-scroll-dashboard-template`.
+Applies to custom pages and `topbar-light-scroll-dashboard-template`.
 
 - `contentWidth = 1920`
 - `gap = 14`

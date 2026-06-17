@@ -76,6 +76,17 @@ Use semantic project/template tokens first. The values below are Haier-aligned f
 | `--color-table-header-bg` | table header surface token, default `#FAFAFA` unless brand/template overrides |
 | `--color-disabled-bg` | disabled/background token / Haier fallback `#F5F5F5` |
 
+Modern SaaS / BI Dashboard fallbacks when no inherited token exists:
+
+| Token | Value/source |
+| --- | --- |
+| `--surface-page` | `surface.page`, default light gray-white neutral such as `#F5F7FA` |
+| `--surface-card` | `surface.card`, default `#FFFFFF` |
+| `--surface-card-muted` | `surface.card.muted`, default `#F8FAFC` for internal sub-blocks rather than nested cards |
+| `--border-subtle` | `border.subtle`, default `#E5E7EB` |
+| `--radius-card` | `radius.card`, default `6-8px` unless inherited |
+| `--shadow-card` | `shadow.card`, subtle single-layer shadow or none when borders carry hierarchy |
+
 Spacing tokens:
 
 | Token | Value |

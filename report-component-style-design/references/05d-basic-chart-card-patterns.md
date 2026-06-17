@@ -2,6 +2,8 @@
 
 Use this reference when screenshots or visual samples show reusable chart cards: simple bars, line trends, area trends, bar-line Combo charts, pie/donut composition cards, stacked bar composition, multi-metric operational Combo cards, and chart cards with a compact local time-range control or tooltip focus. The source images are temporary visual evidence; the durable standard is this text contract.
 
+Boundary: when the card's first-read object is a large KPI value plus comparison, and the line, horizontal bar, scatter, map, or paired comparison evidence sits below/inside as supporting evidence, use `$report-component-style-design` `references/04a-kpi-card-patterns.md` with `kpiCardPattern: 'horizontal-axis-line-trend'`, `kpiCardPattern: 'horizontal-axis-bar-compare'`, `kpiCardPattern: 'horizontal-axis-scatter-diagnostic'`, `kpiCardPattern: 'horizontal-spatial-map-diagnostic'`, or `kpiCardPattern: 'paired-comparison-diagnostic'` instead of treating it as an ordinary chart card. Use this basic chart library when the chart body is the primary object and KPI values are only a metric strip or header summary.
+
 Pair with:
 
 - `05a-echarts-foundation-bars-lines.md` for bars, lines, area charts, axis labels, plot viability, and ECharts lifecycle.
@@ -65,6 +67,8 @@ Do not use these patterns for KPI target/actual summary cards that already requi
 - Local period selectors are small and title-right aligned; they change only the current card and do not behave like page filters.
 - The ECharts ownership is clear: bars, lines, areas, slices, stacks, axes, legends, and tooltips are data-driven, not hand-drawn decorative shapes.
 - The card is visually calm enough to sit with other report components without looking like a generated one-off.
+- KPI-plus-line cards avoid AI flavor when they reserve enough chart height for real axes and thresholds; if the axis chart is squeezed into a decorative strip, route it back to a KPI sparkline or enlarge it into a full chart card.
+- KPI-plus-horizontal-bar cards avoid AI flavor when category labels, bar lengths, exact values, target/reference lines, and change-rate evidence share one readable quantitative axis; if the bars are squeezed into decorative strips, route them back to a mini bar KPI or enlarge them into a full chart card.
 
 ## Pattern Selection
 
@@ -80,6 +84,11 @@ Do not use these patterns for KPI target/actual summary cards that already requi
 | Compare two scale metrics and one rate/efficiency metric over time | `multi-metric-combo-card` |
 | Add a compact local period selector to an otherwise simple bar comparison | `filtered-bar-card` |
 | Show dense daily/rolling line trend where exact value appears on hover/focus | `tooltip-line-trend-card` |
+| Show a large KPI value plus readable axis-line evidence inside one horizontal card | Use `kpiCardPattern: horizontal-axis-line-trend`, not `basicChartCardPattern` |
+| Show a large KPI value plus readable horizontal bar evidence inside one horizontal card | Use `kpiCardPattern: horizontal-axis-bar-compare`, not `basicChartCardPattern` |
+| Show a large KPI value plus readable scatter diagnosis inside one horizontal card | Use `kpiCardPattern: horizontal-axis-scatter-diagnostic`, not `basicChartCardPattern` |
+| Show a large KPI value plus spatial map diagnosis inside one horizontal card | Use `kpiCardPattern: horizontal-spatial-map-diagnostic`, not `basicChartCardPattern` |
+| Show a KPI value compared in two mirrored panes with a central `VS` and conclusion strip | Use `kpiCardPattern: paired-comparison-diagnostic`, not `basicChartCardPattern` |
 
 ## Shared Card Anatomy
 

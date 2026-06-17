@@ -64,7 +64,7 @@ These pattern fields are the current reusable vocabulary. Prefer controlled valu
 | Pattern field | Covered surface |
 | --- | --- |
 | `conclusionCardPattern` | Conclusion, evidence, action, and executive summary cards |
-| `kpiCardPattern` | Plain KPI, target wave, mini bar trend, lead line trend, and landscape/horizontal KPI cards |
+| `kpiCardPattern` plus `kpiOverviewCardPattern` / `kpiSingleIndicatorLayoutMode` / `kpiJudgmentCardPattern` / `kpiGoalExecutionCardPattern` / `kpiTimeSeriesCardPattern` / `kpiComparisonAnalysisCardPattern` | Plain KPI, target wave, mini bar trend, lead line trend, KPI overview cards, single-indicator KPI grid cards, KPI judgment cards for status/health/rating/gauge decisions, KPI goal execution cards for target attainment/gap/progress/milestones, KPI time-series analysis cards for trend/change/YoY-MoM/cycle/volatility/forecast decisions, KPI comparison analysis cards for direct/group/competitor/benchmark/variance decisions, landscape/horizontal KPI cards, axis-line diagnostic KPI cards, axis-bar diagnostic KPI cards, axis-scatter diagnostic KPI cards, spatial-map diagnostic KPI cards, and paired comparison diagnostic KPI cards |
 | `targetActualCardPattern` | KPI headline plus target/actual comparison bars |
 | `targetActualTrendCardPattern` | KPI headline plus actual/comparison/target trends |
 | `targetActualRadarCardPattern` | KPI headline plus product/object radar profiles |
@@ -73,10 +73,15 @@ These pattern fields are the current reusable vocabulary. Prefer controlled valu
 | `targetActualTablePattern` | Target/actual detail audit tables |
 | `targetActualPivotTablePattern` | Target/actual hierarchy/pivot tables |
 | `tableCardPattern` | Detail ledgers, operational tables, grouped headers, metric matrices, S2 cross tables, fixed wide tables, grouped subtotals, and tree tables |
-| `rankingCardPattern` | Medal, bar-progress, and compact TOP ranking cards |
+| `rankingCardPattern` plus `paretoCardPattern` | Ranking, leaderboard, Top N, share/radar/map/bubble ranking, and Pareto contribution cards |
+| `compositionShareCardPattern` | Occupancy/share/composition/structure/market-share/concentration cards such as donut detail, percent bars, multi-ring hierarchy, treemap, stacked share trend, share ranking, market-share overview, concentration, interval distribution, map structure, and sunburst structure |
+| `decompositionAttributionCardPattern` | Indicator decomposition, attribution decomposition, contribution, hierarchy decomposition, driver-factor, variance-waterfall, path-contribution, and matrix-attribution cards |
+| `distributionAnalysisCardPattern` | Distribution, interval, density, quantile, and boxplot cards such as histogram, interval donut, CDF, KDE, density heatmap, bivariate density, percentile bands, boxplot summaries, anomaly boxplot, and distribution detail tables |
+| `anomalyAnalysisCardPattern` | Anomaly, risk, warning, volatility, threshold, impact, response, and outlier analysis cards such as overview, trend compare, distribution, interval threshold, timeline, Top affected objects, impact assessment, baseline compare, risk matrix, relation influence, geographic abnormality, response status, and outlier scatter cards |
 | `basicChartCardPattern` | Bar, line, area, combo, pie/donut, stacked bar, filtered bar, and tooltip trend cards |
 | `specializedChartCardPattern` | Gauge, map, heatmap, K-line, boxplot, parallel, and bubble cards |
 | `flowHierarchyDiagramCardPattern` | Funnel, Sankey, journey, tree, relation graph, sunburst, treemap, and path flow cards |
+| `relationshipAnalysisCardPattern` | Relationship, correlation, association, influence, and relation-network cards such as hub relation, strength matrix, relation Sankey, community network, pair comparison, relation trend, hierarchy relation, bubble quadrant, factor ranking, evolution snapshots, bipartite relation, and relation detail audit cards |
 | `listStatusPattern` | Info lists, task lists, alerts, exceptions, chips, timelines, user/object lists, and mixed work items |
 | `filterControlPattern` | Single select, multi-tag, date range, searchable select, tree path, advanced drawer, and combined chipbar |
 | `overlayPanelPattern` | Filter drawers, action sheets, confirmation modals, fullscreen detail, notifications, navigation drawers, side details, and large panels |

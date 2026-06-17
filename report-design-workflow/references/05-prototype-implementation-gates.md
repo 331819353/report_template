@@ -48,7 +48,7 @@ Detailed prototype implementation and readiness rules moved out of `SKILL.md`. L
 7. Run `$quality-gate-validation` when inputs conflict on scope, display theme, metric口径, visual source, API/mock contract, or implementation target.
 8. Before each non-trivial template, layout, component, renderer, HTML/sample conversion, data-binding, source edit, or readiness decision, run the action reflection loop. If it returns `revise-action` or `stop-and-route`, update the plan or route to the owning skill before editing.
 9. Use `$report-type-design` to choose one primary report type and any secondary local blocks.
-10. Use `$report-info-component-mapping` to produce answer atoms, selected pattern-to-component mapping, component bundles, datasets, filters, interactions, and binding matrix.
+10. Use `$report-info-component-mapping` to produce analysis perspectives, answer atoms, selected pattern-to-component mapping, component bundles, datasets, filters, interactions, and binding matrix.
 11. Declare `pageShellPath` as `template` or `custom`; default to `template` when no hard custom/restoration/existing-shell reason exists.
 12. Use `$report-visual-layout-design` for page shell, header/navigation/native filter surface, `8 * N` grid, block sizing, and responsive layout.
 13. Use `$report-prototype-template-management` for default bundled-template selection, copy/merge, Vue/Vite scaffold handling, and template validation.

@@ -24,16 +24,17 @@ It is not a test-case design skill. For test matrices use `$integration-test-cas
 | Readiness and cross-stage gate | `$quality-gate-validation` |
 | Haier/company application UI baseline | `$haier-enterprise-app-ui-design-spec` for Haier/enterprise Web surfaces, including report/dashboard pages |
 | Report/dashboard baseline and anti-AI/report-decision gates | `$report-design-system-governance` relevant references |
+| Modern SaaS / BI Dashboard / UI Kit runtime style contract | `$report-design-system-governance` `references/12-modern-saas-bi-style-contract.md` when requested or claimed |
 
 ## Workflow
 
 1. Run the Preflight understanding gate before QA execution or acceptance; name QA goal, target URL/app, basis artifacts, affected surfaces, required viewports/interactions, missing runtime inputs, and start decision.
 2. Run available build/typecheck/lint/test/start commands and record blockers.
-3. Classify the UI baseline: Haier/enterprise app, report/dashboard, mixed, or unknown. For Haier/enterprise report pages, apply both Haier application baseline and report-specific baseline during visual judgment.
+3. Classify the UI baseline: Haier/enterprise app, report/dashboard, mixed, or unknown. For Haier/enterprise report pages, apply both Haier application baseline and report-specific baseline during visual judgment. When modern SaaS / BI Dashboard / UI Kit style is requested or claimed, also load the positive style contract before screenshot judgment.
 4. Open the target URL and confirm the page loads without blocking runtime errors.
 5. Capture screenshots before visual judgment: full page, responsive states, interactions, and component crops when report/chart/table components exist.
 6. Run DOM structural checks: expected card/component counts, fixed-height overflow, bounding-box overlap, and chart/table category uniqueness where inspectable.
-7. Run owning-skill proof obligations for implemented report components: KPI X/Y value alignment and CSS cascade, template/component control ownership, fixed-height overflow/clipping, ECharts/S2 option details such as legend/grid/axis budgets, ECharts axis-chart plot-height/anti-squeeze checks, contract-to-DOM/CSS/option mapping, and at least one non-default state when relevant.
+7. Run owning-skill proof obligations for implemented report components: KPI X/Y value alignment and CSS cascade, template/component control ownership, fixed-height overflow/clipping, ECharts/S2 option details such as legend/grid/axis budgets, ECharts axis-chart plot-height/anti-squeeze checks, modern BI page/card token checks, component-pileup and hierarchy checks, chart-lightness checks, contract-to-DOM/CSS/option mapping, and at least one non-default state when relevant.
 8. Inspect console, network, assets, routes, auth, and provider calls.
 9. Exercise filters, tabs, drawers, modals, chart clicks, table actions, pagination, sorting, export, refresh, fullscreen, hover, and focus states in scope.
 10. Apply anti-AI, report-decision, and multimodal/visual checks when relevant. Use `$visual-browser-regression-check` when the scope requires deterministic baseline diff, screenshot coverage, component crops, or structured `VIS-*` findings.
@@ -51,6 +52,7 @@ Use `references/qa-note-template.md` and include:
 - Console/network result.
 - Interaction/state checks.
 - Visual/DOM structural findings: overflow, card/component counts, bounding-box overlap, and category uniqueness.
+- Modern BI runtime proof when requested or claimed: page/card token evidence, first-viewport hierarchy, component-count/pileup scan, and chart-lightness evidence.
 - Proof obligation results: KPI alignment and CSS cascade, no duplicate template/component controls, fixed-height overflow/clipping, chart option/legend/grid checks, chart body/plot-height anti-squeeze checks, contract-to-DOM/CSS/option mapping, and non-default state coverage.
 - Action reflection result before readiness, including renderer/source authority concerns.
 - Anti-laziness execution result: coverage actually executed, `LAZY-*` findings or explicit no-finding result, source/DOM evidence inspected, retest proof, and readiness impact.
@@ -62,6 +64,7 @@ Use `references/qa-note-template.md` and include:
 - Do not mark visual/runtime readiness without screenshots or a precise blocker.
 - Do not execute or conclude visual/runtime QA before the target URL/app, affected surfaces, viewports, interactions, and required evidence are scoped.
 - Do not pass Haier/enterprise report visual QA when report-specific checks pass but Haier application baseline checks for typography, color, spacing, base controls, states, or brand/logo are missing.
+- Do not mark runtime QA ready for a requested modern SaaS / BI Dashboard / UI Kit page when screenshots and DOM/CSS/ECharts evidence do not prove the positive style contract, or when `VIS-MODERN-BI-BASELINE-MISSING`, `VIS-GENERIC-SAAS-SHELL`, `VIS-COMPONENT-PILEUP`, `VIS-CHART-OVERWEIGHT`, or `VIS-HIERARCHY-FLAT` remains unresolved.
 - Report/dashboard QA cannot rely only on full-page screenshots when component crops are needed.
 - Fixed-height content with `scrollHeight > clientHeight + 2` or `scrollWidth > clientWidth + 2` fails unless it is an intentional visible scroll region or declared disclosure strategy.
 - Fixed-height summary/ranking/card/KPI/composite content with `scrollHeight > clientHeight + 2` or `scrollWidth > clientWidth + 2` fails unless it is an intentional visible scroll region, expand/collapse, pagination, drawer/fullscreen, or split strategy. `overflow: hidden` does not make hidden decision content acceptable.

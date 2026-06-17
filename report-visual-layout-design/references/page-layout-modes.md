@@ -4,7 +4,7 @@
 
 Before designing a report page, decide which mode controls the page shell:
 
-- `pageShellPath: template`: default for report layout work. Use the selected implementation asset under `assets/templates/`: `topbar-dark-scroll-dashboard-template`, `topbar-light-scroll-dashboard-template`, `left-nav-analytics-workbench-template`, `frozen-title-sci-fi-cockpit-template`, or another existing project template.
+- `pageShellPath: template`: default for report layout work. Use the selected implementation asset under `assets/templates/`: `topbar-light-scroll-dashboard-template`, `left-nav-analytics-workbench-template`, `frozen-title-sci-fi-cockpit-template`, or another existing project template.
 - `pageShellPath: custom`: use only when the user explicitly asks for 自行设计开发 / 自由设计 / custom development, explicitly asks to 百分百复刻 / exactly restore a provided sample/HTML/source, or a documented template limitation makes all bundled templates unsuitable.
 
 This decision comes before choosing cards, charts, filters, or navigation.

@@ -10,6 +10,7 @@ This distilled standard covers:
 - Requirement breakdown and business-question framing.
 - Metric dictionary, calculation口径, unit, precision, numeric display contract, and data-source explanation.
 - Page hierarchy, module priority, layout spacing, and card structure.
+- Modern SaaS / BI Dashboard / UI Kit positive style contract when explicitly requested: light page canvas, white analytical cards, thin borders, clear hierarchy, no component pileup, and lightweight charts.
 - Chart anatomy, chart selection, chart color, warning color, tooltip, labels, and drilldown/link rules.
 - Table alignment, column contract, pagination, export, and operation rules.
 - Text, number, date, percentage, empty value, warning display formats, and numeric rounding/export consistency.
@@ -45,6 +46,7 @@ Do not use `$haier-enterprise-app-ui-design-spec` as the primary analytical repo
 | Design highlights from proven leadership/operating report samples, reusable page patterns, reading paths, density, and visual acceptance | `07-exemplary-report-design-patterns.md` |
 | Anti-AI design gate for generic aesthetics, empty copy, first-screen-only completion, missing states/accessibility, and sample-like engineering | `08-anti-ai-design-gate.md` |
 | Report decision anti-AI gate for avoiding empty dashboard shells and enforcing metric systems, data stories, realistic data, linkage, action, and industry sense | `09-report-decision-anti-ai-gate.md` |
+| Positive modern SaaS / BI Dashboard / UI Kit style contract | `12-modern-saas-bi-style-contract.md` when the user requests this language |
 | Numeric precision, rounding, unit scaling, tooltip/export precision, and formatter ownership | `$metric-number-display-contract` |
 
 Load only the smallest reference needed. Do not load all report guideline references by default.

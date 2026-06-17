@@ -41,6 +41,17 @@ Routing rules:
 
 ## Pattern Card Contract
 
+## Modern SaaS BI Baseline
+
+When `displayTheme: business-dashboard`, `summary-stat`, or `exploratory-analysis` is paired with an explicit modern SaaS / BI Dashboard / UI Kit style request, also load `$report-design-system-governance` `references/12-modern-saas-bi-style-contract.md`.
+
+Required effects:
+
+- The visual language is light page canvas, white analytical cards, thin borders, restrained shadows, compact UI Kit controls, and semantic chart colors.
+- The first viewport is not a card collection. It has one primary decision answer/action and bounded supporting evidence.
+- Pattern cards such as `少而精的图表数量`, `卡片层级与留白`, `指标口径说明`, and `下钻到分析/明细` are acceptance constraints, not optional decoration.
+- `VIS-GENERIC-SAAS-SHELL`, `VIS-COMPONENT-PILEUP`, `VIS-CHART-OVERWEIGHT`, and `VIS-HIERARCHY-FLAT` block prototype readiness when unresolved.
+
 The 120-card pattern library is not a visual decoration list. Each selected card must become a traceable design input.
 
 Required fields for each selected card:
@@ -246,6 +257,6 @@ Use this ten-stage chain before implementation and as a review checklist after i
 - A prototype is not ready for layout or implementation until `displayTheme`, `primaryReportType`, selected pattern cards, and the reason for rejected competing themes are recorded.
 - The selected pattern set must be small enough to implement and test in the requested scope.
 - First-screen structure must follow the display theme while still answering the business report type's core question.
-- Each must-have component must trace to both a business answer atom and either a selected pattern or an explicit custom reason.
+- Each must-have component must trace to a controlled `analysisPerspective`, a business answer atom, and either a selected pattern or an explicit custom reason.
 - Data/interface/test handoff must include the selected pattern acceptance points.
 - Operations, export, permissions, refresh, and versioning patterns may be non-visual; do not drop them just because they do not draw a component.

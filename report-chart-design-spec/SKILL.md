@@ -21,7 +21,9 @@ Use `$report-component-style-design` when the task covers mixed component famili
 | Screenshot/sample-derived chart style generalization | `$report-component-style-design` `references/00a-style-generalization-goal.md` and `$artifact-readability-standard` `references/visual-source-abstraction-standard.md` |
 | Chart source map and exact placement files | `references/01-chart-reference-map.md` |
 | Shared chart visual rules | `$report-component-style-design` `references/05-echarts-charts.md` |
+| Reusable relationship analysis chart-card patterns | `$report-component-style-design` `references/09b-relationship-analysis-card-patterns.md` when the chart answers 看关系, 相关性, 关联, 影响因素, or 关系网络 before routing to the exact chart family |
 | Report chart/table format baseline | `$report-design-system-governance` `references/05-report-charts-tables-format-guidelines.md` |
+| Modern SaaS / BI Dashboard / UI Kit chart-lightness contract | `$report-design-system-governance` `references/12-modern-saas-bi-style-contract.md` when requested |
 | Placement and dense acceptance | `$report-component-style-design` references: `12-internal-placement-algorithms.md`, `12-component-acceptance-gates.md` |
 
 ## Anti-Laziness Gate
@@ -38,8 +40,9 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 6. Load `references/01-chart-reference-map.md`, then load only the chart-family visual and placement files it names.
 7. Confirm chart type is fit for the task before styling labels or colors.
 8. Define chart anatomy: title, subtitle/definition, unit, metric strip, legend, axes, plot area, labels, tooltip, local filters, footer/source, and states.
-9. Verify ECharts ownership and lifecycle: standard ECharts charts must use ECharts series/options/runtime behavior rather than hand-drawn SVG/canvas marks, and must initialize, update, resize, and dispose from a measurable chart body viewport.
-10. Run acceptance gates before marking dense or implementation-ready charts as ready.
+9. When modern SaaS / BI Dashboard / UI Kit style is requested, apply the chart-lightness contract: restrained grid/axis/legend/label density, semantic low-noise colors, one task per chart, no decorative chart variety, and no mini chart pileup inside KPI cards.
+10. Verify ECharts ownership and lifecycle: standard ECharts charts must use ECharts series/options/runtime behavior rather than hand-drawn SVG/canvas marks, and must initialize, update, resize, and dispose from a measurable chart body viewport.
+11. Run acceptance gates before marking dense or implementation-ready charts as ready.
 
 ## Required Output
 
@@ -55,6 +58,7 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 ## Quality Gate
 
 - Do not choose a decorative chart when a simpler chart answers the business question better.
+- Do not accept a chart-heavy "modern dashboard" look. Extra chart families, dense labels, high-saturation palettes, decorative plot backgrounds, or multiple mini charts without distinct task roles are `VIS-CHART-OVERWEIGHT` or `RPT-DECORATIVE-CHART`.
 - Do not accept a sample-derived chart style that remains image-only or lacks a controlled chart/card pattern, composed pattern decision, or documented `requires-pattern-extension` gap.
 - Do not repair or accept chart visuals before the chart family, parent container, data grain, units, renderer ownership, and affected chart anatomy are known.
 - Do not copy hand-authored chart SVG/canvas/DOM from an HTML prototype into a standard report chart implementation. Use ECharts options/series/runtime behavior, or document an explicit data-driven custom-diagram exception before implementation.

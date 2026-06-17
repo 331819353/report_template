@@ -1,6 +1,7 @@
 ---
 name: report-design-system-governance
-description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分析/明细查询/专题分析页面的全流程设计系统与开发基线。用户提到提高前端设计、前端设计提升、报表设计系统、页面设计规范、页面规范、组件规范、组件设计规范、视觉规范、tokens、KPI、横向指标卡/横版KPI/宽指标卡、图表、表格、筛选、指标口径、单位/百分比显示、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、报表前端实现、报表联调验收、数据对账、导出/性能、报表风格一致、可复用报表规范时触发；不替代单个组件修复或模板工程复制。"
+aliases: ["时间序列KPI卡设计系统", "趋势卡设计系统", "变化卡设计系统", "同环比卡设计系统", "周期卡设计系统", "波动卡设计系统", "预测卡设计系统", "对比分析卡设计系统", "竞品对比卡设计系统", "标杆卡设计系统", "差异卡设计系统", "排名卡设计系统", "榜单卡设计系统", "Top N卡设计系统", "排行榜设计系统", "帕累托卡设计系统", "占比卡设计系统", "构成卡设计系统", "结构卡设计系统", "份额卡设计系统", "指标拆解卡设计系统", "归因拆解卡设计系统", "贡献卡设计系统", "层级拆解卡设计系统", "分布卡设计系统", "区间卡设计系统", "密度卡设计系统", "分位数卡设计系统", "箱线卡设计系统"]
+description: "用于沉淀、应用和验收可复用报表/仪表盘/经营分析/明细查询/专题分析页面的全流程设计系统与开发基线。用户提到提高前端设计、前端设计提升、报表设计系统、页面设计规范、页面规范、组件规范、组件设计规范、视觉规范、tokens、KPI、KPI总览卡/多指标总览卡、单指标KPI卡、状态卡/健康度卡/评分卡/仪表盘卡/指标判断卡、目标执行卡/目标达成卡/差距卡/进度卡/里程碑卡、时间序列KPI卡/趋势卡/变化卡/同环比卡/周期卡/波动卡/预测卡、对比分析KPI卡/对比卡/分组对比卡/竞品对比卡/标杆卡/差异卡/偏差卡、排名卡/榜单卡/Top N卡/排行榜/帕累托卡、占比卡/构成卡/结构卡/份额卡/市场份额卡/集中度卡、指标拆解卡/归因拆解卡/贡献卡/层级拆解卡/驱动因素拆解/路径贡献/瀑布拆解、分布卡/区间卡/密度卡/分位数卡/箱线卡/直方分布/KDE密度/分布热力图、异常分析卡/异常卡/风险卡/预警卡/离群点卡/波动异常卡/阈值预警卡/风险矩阵卡/异常影响评估卡、横向指标卡/横版KPI/宽指标卡、横向折线KPI/坐标折线诊断卡、横向柱状KPI/坐标柱状诊断卡、横向散点KPI/关系诊断卡、横向地图KPI/空间诊断卡、双栏VS对比诊断卡、图表、表格、筛选、指标口径、单位/百分比显示、Micro Dashboard Card/微型看板卡、状态反馈/空态/loading/error/no-permission/building、报表前端实现、报表联调验收、数据对账、导出/性能、报表风格一致、可复用报表规范时触发；不替代单个组件修复或模板工程复制。"
 ---
 
 # Report Design System Governance
@@ -42,7 +43,11 @@ Always choose the mode and then load only the matching references.
 | Generic anti-AI design gate | `references/08-anti-ai-design-gate.md` |
 | Report decision anti-AI gate | `references/09-report-decision-anti-ai-gate.md` |
 | Detailed reusable-standard acceptance gates | `references/10-design-system-acceptance-gates.md` |
+| Modern SaaS / BI Dashboard / UI Kit positive style contract | `references/12-modern-saas-bi-style-contract.md` |
 | Screenshot/sample-derived component style generalization | `$report-component-style-design` `references/00a-style-generalization-goal.md` and `$artifact-readability-standard` `references/visual-source-abstraction-standard.md` |
+| Distribution / interval / density / quantile / boxplot card governance | `$report-component-style-design` `references/07e-distribution-interval-density-cards.md`, `$report-info-component-mapping` `references/06-binding-implementation-contract.md`, and `$report-layout-size-constraint-spec` |
+| Anomaly / risk / warning / outlier analysis card governance | `$report-component-style-design` `references/07f-anomaly-risk-warning-outlier-cards.md`, `$report-info-component-mapping` `references/00-analysis-perspective-card-taxonomy.md`, `references/06-binding-implementation-contract.md`, and `references/09-component-mapping-gates.md` |
+| Relationship / correlation / association / influence card governance | `$report-component-style-design` `references/09b-relationship-analysis-card-patterns.md`, `$report-info-component-mapping` `references/00-analysis-perspective-card-taxonomy.md`, `references/06-binding-implementation-contract.md`, and `references/09-component-mapping-gates.md` |
 | Number precision, rounding, unit scaling, and exact-value display | `$metric-number-display-contract` |
 | Bundled template layout tokens | `$report-prototype-template-management` `references/template-layout-design-system.md` |
 | Chart/table/filter-specific standards | `$report-chart-design-spec`, `$report-table-design-spec`, `$report-filter-control-design-spec` |
@@ -57,21 +62,23 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 
 1. Run the Preflight understanding gate before creating, auditing, merging, applying, or accepting standards. Name mode, source-of-truth hierarchy, affected surfaces, owning specialty skills, hard constraints, missing evidence, and start decision.
 2. Select mode and source-of-truth hierarchy: company standard, report extension, template standard, project exception, or legacy override. For Haier/enterprise report pages, default hierarchy is `Haier company UI baseline -> report design-system extension -> template/project exception`.
-3. Inventory design surfaces: shell, navigation, filters, KPI cards including horizontal KPI cards, charts, tables, Composite Panels, Micro Dashboard Cards, drawers, modals, buttons, tags, empty/loading/error/no-permission/building states, export, responsive layouts, and custom graphics.
-4. Classify whether the work is report/dashboard/BI/data-screen, common enterprise app, or mixed. Load Haier company UI baseline for Haier/enterprise app surfaces and report design-system references for report surfaces before judging or defining rules.
-5. Run the generic anti-AI gate and report decision gate before stabilizing tokens or accepting a visual standard.
-6. For sample-derived standards, run the style generalization goal: every reusable visual sample must map to controlled patterns, composed patterns, or `requires-pattern-extension`; raw images and embeddings are not durable skill knowledge.
-7. Define semantic tokens and reusable rules: color roles, typography, spacing/grid, radius, border, shadow, density, icon size, z-index, responsive breakpoints, states, accessibility, and motion limits.
-8. Define page, component, visualization, numeric precision/display, filter, state, performance, and handoff standards. Delegate numeric display details to `$metric-number-display-contract`; delegate implementation-ready component families to `$report-component-design-spec` and `$report-component-style-design`.
-9. Classify rule strength before acceptance: `MUST/fail` for correctness/trust/runtime/renderer/filter/permission/export/accessibility/readiness constraints, `SHOULD/exception-required` for strong defaults that may vary by business scenario, and `MAY/optional` for enhancements. Every `MUST` gets a proof method and failure ID; every `SHOULD` gets an exception condition.
-10. Define governance: stable vs experimental rules, allowed variants, deprecated patterns, exception process, versioning, migration status, owners, and review checklist.
-11. Route implementation or remediation to layout, component, frontend, runtime QA, testing, or template skills.
+3. When the user explicitly asks for modern SaaS Dashboard / BI Dashboard / UI Kit / light gray-white / white-card / linear clean style, load `references/12-modern-saas-bi-style-contract.md` and translate the wording into semantic tokens, hierarchy rules, chart-lightness rules, and `VIS-*` failure IDs.
+4. Inventory design surfaces: shell, navigation, filters, KPI cards including KPI overview / multi-metric overview cards, single-indicator KPI grid cards, KPI judgment/status/health/rating/gauge cards, KPI goal execution / target attainment / gap / progress / milestone cards, KPI time-series / trend / change / YoY-MoM / cycle / volatility / forecast cards, KPI comparison analysis / comparison / group comparison / competitor / benchmark / variance cards, ranking / leaderboard / Top N / Pareto cards, composition / share / structure / market-share cards, decomposition / attribution / contribution / hierarchy cards, distribution / interval / density / quantile / boxplot cards, anomaly / risk / warning / outlier analysis cards, relationship / correlation / association / influence cards, horizontal KPI cards, axis-line diagnostic KPI cards, axis-bar diagnostic KPI cards, axis-scatter diagnostic KPI cards, spatial-map diagnostic KPI cards, and paired comparison diagnostic KPI cards, charts, tables, Composite Panels, Micro Dashboard Cards, drawers, modals, buttons, tags, empty/loading/error/no-permission/building states, export, responsive layouts, and custom graphics.
+5. Classify whether the work is report/dashboard/BI/data-screen, common enterprise app, or mixed. Load Haier company UI baseline for Haier/enterprise app surfaces and report design-system references for report surfaces before judging or defining rules.
+6. Run the generic anti-AI gate and report decision gate before stabilizing tokens or accepting a visual standard.
+7. For sample-derived standards, run the style generalization goal: every reusable visual sample must map to controlled patterns, composed patterns, or `requires-pattern-extension`; raw images and embeddings are not durable skill knowledge.
+8. Define semantic tokens and reusable rules: color roles, typography, spacing/grid, radius, border, shadow, density, icon size, z-index, responsive breakpoints, states, accessibility, motion limits, modern BI page/card language, and chart-lightness defaults.
+9. Define page, component, visualization, numeric precision/display, filter, state, performance, and handoff standards. Delegate numeric display details to `$metric-number-display-contract`; delegate implementation-ready component families to `$report-component-design-spec` and `$report-component-style-design`.
+10. Classify rule strength before acceptance: `MUST/fail` for correctness/trust/runtime/renderer/filter/permission/export/accessibility/readiness constraints, `SHOULD/exception-required` for strong defaults that may vary by business scenario, and `MAY/optional` for enhancements. Every `MUST` gets a proof method and failure ID; every `SHOULD` gets an exception condition.
+11. Define governance: stable vs experimental rules, allowed variants, deprecated patterns, exception process, versioning, migration status, owners, and review checklist.
+12. Route implementation or remediation to layout, component, frontend, runtime QA, testing, or template skills.
 
 ## Required Output
 
 - Preflight understanding result, mode, source-of-truth hierarchy, input inventory, and scope.
 - Inherited Haier baseline decisions for color, typography, spacing, radius, shadow, icon/base component, brand/logo, state, and cross-platform behavior.
 - Token, page-layout, component, visualization, numeric precision/display, filter, state, accessibility, interaction, and performance standards.
+- Modern SaaS / BI Dashboard / UI Kit style contract result when requested: selected source hierarchy, page/card tokens, hierarchy rules, chart-lightness rules, and open `VIS-*` findings.
 - Sample-derived style generalization coverage: controlled pattern fields, covered/composed/extension statuses, non-retained image policy, and text-only reproducibility result.
 - Report guideline mapping: requirements, metric dictionary, calculation口径, page hierarchy, chart/table/filter/state rules, engineering handoff, and acceptance checklist.
 - Anti-AI and report-decision gate result with `AI-*` and `RPT-*` findings or explicit pass status.
@@ -86,6 +93,7 @@ For non-trivial work, apply `$quality-gate-validation` `references/anti-laziness
 - Do not accept a Haier/enterprise report standard that omits inherited Haier color, typography, spacing, radius, shadow, base control, brand/logo, state, and responsive rules.
 - Do not create one-off colors, spacings, hover effects, chart semantics, or component variants without semantic tokens or approved exceptions.
 - Do not accept generic "modern SaaS", "高级科技感", purple-blue gradients, glass cards, glow buttons, floating decoration, oversized radius, or abstract AI imagery as default report style.
+- When the user explicitly requests modern SaaS / BI Dashboard / UI Kit language, do not leave it as a generic adjective. It must map to `12-modern-saas-bi-style-contract.md`; missing page/card token mapping, flat hierarchy, component pileup, or overweight charts block readiness with the contract `VIS-*` IDs.
 - Reusable standards must cover responsive behavior, edge states, accessibility, data density, numeric display contracts, exact-value access, engineering tokens, and migration impact.
 - Reusable screenshot/sample-derived standards must reach `100% routable coverage` for the provided sample set: every reusable sample is covered by existing patterns, composed patterns, or a named extension gap, and no long-lived standard depends on raw image paths, image embeddings, or OCR-only extraction.
 - Reusable standards must not leave high-risk rules as vague advice. Renderer ownership, filter scope, query/export/permission impact, data contracts, runtime fit, overflow, accessibility, and readiness evidence must be written as `MUST/fail` with proof obligations.

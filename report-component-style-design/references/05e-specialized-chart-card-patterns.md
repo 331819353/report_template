@@ -2,6 +2,8 @@
 
 Use this reference when screenshots or requirements show reusable card-level patterns for specialized analytical charts: gauge/progress, choropleth map with ranking, time heatmap, candlestick/K-line with volume, boxplot distribution, parallel-coordinate profile, and bubble opportunity charts. The source images are temporary visual evidence; the durable standard is this text contract.
 
+Boundary: when a map, scatter, bubble, or other specialized geometry is supporting evidence inside a KPI-first horizontal card, use `references/04a-kpi-card-patterns.md` with `kpiCardPattern: 'horizontal-axis-scatter-diagnostic'` or `kpiCardPattern: 'horizontal-spatial-map-diagnostic'` instead of treating it as a full specialized chart card. Use this file when the specialized chart body is the primary object and KPI values are only a metric strip, header summary, or side evidence panel.
+
 Pair with:
 
 - `05b-echarts-combo-pie-radar-gauge.md` for gauge-specific rules.

@@ -203,6 +203,11 @@ type KpiCardPattern =
   | 'mini-bar-trend'
   | 'highlight-line-trend'
   | 'horizontal-trend-compare'
+  | 'horizontal-axis-line-trend'
+  | 'horizontal-axis-bar-compare'
+  | 'horizontal-axis-scatter-diagnostic'
+  | 'horizontal-spatial-map-diagnostic'
+  | 'paired-comparison-diagnostic'
   | 'horizontal-ring-progress'
   | 'horizontal-target-progress'
   | 'horizontal-status-trend-compare'
@@ -216,6 +221,153 @@ type KpiCardOrientation =
   | 'landscape'
   | 'compact-row'
   | 'wide-banner';
+
+type KpiAxisLineEvidenceMode =
+  | 'basic-compare-line'
+  | 'filled-baseline-line'
+  | 'target-reference-line'
+  | 'phase-annotated-line'
+  | 'unit-axis-line'
+  | 'grain-switch-line'
+  | 'dual-comparison-line'
+  | 'threshold-band-line';
+
+type KpiAxisBarEvidenceMode =
+  | 'basic-horizontal-bar'
+  | 'period-comparison-bar'
+  | 'target-reference-bar'
+  | 'category-change-sidebar-bar'
+  | 'time-series-horizontal-bar'
+  | 'grain-switch-horizontal-bar'
+  | 'dual-series-horizontal-bar'
+  | 'threshold-warning-bar';
+
+type KpiScatterEvidenceMode =
+  | 'correlation-trendline-scatter'
+  | 'mean-reference-scatter'
+  | 'target-crosshair-scatter'
+  | 'distribution-change-band-scatter'
+  | 'threshold-quadrant-scatter'
+  | 'dual-series-trendline-scatter'
+  | 'change-callout-scatter'
+  | 'category-quadrant-scatter';
+
+type KpiMapEvidenceMode =
+  | 'choropleth-heat-map'
+  | 'graded-choropleth-map'
+  | 'bubble-target-gap-map'
+  | 'distribution-change-marker-map'
+  | 'column-symbol-map'
+  | 'annotated-interval-map'
+  | 'yoy-change-zone-map'
+  | 'point-category-summary-map';
+
+type KpiComparisonEvidenceMode =
+  | 'metric-yoy-vs'
+  | 'progress-mom-vs'
+  | 'target-gap-progress-vs'
+  | 'improvement-dot-matrix-vs'
+  | 'trend-yoy-vs'
+  | 'structure-breakdown-vs'
+  | 'percentage-ring-vs'
+  | 'trend-mom-vs';
+
+type KpiSingleIndicatorLayoutMode =
+  | 'dropdown-sparkline-progress'
+  | 'unit-toggle-ring-progress'
+  | 'dropdown-minibar-progress'
+  | 'grain-switch-minibar-progress'
+  | 'dropdown-area-sparkline-progress'
+  | 'scale-toggle-area-progress'
+  | 'dropdown-gauge-progress';
+
+type KpiOverviewCardPattern =
+  | 'lead-metric-comparison-sparkline-overview'
+  | 'multi-metric-strip-progress-overview'
+  | 'domain-metric-cluster-progress-overview';
+
+type KpiJudgmentCardPattern =
+  | 'semantic-status-icon-card'
+  | 'progress-status-ring-card'
+  | 'health-score-ring-card'
+  | 'health-threshold-bullet-card'
+  | 'health-dimension-breakdown-card'
+  | 'rating-score-summary-card'
+  | 'rating-distribution-card'
+  | 'semicircle-gauge-target-card';
+
+type KpiGoalExecutionCardPattern =
+  | 'attainment-ring-summary-card'
+  | 'attainment-gauge-deadline-card'
+  | 'attainment-linear-target-card'
+  | 'attainment-unit-progress-card'
+  | 'gap-gauge-deficit-card'
+  | 'gap-target-actual-compare-card'
+  | 'progress-plan-actual-card'
+  | 'milestone-timeline-card';
+
+type KpiTimeSeriesCardPattern =
+  | 'trend-line-target-card'
+  | 'change-baseline-delta-card'
+  | 'yoy-mom-comparison-card'
+  | 'cycle-period-progress-card'
+  | 'volatility-stat-card'
+  | 'forecast-interval-card';
+
+type KpiComparisonAnalysisCardPattern =
+  | 'direct-value-compare-card'
+  | 'group-segment-compare-card'
+  | 'competitor-position-card'
+  | 'benchmark-position-card'
+  | 'variance-gap-card';
+
+type KpiComparisonAnalysisEvidenceMode =
+  | 'side-by-side-values'
+  | 'grouped-bars'
+  | 'stacked-distribution'
+  | 'multi-series-trend'
+  | 'market-share-donut'
+  | 'radar-profile'
+  | 'benchmark-ruler'
+  | 'variance-gauge'
+  | 'nps-score-scale'
+  | 'comparison-table'
+  | 'map-table-compare';
+
+type KpiJudgmentBandBinding = {
+  label: string;
+  minField?: string;
+  maxField?: string;
+  colorRole: 'success' | 'info' | 'warning' | 'danger' | 'neutral' | 'domain';
+  statusKind: 'healthy' | 'normal' | 'progress' | 'warning' | 'risk' | 'failed' | 'unknown';
+};
+
+type KpiGoalMilestoneBinding = {
+  milestoneDatasetId: string;
+  nameField: string;
+  statusField: string;
+  dateField?: string;
+  orderField?: string;
+  currentMilestoneField?: string;
+  dueDateField?: string;
+};
+
+type KpiOverviewMetricBinding = {
+  metricId: string;
+  metricName: string;
+  valueField: string;
+  unit: string;
+  numericFormatContractId: string;
+  comparisonFields?: Array<'yoy' | 'mom' | 'baseline' | 'targetGap' | 'status'>;
+  targetField?: string;
+  attainmentRateField?: string;
+  progressTrackField?: string;
+  evidenceVisual?: 'none' | 'sparkline' | 'mini-bars' | 'progress-track' | 'semantic-icon';
+  trendDatasetId?: string;
+  trendCategoryField?: string;
+  trendValueField?: string;
+  tooltipPayload: string[];
+};
 
 type TargetActualCardPattern =
   | 'standard-summary-panel'
@@ -259,9 +411,528 @@ type TableCardPattern =
   | 'tree-hierarchy-table';
 
 type RankingCardPattern =
+  | 'basic-rank-list-card'
+  | 'trend-delta-rank-list-card'
+  | 'progress-bar-rank-list-card'
+  | 'podium-rank-card'
+  | 'yoy-microbar-rank-list-card'
+  | 'radar-comparison-rank-card'
+  | 'metric-summary-rank-card'
+  | 'time-switch-rank-card'
+  | 'share-donut-rank-card'
+  | 'map-distribution-rank-card'
+  | 'topn-bar-rank-card'
+  | 'topn-comparison-rank-card'
+  | 'topn-waterfall-strip-card'
+  | 'topn-sparkline-rank-list-card'
+  | 'topn-bubble-rank-card'
+  | 'topn-icon-card-grid'
   | 'medal-horizontal-ranking'
   | 'bar-progress-ranking'
   | 'compact-list-ranking';
+
+type ParetoCardPattern =
+  | 'pareto-basic-card'
+  | 'pareto-table-chart-card'
+  | 'pareto-dual-axis-card'
+  | 'pareto-cumulative-fill-card'
+  | 'pareto-stacked-share-card'
+  | 'pareto-bubble-card'
+  | 'pareto-zone-card'
+  | 'pareto-ring-list-card';
+
+type CompositionShareCardPattern =
+  | 'basic-donut-share-card'
+  | 'donut-detail-share-card'
+  | 'percent-bar-share-card'
+  | 'multi-ring-hierarchy-share-card'
+  | 'share-trend-stack-card'
+  | 'share-ranking-topn-card'
+  | 'treemap-composition-card'
+  | 'share-metrics-summary-card'
+  | 'stacked-strip-composition-card'
+  | 'stacked-column-trend-composition-card'
+  | 'funnel-composition-card'
+  | 'bubble-composition-card'
+  | 'market-share-overview-card'
+  | 'market-share-concentration-card'
+  | 'share-distribution-interval-card'
+  | 'map-structure-card'
+  | 'sunburst-structure-card';
+
+type DecompositionAttributionCardPattern =
+  | 'formula-decomposition-card'
+  | 'funnel-decomposition-card'
+  | 'tree-decomposition-card'
+  | 'sankey-decomposition-card'
+  | 'driver-factor-decomposition-card'
+  | 'variance-waterfall-decomposition-card'
+  | 'combined-decomposition-card'
+  | 'multilevel-metric-decomposition-card'
+  | 'total-attribution-card'
+  | 'funnel-attribution-card'
+  | 'channel-attribution-donut-card'
+  | 'touchpoint-attribution-list-card'
+  | 'segment-attribution-card'
+  | 'feature-attribution-bar-card'
+  | 'time-attribution-waterfall-card'
+  | 'multidimensional-attribution-matrix-card'
+  | 'overall-contribution-card'
+  | 'contribution-waterfall-card'
+  | 'contribution-structure-card'
+  | 'contribution-comparison-card'
+  | 'contribution-trend-card'
+  | 'contribution-tree-card'
+  | 'key-contribution-topn-card'
+  | 'contribution-heatmap-card'
+  | 'progressive-hierarchy-decomposition-card'
+  | 'hierarchy-tree-decomposition-card'
+  | 'hierarchy-waterfall-card'
+  | 'indented-hierarchy-table-card'
+  | 'hierarchy-share-card'
+  | 'path-contribution-card'
+  | 'multilevel-comparison-hierarchy-card'
+  | 'target-attainment-hierarchy-attribution-card';
+
+type DistributionAnalysisCardPattern =
+  | 'numeric-histogram-distribution-card'
+  | 'interval-donut-distribution-card'
+  | 'percentile-cdf-distribution-card'
+  | 'geographic-distribution-card'
+  | 'time-distribution-card'
+  | 'distribution-comparison-card'
+  | 'calendar-heatmap-distribution-card'
+  | 'multidimensional-population-distribution-card'
+  | 'interval-histogram-card'
+  | 'interval-share-donut-card'
+  | 'interval-boxplot-card'
+  | 'interval-comparison-card'
+  | 'interval-stacked-trend-card'
+  | 'cumulative-interval-card'
+  | 'interval-scatter-strip-card'
+  | 'interval-detail-table-card'
+  | 'univariate-density-curve-card'
+  | 'interval-density-curve-card'
+  | 'grouped-density-comparison-card'
+  | 'density-heatmap-card'
+  | 'kde-cumulative-density-card'
+  | 'bivariate-density-hexbin-card'
+  | 'quantile-band-density-card'
+  | 'density-overview-card'
+  | 'boxplot-kpi-summary-card'
+  | 'time-series-boxplot-card'
+  | 'grouped-boxplot-comparison-card'
+  | 'boxplot-overview-card'
+  | 'boxplot-side-summary-card'
+  | 'weekday-boxplot-card'
+  | 'anomaly-boxplot-card'
+  | 'boxplot-detail-table-card';
+
+type AnomalyAnalysisCardPattern =
+  | 'anomaly-overview-card'
+  | 'anomaly-trend-compare-card'
+  | 'anomaly-distribution-structure-card'
+  | 'anomaly-interval-threshold-card'
+  | 'anomaly-timeline-card'
+  | 'anomaly-ranking-top-card'
+  | 'anomaly-impact-assessment-card'
+  | 'anomaly-baseline-compare-card'
+  | 'anomaly-summary-table-card'
+  | 'anomaly-multi-metric-monitor-card'
+  | 'risk-matrix-card'
+  | 'risk-response-status-card'
+  | 'anomaly-relation-influence-card'
+  | 'anomaly-geographic-distribution-card'
+  | 'outlier-scatter-card'
+  | 'warning-progress-donut-card';
+
+type RankingEvidenceBinding = {
+  rankingMode: 'leaderboard' | 'top-n' | 'bottom-n' | 'rank-comparison' | 'rank-distribution' | 'spatial-rank';
+  metricId: string;
+  metricName: string;
+  unit: string;
+  topN: number;
+  visibleCount: number;
+  rankingOrder: 'desc' | 'asc';
+  rankField: string;
+  objectIdField: string;
+  objectNameField: string;
+  objectSecondaryField?: string;
+  valueField: string;
+  shareField?: string;
+  denominatorField?: string;
+  comparisonField?: string;
+  deltaField?: string;
+  deltaRateField?: string;
+  targetField?: string;
+  progressField?: string;
+  trendSeriesField?: string;
+  scoreDimensionFields?: string[];
+  geographyFields?: string[];
+  periodField?: string;
+  tieBreakFields: string[];
+  totalPolicy: 'all-filtered-rows' | 'visible-top-n' | 'api-provided-total';
+  badgeRule: 'top3-medals' | 'rank-circles' | 'plain-rank' | 'brand-icons';
+  overflowStrategy: 'view-all' | 'pagination' | 'drawer' | 'table-fallback' | 'scroll';
+  tooltipPayload: string[];
+  detailAction?: string;
+};
+
+type ParetoEvidenceBinding = {
+  metricId: string;
+  metricName: string;
+  unit: string;
+  itemIdField: string;
+  itemNameField: string;
+  rankField: string;
+  valueField: string;
+  totalField: string;
+  contributionShareField: string;
+  cumulativeValueField: string;
+  cumulativeShareField: string;
+  thresholdShare: number;
+  keyFactorFlagField: string;
+  boundaryItemField?: string;
+  longTailField?: string;
+  tieBreakFields: string[];
+  otherAggregationPolicy: 'aggregate-tail' | 'show-tail-gray' | 'drawer-detail' | 'table-fallback';
+  tooltipPayload: string[];
+  detailAction?: string;
+};
+
+type CompositionShareEvidenceBinding = {
+  compositionMode: 'share' | 'composition' | 'structure' | 'market-share' | 'concentration' | 'distribution';
+  metricId: string;
+  metricName: string;
+  unit: string;
+  categoryIdField: string;
+  categoryNameField: string;
+  valueField: string;
+  totalField: string;
+  shareField: string;
+  denominatorPolicy: 'all-filtered-rows' | 'api-total' | 'visible-total' | 'declared-market-total' | 'parent-total';
+  orderRule: 'value-desc' | 'business-order' | 'time-order' | 'hierarchy-order';
+  otherPolicy: 'topn-plus-other' | 'small-slice-merge' | 'none' | 'blocked';
+  topN?: number;
+  parentIdField?: string;
+  parentNameField?: string;
+  levelField?: string;
+  parentValueField?: string;
+  parentShareField?: string;
+  totalShareField?: string;
+  childShareField?: string;
+  timeField?: string;
+  comparisonValueField?: string;
+  comparisonShareField?: string;
+  deltaShareField?: string;
+  concentrationFields?: {
+    cr1Field?: string;
+    cr3Field?: string;
+    cr5Field?: string;
+    hhiField?: string;
+    otherShareField?: string;
+  };
+  distributionFields?: {
+    bucketField: string;
+    bucketSortField: string;
+    countField: string;
+    bucketShareField: string;
+  };
+  geoField?: string;
+  lonField?: string;
+  latField?: string;
+  tooltipPayload: string[];
+  detailAction?: string;
+};
+
+type DecompositionAttributionEvidenceBinding = {
+  decompositionMode:
+    | 'formula'
+    | 'driver'
+    | 'attribution'
+    | 'contribution'
+    | 'variance'
+    | 'hierarchy'
+    | 'path'
+    | 'matrix';
+  metricId: string;
+  metricName: string;
+  unit: string;
+  rootMetricId?: string;
+  rootValueField: string;
+  baselineValueField?: string;
+  currentValueField?: string;
+  targetValueField?: string;
+  attainmentRateField?: string;
+  formulaText?: string;
+  formulaOperatorField?: string;
+  nodeDatasetId?: string;
+  nodeIdField?: string;
+  nodeNameField?: string;
+  parentIdField?: string;
+  levelField?: string;
+  pathField?: string;
+  orderField?: string;
+  valueField: string;
+  comparisonValueField?: string;
+  deltaValueField?: string;
+  deltaRateField?: string;
+  contributionValueField?: string;
+  contributionRateField?: string;
+  shareField?: string;
+  parentShareField?: string;
+  totalShareField?: string;
+  directionField?: string;
+  signRule: 'positive-is-good' | 'negative-is-good' | 'signed-neutral' | 'domain-defined';
+  attributionMethod?: 'first-touch' | 'last-touch' | 'linear' | 'position-based' | 'shapley' | 'rule-based' | 'model-based' | 'domain-defined';
+  reconciliationPolicy: 'must-equal-root' | 'allow-residual' | 'non-additive-explained' | 'model-estimate';
+  residualField?: string;
+  otherPolicy?: 'topn-plus-other' | 'small-item-merge' | 'show-residual' | 'none';
+  stageField?: string;
+  sourceField?: string;
+  targetField?: string;
+  linkValueField?: string;
+  timeField?: string;
+  rowDimensionField?: string;
+  columnDimensionField?: string;
+  confidenceField?: string;
+  tooltipPayload: string[];
+  detailAction?: string;
+};
+
+type DistributionAnalysisEvidenceBinding = {
+  distributionMode:
+    | 'numeric-distribution'
+    | 'interval-distribution'
+    | 'density-distribution'
+    | 'quantile-distribution'
+    | 'boxplot-distribution'
+    | 'spatial-distribution'
+    | 'time-distribution'
+    | 'comparison-distribution'
+    | 'multidimensional-distribution';
+  metricId: string;
+  metricName: string;
+  unit: string;
+  sampleGrain: string;
+  sampleCountField: string;
+  valueField?: string;
+  weightField?: string;
+  bucketFields?: {
+    bucketIdField: string;
+    bucketLabelField: string;
+    lowerBoundField?: string;
+    upperBoundField?: string;
+    countField: string;
+    shareField?: string;
+    cumulativeCountField?: string;
+    cumulativeShareField?: string;
+    sortField?: string;
+  };
+  densityFields?: {
+    xField: string;
+    densityField: string;
+    bandwidthField?: string;
+    estimatorField?: string;
+    groupField?: string;
+  };
+  quantileFields?: {
+    percentileField?: string;
+    percentileValueField?: string;
+    q1Field?: string;
+    medianField?: string;
+    q3Field?: string;
+    p10Field?: string;
+    p25Field?: string;
+    p75Field?: string;
+    p90Field?: string;
+  };
+  boxplotFields?: {
+    categoryField: string;
+    minField: string;
+    q1Field: string;
+    medianField: string;
+    q3Field: string;
+    maxField: string;
+    outlierField?: string;
+    whiskerRuleField?: string;
+  };
+  heatmapFields?: {
+    xField: string;
+    yField: string;
+    valueField: string;
+    missingPolicy: 'missing-as-null' | 'missing-as-zero' | 'explicit-empty-cell';
+  };
+  geographyFields?: {
+    geoIdField?: string;
+    geoNameField?: string;
+    lonField?: string;
+    latField?: string;
+    mapResource?: string;
+  };
+  comparisonFields?: {
+    groupField?: string;
+    baselineField?: string;
+    deltaField?: string;
+    deltaRateField?: string;
+  };
+  intervalPolicy?: 'equal-width' | 'quantile' | 'business-rule' | 'api-provided' | 'custom';
+  missingValuePolicy:
+    | 'missing-as-null'
+    | 'missing-as-zero'
+    | 'explicit-empty-cell'
+    | 'exclude-with-disclosure';
+  zeroValuePolicy: 'true-zero' | 'empty-zero' | 'exclude-zero' | 'domain-defined';
+  outOfRangePolicy:
+    | 'clip-to-domain'
+    | 'show-overflow-bucket'
+    | 'mark-as-outlier'
+    | 'exclude-with-disclosure';
+  densityPolicy?: 'kde' | 'histogram-smoothed' | 'hexbin' | 'precomputed-density' | 'none';
+  tooltipPayload: string[];
+  detailAction?: string;
+  exportFields?: string[];
+};
+
+type AnomalyAnalysisEvidenceBinding = {
+  anomalyObjectType:
+    | 'metric'
+    | 'order'
+    | 'request'
+    | 'server'
+    | 'region'
+    | 'user'
+    | 'service'
+    | 'indicator'
+    | 'risk-event'
+    | 'warning'
+    | 'outlier-point'
+    | 'project-defined';
+  anomalyIdField?: string;
+  objectIdField?: string;
+  objectNameField?: string;
+  severityField: string;
+  severityDictionary: string[];
+  statusField?: string;
+  statusDictionary?: string[];
+  currentValueField?: string;
+  unit?: string;
+  baselineValueField?: string;
+  deltaField?: string;
+  deltaRateField?: string;
+  directionRule?: 'higher-is-worse' | 'lower-is-worse' | 'outside-band-is-worse' | 'domain-defined';
+  thresholdFields?: {
+    warningThresholdField?: string;
+    highThresholdField?: string;
+    mediumThresholdField?: string;
+    lowThresholdField?: string;
+    thresholdUnit?: string;
+    thresholdRule?: string;
+    intervalLabelField?: string;
+    lowerBoundField?: string;
+    upperBoundField?: string;
+  };
+  timeFields?: {
+    firstSeenAtField?: string;
+    occurredAtField?: string;
+    updatedAtField?: string;
+    durationField?: string;
+    timeGrain?: string;
+    sortRule?: string;
+  };
+  impactFields?: {
+    affectedUserField?: string;
+    affectedOrderField?: string;
+    affectedServiceField?: string;
+    lossAmountField?: string;
+    impactScoreField?: string;
+    durationField?: string;
+  };
+  distributionFields?: {
+    categoryField?: string;
+    countField?: string;
+    shareField?: string;
+    totalField?: string;
+    denominatorPolicy?: string;
+  };
+  timelineFields?: {
+    eventIdField: string;
+    eventTimeField: string;
+    eventTitleField: string;
+    eventStatusField: string;
+    eventDetailField?: string;
+  };
+  rankingFields?: {
+    rankField?: string;
+    valueField: string;
+    tieBreakFields?: string[];
+    visibleLimit: number;
+  };
+  relationFields?: {
+    nodeIdField?: string;
+    nodeNameField?: string;
+    nodeTypeField?: string;
+    edgeSourceField?: string;
+    edgeTargetField?: string;
+    edgeWeightField?: string;
+    relationDirection?: 'directed' | 'undirected' | 'mixed';
+  };
+  geoFields?: {
+    regionIdField?: string;
+    regionNameField?: string;
+    geoCodeField?: string;
+    lonField?: string;
+    latField?: string;
+    mapResource?: string;
+    missingGeoPolicy?: string;
+  };
+  responseFields?: {
+    ownerField?: string;
+    actionField?: string;
+    actionStatusField?: string;
+    resolvedAtField?: string;
+    slaField?: string;
+  };
+  tooltipPayload: string[];
+  detailAction: string;
+  exportFields?: string[];
+  validationCases: string[];
+};
+
+type RelationshipAnalysisEvidenceBinding = {
+  relationshipAnalysisCardPattern: RelationshipAnalysisCardPattern;
+  relationTask:
+    | 'correlation'
+    | 'association'
+    | 'influence'
+    | 'dependency'
+    | 'cooccurrence'
+    | 'similarity'
+    | 'flow'
+    | 'community'
+    | 'hierarchy'
+    | 'pair-audit';
+  entityGrain: string;
+  sourceEntityFields?: string[];
+  targetEntityFields?: string[];
+  nodeFields?: string[];
+  edgeFields?: string[];
+  pairFields?: string[];
+  metricFields: string[];
+  strengthField?: string;
+  directionField?: string;
+  methodField?: string;
+  timeField?: string;
+  groupField?: string;
+  thresholdRule?: string;
+  densityLimit: string;
+  labelRule: string;
+  tooltipPayload: string[];
+  exactValueRoute: string;
+  localControls?: string[];
+  rendererOwner: 'echarts' | 'antv-s2' | 'project-table' | 'data-driven-custom-diagram';
+  fallback: string;
+};
 
 type BasicChartCardPattern =
   | 'single-series-bar-card'
@@ -293,6 +964,20 @@ type FlowHierarchyDiagramCardPattern =
   | 'sunburst-composition-card'
   | 'treemap-composition-card'
   | 'path-conversion-flow-card';
+
+type RelationshipAnalysisCardPattern =
+  | 'relation-overview-hub-card'
+  | 'relation-strength-matrix-card'
+  | 'relation-flow-sankey-card'
+  | 'relation-community-network-card'
+  | 'relation-pair-compare-card'
+  | 'relation-trend-card'
+  | 'relation-hierarchy-tree-card'
+  | 'relation-bubble-quadrant-card'
+  | 'relation-factor-ranking-card'
+  | 'relation-evolution-snapshot-card'
+  | 'relation-bipartite-attribute-card'
+  | 'relation-detail-table-card';
 
 type ListStatusPattern =
   | 'simple-info-list'
@@ -359,6 +1044,35 @@ type StateFeedbackScope =
   | 'overlay'
   | 'card';
 
+type AnalysisPerspective =
+  | 'currentStatus'
+  | 'targetProgress'
+  | 'trendMovement'
+  | 'comparisonDifference'
+  | 'rankingContribution'
+  | 'compositionShare'
+  | 'decompositionDriver'
+  | 'distributionSpread'
+  | 'anomalyRisk'
+  | 'relationshipInfluence'
+  | 'flowTransfer'
+  | 'processBottleneck'
+  | 'conversionRetention'
+  | 'spatialDistribution'
+  | 'timePattern'
+  | 'multiDimensionalProfile'
+  | 'populationObject'
+  | 'matrixDecision'
+  | 'marketMovement'
+  | 'definitionHelp'
+  | 'conclusionInsight'
+  | 'causeDiagnosis'
+  | 'actionRecommendation'
+  | 'reviewImpact'
+  | 'dataQualityTrust'
+  | 'detailEvidence'
+  | 'filterExploration';
+
 type SubBlockRole =
   | 'summary'
   | 'evidence'
@@ -385,6 +1099,8 @@ type ComponentMapping = {
   patternRoles?: PatternRole[];
   styleGeneralization?: StyleGeneralizationContract;
   businessQuestion: string;
+  analysisPerspective?: AnalysisPerspective;
+  secondaryAnalysisPerspectives?: AnalysisPerspective[];
   answerAtom: string;
   semanticRole: string;
   block: string;
@@ -397,6 +1113,18 @@ type ComponentMapping = {
   visualType: string;
   kpiCardPattern?: KpiCardPattern;
   kpiCardOrientation?: KpiCardOrientation;
+  kpiAxisLineEvidenceMode?: KpiAxisLineEvidenceMode;
+  kpiAxisBarEvidenceMode?: KpiAxisBarEvidenceMode;
+  kpiScatterEvidenceMode?: KpiScatterEvidenceMode;
+  kpiMapEvidenceMode?: KpiMapEvidenceMode;
+  kpiComparisonEvidenceMode?: KpiComparisonEvidenceMode;
+  kpiSingleIndicatorLayoutMode?: KpiSingleIndicatorLayoutMode;
+  kpiOverviewCardPattern?: KpiOverviewCardPattern;
+  kpiJudgmentCardPattern?: KpiJudgmentCardPattern;
+  kpiGoalExecutionCardPattern?: KpiGoalExecutionCardPattern;
+  kpiTimeSeriesCardPattern?: KpiTimeSeriesCardPattern;
+  kpiComparisonAnalysisCardPattern?: KpiComparisonAnalysisCardPattern;
+  kpiComparisonAnalysisEvidenceMode?: KpiComparisonAnalysisEvidenceMode;
   targetActualCardPattern?: TargetActualCardPattern;
   targetActualTrendCardPattern?: TargetActualTrendCardPattern;
   targetActualRadarCardPattern?: TargetActualRadarCardPattern;
@@ -406,6 +1134,12 @@ type ComponentMapping = {
   targetActualPivotTablePattern?: TargetActualPivotTablePattern;
   tableCardPattern?: TableCardPattern;
   rankingCardPattern?: RankingCardPattern;
+  paretoCardPattern?: ParetoCardPattern;
+  compositionShareCardPattern?: CompositionShareCardPattern;
+  decompositionAttributionCardPattern?: DecompositionAttributionCardPattern;
+  distributionAnalysisCardPattern?: DistributionAnalysisCardPattern;
+  anomalyAnalysisCardPattern?: AnomalyAnalysisCardPattern;
+  relationshipAnalysisCardPattern?: RelationshipAnalysisCardPattern;
   basicChartCardPattern?: BasicChartCardPattern;
   specializedChartCardPattern?: SpecializedChartCardPattern;
   flowHierarchyDiagramCardPattern?: FlowHierarchyDiagramCardPattern;
@@ -426,6 +1160,13 @@ type ComponentMapping = {
   rollupLogic?: string;
   numericFormatContracts?: NumericFormatContract[];
   analysisInsightContract?: AnalysisInsightContract;
+  rankingEvidenceBinding?: RankingEvidenceBinding;
+  paretoEvidenceBinding?: ParetoEvidenceBinding;
+  compositionShareEvidenceBinding?: CompositionShareEvidenceBinding;
+  decompositionAttributionEvidenceBinding?: DecompositionAttributionEvidenceBinding;
+  distributionAnalysisEvidenceBinding?: DistributionAnalysisEvidenceBinding;
+  anomalyAnalysisEvidenceBinding?: AnomalyAnalysisEvidenceBinding;
+  relationshipAnalysisEvidenceBinding?: RelationshipAnalysisEvidenceBinding;
   compositePanelContract?: {
     topic: string;
     analysisSequence: Array<'summary' | 'trend' | 'structure' | 'contribution' | 'exception' | 'detail' | 'action'>;
@@ -582,6 +1323,237 @@ type ComponentMapping = {
   interactions?: string[];
   actionPayload?: string[];
   stateKeys?: string[];
+  kpiEvidenceBinding?: {
+    overview?: {
+      overviewTopic: string;
+      overviewPattern: KpiOverviewCardPattern;
+      leadMetricId?: string;
+      metrics: KpiOverviewMetricBinding[];
+      visibleMetricLimit: number;
+      localControlId?: string;
+      localControlType?:
+        | 'period-segmented'
+        | 'period-dropdown'
+        | 'metric-segmented'
+        | 'unit-scale-segmented'
+        | 'overflow-menu';
+      localControlOptions?: string[];
+      selectedControlField?: string;
+      exactValuePayload: string[];
+      detailRoute?: string;
+    };
+    singleIndicator?: {
+      evidenceVisual: 'sparkline' | 'mini-bars' | 'ring' | 'area-sparkline' | 'semi-gauge';
+      trendDatasetId?: string;
+      trendCategoryField?: string;
+      trendValueField?: string;
+      latestPointField?: string;
+      targetField?: string;
+      attainmentRateField?: string;
+      progressTrackField?: string;
+      localControlId?: string;
+      localControlType?: 'period-dropdown' | 'grain-segmented' | 'unit-toggle' | 'scale-toggle';
+      localControlOptions?: string[];
+      selectedControlField?: string;
+      exactValuePayload: string[];
+    };
+    judgment?: {
+      judgmentPattern: KpiJudgmentCardPattern;
+      judgmentKind: 'status' | 'health' | 'rating' | 'score' | 'gauge' | 'risk' | 'progress';
+      statusField?: string;
+      scoreField?: string;
+      scoreRange?: [number, number];
+      levelField?: string;
+      bands?: KpiJudgmentBandBinding[];
+      thresholdFields?: string[];
+      direction: 'higher-better' | 'lower-better' | 'range-target' | 'status-enum';
+      heroVisual:
+        | 'semantic-icon'
+        | 'ring'
+        | 'semi-gauge'
+        | 'bullet-range'
+        | 'dimension-bars'
+        | 'rating-stars'
+        | 'rating-distribution';
+      dimensionDatasetId?: string;
+      dimensionNameField?: string;
+      dimensionScoreField?: string;
+      ratingDistributionFields?: string[];
+      comparisonStripFields?: string[];
+      footerEvidenceFields: string[];
+      exactValuePayload: string[];
+    };
+    goalExecution?: {
+      goalPattern: KpiGoalExecutionCardPattern;
+      goalExecutionKind: 'attainment' | 'gap' | 'progress' | 'milestone';
+      direction: 'higher-better' | 'lower-better' | 'range-target' | 'schedule-target';
+      actualField?: string;
+      targetField?: string;
+      attainmentRateField?: string;
+      gapField?: string;
+      gapRateField?: string;
+      remainingField?: string;
+      deadlineField?: string;
+      dueStatusField?: string;
+      planProgressField?: string;
+      actualProgressField?: string;
+      progressDeltaField?: string;
+      remainingTimeField?: string;
+      milestone?: KpiGoalMilestoneBinding;
+      heroVisual:
+        | 'ring'
+        | 'semi-gauge'
+        | 'linear-progress'
+        | 'target-actual-bars'
+        | 'dot-strip'
+        | 'stepper'
+        | 'timeline'
+        | 'cumulative-line';
+      comparisonStripFields?: string[];
+      footerEvidenceFields: string[];
+      exactValuePayload: string[];
+    };
+    timeSeries?: {
+      timeSeriesPattern: KpiTimeSeriesCardPattern;
+      temporalAnalysisKind: 'trend' | 'change' | 'yoy-mom' | 'cycle' | 'volatility' | 'forecast';
+      direction: 'higher-better' | 'lower-better' | 'range-target' | 'neutral';
+      datasetId: string;
+      xField: string;
+      yField: string;
+      grainField?: string;
+      latestPeriodField: string;
+      tooltipPayload: string[];
+      baselineLabelField?: string;
+      baselineValueField?: string;
+      deltaValueField?: string;
+      deltaRateField?: string;
+      yoyValueField?: string;
+      yoyRateField?: string;
+      momValueField?: string;
+      momRateField?: string;
+      priorYearComparableValueField?: string;
+      priorPeriodValueField?: string;
+      cycle?: {
+        grainField: string;
+        periodStartField: string;
+        periodEndField: string;
+        currentIndexField: string;
+        totalCountField: string;
+        progressField?: string;
+        phaseStatusField?: string;
+      };
+      volatility?: {
+        formula: string;
+        volatilityRateField: string;
+        levelField: string;
+        maxField?: string;
+        minField?: string;
+        stdDevField?: string;
+        thresholdBandFields?: string[];
+      };
+      forecast?: {
+        forecastDatasetId: string;
+        forecastStartField: string;
+        forecastEndField?: string;
+        horizonField?: string;
+        forecastValueField: string;
+        lowerBoundField?: string;
+        upperBoundField?: string;
+        forecastStatusField?: string;
+      };
+      footerEvidenceFields: string[];
+      exactValuePayload: string[];
+    };
+    scatter?: {
+      datasetId: string;
+      objectIdField: string;
+      objectNameField: string;
+      xField: string;
+      yField: string;
+      xUnit: string;
+      yUnit: string;
+      sizeField?: string;
+      colorField?: string;
+      trendlineField?: string;
+      referenceFields?: string[];
+      thresholdFields?: string[];
+      quadrantFields?: string[];
+      pointLimit?: number;
+    };
+    map?: {
+      datasetId: string;
+      regionCodeField?: string;
+      regionNameField?: string;
+      valueField: string;
+      visualMapField?: string;
+      pointDatasetId?: string;
+      lonField?: string;
+      latField?: string;
+      pointValueField?: string;
+      categoryField?: string;
+      projection: string;
+      mapResource: string;
+      legendFields?: string[];
+      missingGeoPolicy: string;
+    };
+    comparison?: {
+      leftPaneFields: string[];
+      rightPaneFields: string[];
+      baselineLabels: string[];
+      valueFields: string[];
+      deltaField?: string;
+      gapField?: string;
+      conclusionField: string;
+      sharedUnit: string;
+      sharedGrain: string;
+    };
+    comparisonAnalysis?: {
+      comparisonPattern: KpiComparisonAnalysisCardPattern;
+      comparisonAnalysisKind: 'direct' | 'group' | 'competitor' | 'benchmark' | 'variance';
+      evidenceMode: KpiComparisonAnalysisEvidenceMode;
+      direction: 'higher-better' | 'lower-better' | 'range-target' | 'neutral';
+      datasetId: string;
+      subjectIdField?: string;
+      subjectNameField: string;
+      subjectRoleField?: string;
+      groupField?: string;
+      competitorField?: string;
+      metricField: string;
+      metricNameField?: string;
+      unit: string;
+      grainField?: string;
+      periodField?: string;
+      filterScopeField?: string;
+      currentValueField: string;
+      comparisonValueField?: string;
+      deltaValueField?: string;
+      deltaRateField?: string;
+      rankField?: string;
+      shareField?: string;
+      marketTotalField?: string;
+      benchmarkSourceField?: string;
+      benchmarkValueField?: string;
+      benchmarkP50Field?: string;
+      benchmarkP75Field?: string;
+      benchmarkP90Field?: string;
+      varianceFormula?: string;
+      varianceValueField?: string;
+      varianceRateField?: string;
+      attainmentRateField?: string;
+      normalizedScoreField?: string;
+      seriesDatasetId?: string;
+      xField?: string;
+      yField?: string;
+      seriesField?: string;
+      radarDimensionField?: string;
+      radarScoreField?: string;
+      sortRule?: string;
+      visibleSubjectLimit?: number;
+      tooltipPayload: string[];
+      footerEvidenceFields: string[];
+      exactValuePayload: string[];
+    };
+  };
   updateTriggers: string[];
   parentLayoutSpan?: string;
   subBlockLayout?: string;
@@ -595,11 +1567,12 @@ Rules:
 
 - Use stable IDs such as `attritionTrend`, `riskEmployeeTable`, or `revenueGapWaterfall`.
 - For sample/source restoration, set `sampleModuleRole`. Only `businessRequired` modules should become `must-have`; `sampleStructure` preserves visible sample structure, and `optionalEnhancement` must be labeled as an enhancement.
+- Set `analysisPerspective` on each mapped component when the component is selected from a business intent such as 看现状, 看目标, 看趋势, 看排名, 看原因, 看行动, or equivalent. Use `secondaryAnalysisPerspectives` only when the same visible component supports additional decision questions; do not duplicate the component only to represent each perspective.
 - When a display-theme pattern library is used, set `displayTheme`, `sourcePatternIds`, and `patternRoles` on every affected mapping row. Pattern IDs should be stable values such as `detail-table-01`.
 - For screenshot/sample-derived reusable styles, set `styleGeneralization`. Use `covered-by-existing-pattern` when one controlled pattern field is enough, `covered-by-composed-patterns` when the design is a valid composition of several controlled pattern fields, `requires-pattern-extension` when the sample is reusable but not yet covered, and `out-of-scope-one-off` only for non-reusable, audit-only, or exact-restoration-only surfaces. Reusable style knowledge must have `textOnlyReproduction: true`.
 - `visualType` must match runnable template/widget capability where a template is used.
 - Conclusion/evidence/action cards should keep `componentType: 'text-summary'`, `visualType: 'text-summary'`, set `analysisInsightContract.subtype: 'conclusion-card'`, `analysisInsightContract.insightFamily: 'conclusion'`, and set `analysisInsightContract.conclusionCardPattern` to `metric-evidence-conclusion`, `finding-action-conclusion`, or `compact-conclusion-summary` from `$report-component-style-design` `references/03a-conclusion-evidence-action-cards.md`.
-- Metric cards that use `visualType: 'metric-card'` should set `kpiCardPattern` when the card's expression matters. Use `plain-metric`, `target-wave`, `mini-bar-trend`, or `highlight-line-trend` from `$report-component-style-design` `references/04a-kpi-card-patterns.md`; do not create new enum values for visual variants.
+- Metric cards that use `visualType: 'metric-card'` should set `kpiCardPattern` when the card's expression matters. Use `plain-metric`, `target-wave`, `mini-bar-trend`, `highlight-line-trend`, `horizontal-trend-compare`, `horizontal-axis-line-trend`, `horizontal-axis-bar-compare`, `horizontal-axis-scatter-diagnostic`, `horizontal-spatial-map-diagnostic`, `paired-comparison-diagnostic`, `horizontal-ring-progress`, `horizontal-target-progress`, `horizontal-status-trend-compare`, `horizontal-grain-bar-switch`, `horizontal-period-summary-strip`, `horizontal-pp-assist-info`, or `horizontal-warning-status-band` from `$report-component-style-design` `references/04a-kpi-card-patterns.md`; do not create new enum values for visual variants. For KPI overview cards, also set `kpiOverviewCardPattern` and `kpiEvidenceBinding.overview` so the card can be reproduced without screenshot access. For single-indicator KPI grid cards, also set `kpiSingleIndicatorLayoutMode` and `kpiEvidenceBinding.singleIndicator`. For status/health/score/rating/gauge judgment cards, also set `kpiJudgmentCardPattern` and `kpiEvidenceBinding.judgment` with status or score fields, range/status dictionary, thresholds/bands when visible, direction semantics, one hero visual, comparison strip fields, footer evidence, and exact-value payload. For target attainment, gap, progress, or milestone execution cards, also set `kpiGoalExecutionCardPattern` and `kpiEvidenceBinding.goalExecution` with `goalExecutionKind`, direction semantics, actual/target fields, required attainment/gap/progress/milestone fields, formula/denominator behavior, deadline or remaining-time fields when visible, one execution hero visual, comparison strip fields, footer evidence, and exact-value payload. For trend, change, YoY/MoM, cycle, volatility, or forecast time-series cards, also set `kpiTimeSeriesCardPattern` and `kpiEvidenceBinding.timeSeries` with `temporalAnalysisKind`, ordered x/y fields, grain, latest period, direction semantics, baseline/cycle/volatility/forecast fields required by the selected pattern, tooltip payload, footer evidence, and exact-value payload. For direct comparison, group comparison, competitor comparison, benchmark position, or variance/gap diagnosis cards, also set `kpiComparisonAnalysisCardPattern`, `kpiComparisonAnalysisEvidenceMode`, and `kpiEvidenceBinding.comparisonAnalysis` with `comparisonAnalysisKind`, comparable subject grain/roles, shared metric definition, unit, period/grain, filter scope, direction semantics, benchmark or variance fields when required, sort/visible-limit rules, tooltip payload, footer evidence, and exact-value payload. When `horizontal-axis-line-trend` is used, set `kpiAxisLineEvidenceMode`, ordered x/y fields, axis unit, tooltip payload, and any target/reference/threshold/phase/comparison-series fields. When `horizontal-axis-bar-compare` is used, set `kpiAxisBarEvidenceMode`, category/value fields, axis unit, sort rule, visible limit, tooltip payload, and any target/reference/threshold/change-rate/comparison-series fields. When `horizontal-axis-scatter-diagnostic` is used, set `kpiScatterEvidenceMode`, `kpiEvidenceBinding.scatter`, object grain, x/y fields and units, point limit/density strategy, tooltip payload, and any trendline/reference/threshold/quadrant/category/size fields. When `horizontal-spatial-map-diagnostic` is used, set `kpiMapEvidenceMode`, `kpiEvidenceBinding.map`, geography fields, projection/map resource, missing-geo policy, visualMap/legend fields, tooltip payload, and any target-gap/change/category/point fields. When `paired-comparison-diagnostic` is used, set `kpiComparisonEvidenceMode`, `kpiEvidenceBinding.comparison`, left/right pane fields, baseline labels, shared unit/grain, delta/gap/conclusion fields, and optional mini evidence fields.
 - Target/actual comparison cards should keep `visualType: 'bar'`, set `chartSubtype: 'target-actual-comparison'`, and set `targetActualCardPattern` to `standard-summary-panel`, `emphasis-header-summary`, or `soft-chip-summary` from `$report-component-style-design` `references/04b-target-actual-comparison-cards.md`.
 - Target/actual trend cards should keep `visualType: 'line'`, set `chartSubtype: 'target-actual-trend'`, and set `targetActualTrendCardPattern` to `emphasis-wave-trend`, `standard-summary-trend`, or `soft-chip-trend` from `$report-component-style-design` `references/04c-target-actual-trend-cards.md`.
 - Target/actual radar cards should keep `visualType: 'radar'`, set `chartSubtype: 'target-actual-radar'`, and set `targetActualRadarCardPattern` to `emphasis-wave-radar` or `standard-action-radar` from `$report-component-style-design` `references/04d-target-actual-radar-cards.md`.
@@ -608,7 +1581,12 @@ Rules:
 - Target/actual detail table cards should keep `componentType: 'table'`, `visualType: 'table'`, set `tableSubtype: 'target-actual-detail'`, and set `targetActualTablePattern` to `standard-audit-table` or `compact-audit-table` from `$report-component-style-design` `references/06a-target-actual-detail-tables.md`.
 - Target/actual pivot table cards should keep `componentType: 'table'`, `visualType: 'pivot'`, set `tableSubtype: 'target-actual-pivot'`, and set `targetActualPivotTablePattern` to `standard-hierarchy-pivot`, `share-matrix-pivot`, or `tree-expand-pivot` from `$report-component-style-design` `references/06b-target-actual-pivot-tables.md`.
 - Reusable table card patterns should keep `componentType: 'table'`, keep `visualType` as `table` or `pivot`, and set `tableCardPattern` to `plain-detail-ledger-table`, `filtered-operational-status-table`, `grouped-header-summary-table`, `metric-matrix-table`, `s2-cross-pivot-table`, `fixed-column-scroll-table`, `grouped-subtotal-summary-table`, or `tree-hierarchy-table` from `$report-component-style-design` `references/06c-table-card-patterns.md`.
-- Top ranking cards should keep `componentType: 'card'`, `visualType: 'ranking-list'`, and set `rankingCardPattern` to `medal-horizontal-ranking`, `bar-progress-ranking`, or `compact-list-ranking` from `$report-component-style-design` `references/07a-top-ranking-cards.md`.
+- Ranking, leaderboard, and Top N cards should keep `componentType: 'card'`, `visualType: 'ranking-list'`, set `rankingCardPattern` from `$report-component-style-design` `references/07a-top-ranking-cards.md`, and declare `rankingEvidenceBinding` with source-side Top N, object id/name, value/share/denominator, rank/tie-break fields, visible-count budget, overflow strategy, tooltip payload, and detail action. Use `paretoCardPattern` plus `paretoEvidenceBinding` when the card answers key-factor contribution, 80/20, cumulative share, or Pareto threshold questions.
+- Composition, share, structure, and market-share cards should keep `componentType: 'card'`, `visualType: 'composition-card'`, set `compositionShareCardPattern` from `$report-component-style-design` `references/07c-composition-share-cards.md`, and declare `compositionShareEvidenceBinding` with metric/unit, category id/name, value, total, share, denominator policy, order rule, `Top N + 其他` or small-slice merge behavior, tooltip payload, and detail action. Use chart `visualType` values only for standalone chart blocks; use `composition-card` when donut, bars, treemap, funnel, bubble, map, or sunburst are wrapped with denominator, exact values, local controls, update time, and fallback inside one card.
+- Decomposition, attribution, contribution, and hierarchy decomposition cards should keep `componentType: 'card'`, `visualType: 'decomposition-card'`, set `decompositionAttributionCardPattern` from `$report-component-style-design` `references/07d-decomposition-attribution-contribution-cards.md`, and declare `decompositionAttributionEvidenceBinding` with root metric, value fields, formula/node/link/stage/matrix fields as required by the pattern, sign rule, attribution method when causal attribution is claimed, reconciliation policy, residual/other policy, tooltip payload, and detail action. Use chart `visualType` values only for standalone chart blocks; use `decomposition-card` when formula, funnel, tree, Sankey, waterfall, matrix, heatmap, Top N, or hierarchy evidence is wrapped with root metric, exact values, local controls, and reconciliation inside one card.
+- Distribution, interval, density, quantile, and boxplot cards should keep `componentType: 'card'`, `visualType: 'distribution-card'`, set `distributionAnalysisCardPattern` from `$report-component-style-design` `references/07e-distribution-interval-density-cards.md`, and declare `distributionAnalysisEvidenceBinding` with sample grain/count, metric/unit, selected bucket/density/quantile/boxplot/heatmap/geography/comparison fields, interval policy, density policy, explicit `missingValuePolicy`, `zeroValuePolicy`, `outOfRangePolicy`, tooltip payload, detail action, and export fields when exact audit is needed. Use chart `visualType` values only for standalone chart blocks; use `distribution-card` when histogram, interval donut, CDF, KDE, density heatmap, boxplot, distribution map, population pyramid, statistic strip, local controls, and exact-value evidence are packaged in one card.
+- Anomaly, risk, warning, and outlier analysis cards should keep `componentType: 'card'`, `visualType: 'anomaly-card'`, `analysisPerspective: 'anomalyRisk'`, set `anomalyAnalysisCardPattern` from `$report-component-style-design` `references/07f-anomaly-risk-warning-outlier-cards.md`, and declare `anomalyAnalysisEvidenceBinding` with severity/status, current/baseline or threshold fields, occurrence/update/freshness time, impact or affected-object fields when visible, tooltip payload, detail action, export fields when exact audit is needed, and validation cases. Use chart/list/table `visualType` values only for standalone evidence blocks; use `anomaly-card` when trend, donut, interval, timeline, ranking, matrix, relation, map, scatter, gauge, list, or table evidence is wrapped with abnormality context and action path inside one card.
+- Relationship, correlation, association, and influence cards should keep the real `visualType` such as `scatter`, `heatmap`, `graph`, `sankey`, `tree`, `line`, `bar`, or `table`, set `relationshipAnalysisCardPattern` from `$report-component-style-design` `references/09b-relationship-analysis-card-patterns.md`, and declare `relationshipAnalysisEvidenceBinding` with relation task, entity grain, source/target or pair/node/edge fields, metric/strength/direction/method fields, threshold rule when visible, density and label rules, tooltip payload, exact-value route, renderer ownership, and fallback. Use influence wording only when a method/model/business rule supports it; otherwise use correlation, association, co-occurrence, similarity, or dependency wording.
 - Basic chart cards should keep `componentType: 'chart'`, keep `visualType` as the real chart family (`bar`, `line`, `combo`, or `pie`), and set `basicChartCardPattern` to `single-series-bar-card`, `comparison-line-trend-card`, `area-trend-card`, `bar-line-combo-card`, `pie-composition-card`, `donut-composition-card`, `stacked-bar-composition-card`, `multi-metric-combo-card`, `filtered-bar-card`, or `tooltip-line-trend-card` from `$report-component-style-design` `references/05d-basic-chart-card-patterns.md`.
 - Specialized chart cards should keep `componentType: 'chart'`, keep `visualType` as the real chart family (`gauge`, `map`, `heatmap`, `candlestick`, `boxplot`, `parallel`, or `scatter`), and set `specializedChartCardPattern` to `gauge-progress-card`, `choropleth-ranking-map-card`, `time-heatmap-card`, `candlestick-volume-card`, `boxplot-distribution-card`, `parallel-profile-card`, or `bubble-opportunity-card` from `$report-component-style-design` `references/05e-specialized-chart-card-patterns.md`.
 - Flow/hierarchy diagram cards should keep `componentType: 'chart'`, keep `visualType` as the real diagram family (`funnel`, `sankey`, `path`, `tree`, `graph`, `sunburst`, or `treemap`), and set `flowHierarchyDiagramCardPattern` to `conversion-funnel-card`, `multi-stage-sankey-card`, `journey-stage-map-card`, `hierarchy-tree-card`, `hub-relation-network-card`, `sunburst-composition-card`, `treemap-composition-card`, or `path-conversion-flow-card` from `$report-component-style-design` `references/09a-flow-hierarchy-diagram-card-patterns.md`.
@@ -640,9 +1618,22 @@ Use these values unless an existing project explicitly defines a different local
 
 - `priority`: `must-have`, `should-have`, `optional`.
 - `componentType`: `card`, `chart`, `table`, `text-summary`, `drawer`, `task`, `action`, `custom`.
-- `visualType`: `line`, `bar`, `combo`, `candlestick`, `heatmap`, `pie`, `radar`, `path`, `sunburst`, `gauge`, `scatter`, `boxplot`, `parallel`, `map`, `graph`, `tree`, `treemap`, `sankey`, `funnel`, `metric-card`, `text-summary`, `table`, `pivot`, `ranking-list`, `operational-list`, `overlay-panel`, `composite-panel`, `micro-dashboard`, `state-feedback`, `other`.
+- `visualType`: `line`, `bar`, `combo`, `candlestick`, `heatmap`, `pie`, `radar`, `path`, `sunburst`, `gauge`, `scatter`, `boxplot`, `parallel`, `map`, `graph`, `tree`, `treemap`, `sankey`, `funnel`, `metric-card`, `text-summary`, `table`, `pivot`, `ranking-list`, `composition-card`, `decomposition-card`, `distribution-card`, `anomaly-card`, `operational-list`, `overlay-panel`, `composite-panel`, `micro-dashboard`, `state-feedback`, `other`.
+- `analysisPerspective`: `currentStatus`, `targetProgress`, `trendMovement`, `comparisonDifference`, `rankingContribution`, `compositionShare`, `decompositionDriver`, `distributionSpread`, `anomalyRisk`, `relationshipInfluence`, `flowTransfer`, `processBottleneck`, `conversionRetention`, `spatialDistribution`, `timePattern`, `multiDimensionalProfile`, `populationObject`, `matrixDecision`, `marketMovement`, `definitionHelp`, `conclusionInsight`, `causeDiagnosis`, `actionRecommendation`, `reviewImpact`, `dataQualityTrust`, `detailEvidence`, `filterExploration`.
 - `conclusionCardPattern`: `metric-evidence-conclusion`, `finding-action-conclusion`, `compact-conclusion-summary`.
-- `kpiCardPattern`: `plain-metric`, `target-wave`, `mini-bar-trend`, `highlight-line-trend`.
+- `kpiCardPattern`: `plain-metric`, `target-wave`, `mini-bar-trend`, `highlight-line-trend`, `horizontal-trend-compare`, `horizontal-axis-line-trend`, `horizontal-axis-bar-compare`, `horizontal-axis-scatter-diagnostic`, `horizontal-spatial-map-diagnostic`, `paired-comparison-diagnostic`, `horizontal-ring-progress`, `horizontal-target-progress`, `horizontal-status-trend-compare`, `horizontal-grain-bar-switch`, `horizontal-period-summary-strip`, `horizontal-pp-assist-info`, `horizontal-warning-status-band`.
+- `kpiAxisLineEvidenceMode`: `basic-compare-line`, `filled-baseline-line`, `target-reference-line`, `phase-annotated-line`, `unit-axis-line`, `grain-switch-line`, `dual-comparison-line`, `threshold-band-line`. Use only with `kpiCardPattern: horizontal-axis-line-trend`.
+- `kpiAxisBarEvidenceMode`: `basic-horizontal-bar`, `period-comparison-bar`, `target-reference-bar`, `category-change-sidebar-bar`, `time-series-horizontal-bar`, `grain-switch-horizontal-bar`, `dual-series-horizontal-bar`, `threshold-warning-bar`. Use only with `kpiCardPattern: horizontal-axis-bar-compare`.
+- `kpiScatterEvidenceMode`: `correlation-trendline-scatter`, `mean-reference-scatter`, `target-crosshair-scatter`, `distribution-change-band-scatter`, `threshold-quadrant-scatter`, `dual-series-trendline-scatter`, `change-callout-scatter`, `category-quadrant-scatter`. Use only with `kpiCardPattern: horizontal-axis-scatter-diagnostic`.
+- `kpiMapEvidenceMode`: `choropleth-heat-map`, `graded-choropleth-map`, `bubble-target-gap-map`, `distribution-change-marker-map`, `column-symbol-map`, `annotated-interval-map`, `yoy-change-zone-map`, `point-category-summary-map`. Use only with `kpiCardPattern: horizontal-spatial-map-diagnostic`.
+- `kpiComparisonEvidenceMode`: `metric-yoy-vs`, `progress-mom-vs`, `target-gap-progress-vs`, `improvement-dot-matrix-vs`, `trend-yoy-vs`, `structure-breakdown-vs`, `percentage-ring-vs`, `trend-mom-vs`. Use only with `kpiCardPattern: paired-comparison-diagnostic`.
+- `kpiOverviewCardPattern`: `lead-metric-comparison-sparkline-overview`, `multi-metric-strip-progress-overview`, `domain-metric-cluster-progress-overview`. Use with `visualType: metric-card` when one wide card summarizes one business domain/topic with `2-5` visible metrics.
+- `kpiSingleIndicatorLayoutMode`: `dropdown-sparkline-progress`, `unit-toggle-ring-progress`, `dropdown-minibar-progress`, `grain-switch-minibar-progress`, `dropdown-area-sparkline-progress`, `scale-toggle-area-progress`, `dropdown-gauge-progress`. Use with `visualType: metric-card` when a peer grid of single-indicator cards needs one metric, one comparison, one mini evidence visual, and one target/progress footer.
+- `kpiJudgmentCardPattern`: `semantic-status-icon-card`, `progress-status-ring-card`, `health-score-ring-card`, `health-threshold-bullet-card`, `health-dimension-breakdown-card`, `rating-score-summary-card`, `rating-distribution-card`, `semicircle-gauge-target-card`. Use with `visualType: metric-card` when one card judges status, health, score, rating, risk, progress, or gauge state; bind status/score/range/threshold semantics, comparison strip fields, and footer evidence.
+- `kpiGoalExecutionCardPattern`: `attainment-ring-summary-card`, `attainment-gauge-deadline-card`, `attainment-linear-target-card`, `attainment-unit-progress-card`, `gap-gauge-deficit-card`, `gap-target-actual-compare-card`, `progress-plan-actual-card`, `milestone-timeline-card`. Use with `visualType: metric-card` when one card manages target attainment, target gap, plan-vs-actual progress, remaining work, deadlines, or milestones; bind actual/target/gap/progress/milestone fields, direction semantics, formula/denominator behavior, comparison strip, footer evidence, and exact values.
+- `kpiTimeSeriesCardPattern`: `trend-line-target-card`, `change-baseline-delta-card`, `yoy-mom-comparison-card`, `cycle-period-progress-card`, `volatility-stat-card`, `forecast-interval-card`. Use with `visualType: metric-card` when one card answers trend movement, named-baseline change, YoY/MoM comparison, cycle/period state, volatility/stability, or forecast uncertainty; bind ordered series, grain, latest period, baseline/cycle/volatility/forecast fields, direction semantics, footer evidence, and exact values.
+- `kpiComparisonAnalysisCardPattern`: `direct-value-compare-card`, `group-segment-compare-card`, `competitor-position-card`, `benchmark-position-card`, `variance-gap-card`. Use with `visualType: metric-card` when one card answers direct value comparison, group/segment comparison, competitor position, benchmark distance, or variance/gap diagnosis; bind comparable subject roles, shared metric/unit/grain, benchmark or variance fields, sort/visible-limit rules, footer evidence, and exact values.
+- `kpiComparisonAnalysisEvidenceMode`: `side-by-side-values`, `grouped-bars`, `stacked-distribution`, `multi-series-trend`, `market-share-donut`, `radar-profile`, `benchmark-ruler`, `variance-gauge`, `nps-score-scale`, `comparison-table`, `map-table-compare`. Use only with `kpiComparisonAnalysisCardPattern` and `kpiEvidenceBinding.comparisonAnalysis`.
 - `targetActualCardPattern`: `standard-summary-panel`, `emphasis-header-summary`, `soft-chip-summary`.
 - `targetActualTrendCardPattern`: `emphasis-wave-trend`, `standard-summary-trend`, `soft-chip-trend`.
 - `targetActualRadarCardPattern`: `emphasis-wave-radar`, `standard-action-radar`.
@@ -652,10 +1643,16 @@ Use these values unless an existing project explicitly defines a different local
 - `targetActualTablePattern`: `standard-audit-table`, `compact-audit-table`.
 - `targetActualPivotTablePattern`: `standard-hierarchy-pivot`, `share-matrix-pivot`, `tree-expand-pivot`.
 - `tableCardPattern`: `plain-detail-ledger-table`, `filtered-operational-status-table`, `grouped-header-summary-table`, `metric-matrix-table`, `s2-cross-pivot-table`, `fixed-column-scroll-table`, `grouped-subtotal-summary-table`, `tree-hierarchy-table`.
-- `rankingCardPattern`: `medal-horizontal-ranking`, `bar-progress-ranking`, `compact-list-ranking`.
+- `rankingCardPattern`: `basic-rank-list-card`, `trend-delta-rank-list-card`, `progress-bar-rank-list-card`, `podium-rank-card`, `yoy-microbar-rank-list-card`, `radar-comparison-rank-card`, `metric-summary-rank-card`, `time-switch-rank-card`, `share-donut-rank-card`, `map-distribution-rank-card`, `topn-bar-rank-card`, `topn-comparison-rank-card`, `topn-waterfall-strip-card`, `topn-sparkline-rank-list-card`, `topn-bubble-rank-card`, `topn-icon-card-grid`, `medal-horizontal-ranking`, `bar-progress-ranking`, `compact-list-ranking`.
+- `paretoCardPattern`: `pareto-basic-card`, `pareto-table-chart-card`, `pareto-dual-axis-card`, `pareto-cumulative-fill-card`, `pareto-stacked-share-card`, `pareto-bubble-card`, `pareto-zone-card`, `pareto-ring-list-card`.
+- `compositionShareCardPattern`: `basic-donut-share-card`, `donut-detail-share-card`, `percent-bar-share-card`, `multi-ring-hierarchy-share-card`, `share-trend-stack-card`, `share-ranking-topn-card`, `treemap-composition-card`, `share-metrics-summary-card`, `stacked-strip-composition-card`, `stacked-column-trend-composition-card`, `funnel-composition-card`, `bubble-composition-card`, `market-share-overview-card`, `market-share-concentration-card`, `share-distribution-interval-card`, `map-structure-card`, `sunburst-structure-card`. Use with `componentType: card`, `visualType: composition-card`, and `compositionShareEvidenceBinding`.
+- `decompositionAttributionCardPattern`: `formula-decomposition-card`, `funnel-decomposition-card`, `tree-decomposition-card`, `sankey-decomposition-card`, `driver-factor-decomposition-card`, `variance-waterfall-decomposition-card`, `combined-decomposition-card`, `multilevel-metric-decomposition-card`, `total-attribution-card`, `funnel-attribution-card`, `channel-attribution-donut-card`, `touchpoint-attribution-list-card`, `segment-attribution-card`, `feature-attribution-bar-card`, `time-attribution-waterfall-card`, `multidimensional-attribution-matrix-card`, `overall-contribution-card`, `contribution-waterfall-card`, `contribution-structure-card`, `contribution-comparison-card`, `contribution-trend-card`, `contribution-tree-card`, `key-contribution-topn-card`, `contribution-heatmap-card`, `progressive-hierarchy-decomposition-card`, `hierarchy-tree-decomposition-card`, `hierarchy-waterfall-card`, `indented-hierarchy-table-card`, `hierarchy-share-card`, `path-contribution-card`, `multilevel-comparison-hierarchy-card`, `target-attainment-hierarchy-attribution-card`. Use with `componentType: card`, `visualType: decomposition-card`, and `decompositionAttributionEvidenceBinding`.
+- `distributionAnalysisCardPattern`: `numeric-histogram-distribution-card`, `interval-donut-distribution-card`, `percentile-cdf-distribution-card`, `geographic-distribution-card`, `time-distribution-card`, `distribution-comparison-card`, `calendar-heatmap-distribution-card`, `multidimensional-population-distribution-card`, `interval-histogram-card`, `interval-share-donut-card`, `interval-boxplot-card`, `interval-comparison-card`, `interval-stacked-trend-card`, `cumulative-interval-card`, `interval-scatter-strip-card`, `interval-detail-table-card`, `univariate-density-curve-card`, `interval-density-curve-card`, `grouped-density-comparison-card`, `density-heatmap-card`, `kde-cumulative-density-card`, `bivariate-density-hexbin-card`, `quantile-band-density-card`, `density-overview-card`, `boxplot-kpi-summary-card`, `time-series-boxplot-card`, `grouped-boxplot-comparison-card`, `boxplot-overview-card`, `boxplot-side-summary-card`, `weekday-boxplot-card`, `anomaly-boxplot-card`, `boxplot-detail-table-card`. Use with `componentType: card`, `visualType: distribution-card`, and `distributionAnalysisEvidenceBinding`.
+- `anomalyAnalysisCardPattern`: `anomaly-overview-card`, `anomaly-trend-compare-card`, `anomaly-distribution-structure-card`, `anomaly-interval-threshold-card`, `anomaly-timeline-card`, `anomaly-ranking-top-card`, `anomaly-impact-assessment-card`, `anomaly-baseline-compare-card`, `anomaly-summary-table-card`, `anomaly-multi-metric-monitor-card`, `risk-matrix-card`, `risk-response-status-card`, `anomaly-relation-influence-card`, `anomaly-geographic-distribution-card`, `outlier-scatter-card`, `warning-progress-donut-card`. Use with `componentType: card`, `visualType: anomaly-card`, `analysisPerspective: anomalyRisk`, and `anomalyAnalysisEvidenceBinding`.
 - `basicChartCardPattern`: `single-series-bar-card`, `comparison-line-trend-card`, `area-trend-card`, `bar-line-combo-card`, `pie-composition-card`, `donut-composition-card`, `stacked-bar-composition-card`, `multi-metric-combo-card`, `filtered-bar-card`, `tooltip-line-trend-card`.
 - `specializedChartCardPattern`: `gauge-progress-card`, `choropleth-ranking-map-card`, `time-heatmap-card`, `candlestick-volume-card`, `boxplot-distribution-card`, `parallel-profile-card`, `bubble-opportunity-card`.
 - `flowHierarchyDiagramCardPattern`: `conversion-funnel-card`, `multi-stage-sankey-card`, `journey-stage-map-card`, `hierarchy-tree-card`, `hub-relation-network-card`, `sunburst-composition-card`, `treemap-composition-card`, `path-conversion-flow-card`.
+- `relationshipAnalysisCardPattern`: `relation-overview-hub-card`, `relation-strength-matrix-card`, `relation-flow-sankey-card`, `relation-community-network-card`, `relation-pair-compare-card`, `relation-trend-card`, `relation-hierarchy-tree-card`, `relation-bubble-quadrant-card`, `relation-factor-ranking-card`, `relation-evolution-snapshot-card`, `relation-bipartite-attribute-card`, `relation-detail-table-card`. Use with `analysisPerspective: relationshipInfluence` and the real renderer `visualType`.
 - `listStatusPattern`: `simple-info-list`, `progress-task-list`, `severity-alert-list`, `exception-record-list`, `status-chip-set`, `event-timeline`, `user-object-list`, `mixed-info-list`.
 - `overlayPanelPattern`: `right-filter-drawer`, `bottom-action-sheet`, `center-confirmation-modal`, `fullscreen-detail-modal`, `top-notification-bar`, `left-navigation-drawer`, `side-detail-drawer`, `large-detail-side-panel`.
 - `microDashboardCardPattern`: `sales-fresh-analysis-board`, `user-operations-purple-board`, `supply-chain-orange-monitoring-board`, `finance-blue-analysis-board`.
@@ -693,6 +1690,7 @@ Minimum columns:
 - Metric formulas and rollup logic.
 - Numeric display contracts for every visible metric-bearing field, including percent/rate scale and denominator-zero behavior.
 - `analysisInsightContract` when the component is an analysis/explanation/decision-support text summary, card, annotation, task, or state note.
+- `anomalyAnalysisEvidenceBinding` when `visualType` is `anomaly-card`, including severity/status, baseline or threshold, time/freshness, impact/object, exact-value/detail/action path, and validation cases.
 - `compositePanelContract` when `visualType` is `composite-panel` or multiple child components are intentionally combined into one component container.
 - Control semantics for each control that affects the component.
 - Component schema impact: whether the control changes metric names, component set, table headers, dimensions, formulas/口径, domain vocabulary, or only row scope.

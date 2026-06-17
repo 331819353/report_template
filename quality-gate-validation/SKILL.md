@@ -29,6 +29,7 @@ Primary shared gates:
 - `$haier-enterprise-app-ui-design-spec` when judging Haier/enterprise Web UI readiness, including report/dashboard pages that inherit company-level application UI rules.
 - `$metric-number-display-contract` when judging numeric unit, precision, rounding, percent, tooltip/export, or formatter ownership.
 - `$report-design-system-governance` relevant references when judging report/dashboard/BI/data-screen readiness.
+- `$report-design-system-governance` `references/12-modern-saas-bi-style-contract.md` when modern SaaS / BI Dashboard / UI Kit style is requested or claimed.
 
 ## Gate Types
 
@@ -48,6 +49,7 @@ Primary shared gates:
 | Numeric precision/display | Metric-bearing artifacts need consistent value type, units, scale, precision, rounding, null/zero behavior, and formatter ownership. |
 | Haier/app UI baseline | Haier/enterprise Web pages, including report/dashboard pages, need company UI baseline checks for tokens, base controls, states, brand/logo, and responsive behavior. |
 | Report UI baseline | Report/dashboard/analysis pages need report guideline checks. |
+| Modern BI style baseline | Requested modern SaaS / BI Dashboard / UI Kit pages need tokenized light surfaces, white-card UI Kit language, hierarchy, no component pileup, and lightweight chart proof. |
 
 ## Workflow
 
@@ -83,6 +85,7 @@ Primary shared gates:
 - Do not mark visual/layout/component contract work `ready` when contracts exist only in prose/config and lack matching DOM/CSS/renderer/browser evidence. Use `LAZY-CONTRACT-THEATER` or a domain `VIS-*`/`RPT-*` finding.
 - Do not let advisory wording hide a required constraint. If a `should`/`recommended`/`prefer`/`default` rule affects correctness, runtime fit, renderer ownership, data trust, filter/query/export/permission behavior, accessibility, or readiness evidence, it must be treated as `MUST/fail` or documented as `SHOULD/exception-required` with evidence.
 - Do not mark Haier/enterprise report or dashboard UI `ready` when report-specific checks pass but inherited Haier application UI baseline checks are missing or treated as optional.
+- Do not mark a requested modern SaaS / BI Dashboard / UI Kit page `ready` when the positive style contract is missing, the layout is a generic SaaS shell, components are piled up, charts are overweight, or hierarchy is flat.
 - Do not mark `ready` when governed report metrics lack numeric display contracts or show inconsistent units, decimals, percent scale, rounding, tooltip/export precision, null/zero/denominator-zero behavior, or formatter ownership across design/API/frontend/backend/export.
 - Do not use this skill to restate full domain rules; cite the loaded references and summarize the blocking evidence.
 - Load `shared-quality-gate-blockers.md` before final readiness decisions or when a finding can block delivery.

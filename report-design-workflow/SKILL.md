@@ -42,6 +42,7 @@ Default policy: load `$report-prototype-design-thinking` for the generic design-
 - Startup/deployment self-check: `references/02-self-check-startup-deployment.md`
 - Output quality and avoid list: `references/03-output-quality-and-avoid.md`
 - Display themes and pattern chain: `references/04-common-display-theme-pattern-chain.md`
+- Modern SaaS / BI Dashboard / UI Kit positive style contract: `$report-design-system-governance` `references/12-modern-saas-bi-style-contract.md` when that design language is requested.
 - Detailed prototype implementation gates: `references/05-prototype-implementation-gates.md`
 - Code-file ledger: `$code-change-ledger-management` before code edits.
 - Delivery pipeline handoff: `$report-delivery-pipeline-governance` when a prototype feeds technical solution, backend, frontend, testing, release, or retest work.
@@ -56,9 +57,9 @@ Default policy: load `$report-prototype-design-thinking` for the generic design-
 4. Before each non-trivial mode, template, visual-source, component, renderer, or source-code action, run the action reflection loop from `$quality-gate-validation` `references/preflight-understanding-gate.md`; revise or stop when the action fails hard constraints or design reasonableness.
 5. Load `$report-prototype-design-thinking` as the default generic thinking layer. Do not branch into 自助分析、指标看板、分析报告、or 明细报表 inside this workflow; those are separate workflow skills.
 6. Normalize rough requirements when needed.
-7. Choose one `displayTheme`, one primary report type, and a small reusable pattern-card set. Record rejected competing themes.
+7. Choose one `displayTheme`, one primary report type, one style baseline when requested, and a small reusable pattern-card set. Record rejected competing themes and rejected generic style directions.
 8. Run anti-AI and report-decision gates before layout, styling, or code.
-9. Use `$report-info-component-mapping` to produce answer atoms, component bundles, datasets, filters, interactions, binding matrix, and a filter/value semantics table.
+9. Use `$report-info-component-mapping` to produce analysis perspectives, answer atoms, component bundles, datasets, filters, interactions, binding matrix, and a filter/value semantics table.
 10. Decide `pageShellPath`: default `template`; use `custom` only for explicit custom/free design, exact restoration, existing shell preservation, or documented template limitation.
 11. If HTML/source is provided, classify any SVG/canvas/DOM chart marks as sample evidence, not standard-chart implementation. Standard charts must be rebuilt with ECharts/data-driven options unless an explicit custom-diagram exception is documented.
 12. Use `$report-visual-layout-design` for shell, navigation, filter surface, grid, block sizing, responsive plan, and page规范.
@@ -73,11 +74,12 @@ Default policy: load `$report-prototype-design-thinking` for the generic design-
 ## Required Output
 
 - Workflow mode, Preflight understanding matrix, input inventory, prototype design-thinking output, target user/scenario/decision/action, `displayTheme`, pattern cards, report type, and core question.
+- Style baseline decision when applicable: inherited source hierarchy, modern SaaS / BI Dashboard / UI Kit contract mapping, and unresolved `VIS-*` design-language findings.
 - Action reflection checkpoints for non-trivial mode/template/component/renderer/source-code decisions, especially when HTML/source samples are used.
 - Anti-laziness execution result: local/source evidence inspected, `LAZY-*` findings or explicit no-finding result, before/after proof for repairs, regression probe, and readiness impact.
 - Affected-surface to owning-skill routing, including chart/table/filter/component-placement/design-system skills when applicable.
 - Anti-AI and report-decision gate result.
-- Component/data/filter/control/interaction binding matrix.
+- Analysis perspective and component/data/filter/control/interaction binding matrix.
 - Filter/value semantics table with `detailValue`, `aggregateValue`, `emptyFilterValue`, display label, data-row role, query behavior, and primary-key eligibility.
 - Layout plan, selected template/custom reason, filter surface mapping, perspective-layer mapping, baseline inheritance decision, and implementation target path.
 - Files changed, code-ledger proof, verification commands, URL or blocker.
@@ -92,6 +94,7 @@ Default policy: load `$report-prototype-design-thinking` for the generic design-
 - Do not treat Haier UI and report design-system baselines as alternatives for Haier/enterprise report pages; inherit Haier application tokens/base controls and then apply report-specific rules.
 - Do not rely only on this top-level workflow when a chart, table, filter, component-placement, or reusable component standard is affected; route to the specific front-door skill before implementation or acceptance.
 - Do not implement before display theme, report type, binding matrix, layout, and template/custom shell decision exist.
+- Do not implement a requested modern SaaS / BI Dashboard / UI Kit page before the positive style contract is mapped to tokens, hierarchy, component count, and chart-lightness proof obligations.
 - Do not reuse one sentinel value such as `all` for detail rows, aggregate rows, and empty/no-filter state. "All detail rows", "aggregate row", and "empty filter value" must be declared as separate semantics before implementation.
 - Do not choose custom development when a bundled template can satisfy the request.
 - Template-native filters and shell slots must be reused unless template-level redesign is explicitly requested.

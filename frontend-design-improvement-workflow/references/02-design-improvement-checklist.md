@@ -5,7 +5,9 @@ Use this checklist after the route is selected.
 ## Page-Level Checks
 
 - Page shell, navigation, topbar, filter area, toolbar, and content grid have clear hierarchy.
+- When modern SaaS / BI Dashboard / UI Kit language is requested, page background, card surface, borders, radius, shadow, typography, and chart palette map to semantic tokens or inherited template tokens.
 - First viewport shows the most important decision content without crowding or empty decorative space.
+- First viewport has one clear primary answer/action and bounded supporting evidence; equal-weight card grids or chart variety do not carry the design.
 - Blocks use stable dimensions, legal grid spans, and responsive fallbacks.
 - Text, controls, legends, table headers, and chart labels do not overlap or clip.
 - Fixed-height summary/ranking/cards/KPI/composite blocks prove fit with height budget and DOM overflow assertions, not only screenshots.
@@ -22,6 +24,7 @@ Use this checklist after the route is selected.
 - Shape-sensitive charts preserve aspect ratio and use the appropriate engine/library.
 - ECharts chart checks inspect option/config details, not only chart existence. Combo charts with top-centered legends prove legend centering, `grid.top` reserve, and legend/axis-name spacing.
 - Dense charts and tables have tooltip/detail/table/fullscreen/scroll strategies instead of shrinking until unreadable.
+- Charts are lightweight: each chart has a task reason, restrained grid/axis/legend/label treatment, exact-value path, and no extra chart family added only for visual richness.
 
 ## Runtime Checks
 

@@ -60,7 +60,7 @@ Deliver:
 - Public URL or local preview URL.
 - Screenshot or browser QA when applicable.
 
-Do not treat the word "report" as a single-page constraint. A report may be a one-page summary, a multi-chapter report suite, or a big-screen cockpit. Choose the template by content volume, chapter/view count, interaction density, and display scenario. Use the bundled template assets under `report-prototype-template-management/assets/templates/`: `topbar-light-scroll-dashboard-template` or `topbar-dark-scroll-dashboard-template` for compact focused reports, `left-nav-analytics-workbench-template` for multi-chapter analytics workbenches, and `frozen-title-sci-fi-cockpit-template` for fixed 1920x1080 cockpit screens. Topbar and left-nav templates may exceed 1080px and scroll vertically. Only select a template with `nav[]` when the content can be redesigned into multiple substantial nav pages; never use a navigation template while populating only the homepage. All bundled implementation paths use `TypeScript + Vue 3 + Vite + Element Plus + ECharts` as the base stack; add AntV S2 dependencies only when a generated component actually needs S2.
+Do not treat the word "report" as a single-page constraint. A report may be a one-page summary, a multi-chapter report suite, or a big-screen cockpit. Choose the template by content volume, chapter/view count, interaction density, and display scenario. Use the bundled template assets under `report-prototype-template-management/assets/templates/`: `topbar-light-scroll-dashboard-template` for compact focused reports, `left-nav-analytics-workbench-template` for multi-chapter analytics workbenches, and `frozen-title-sci-fi-cockpit-template` for fixed 1920x1080 cockpit screens. Topbar and left-nav templates may exceed 1080px and scroll vertically. Only select a template with `nav[]` when the content can be redesigned into multiple substantial nav pages; never use a navigation template while populating only the homepage. All bundled implementation paths use `TypeScript + Vue 3 + Vite + Element Plus + ECharts` as the base stack; add AntV S2 dependencies only when a generated component actually needs S2.
 
 ### 4. Review And Repair Mode
 
@@ -198,7 +198,7 @@ Extract before designing:
 
 - Page shell: title, logo, navigation, filters, toolbar actions, tabs, sidebars, drawers, modals, footer, and visible states.
 - Content structure: first-viewport answer, section order, card/table/chart grouping, hierarchy, and repeated blocks.
-- Component inventory: KPI cards, Analysis & Insight components, text summaries, Composite Panels, charts, tables, lists, task cards, alerts, comparison panels, controls, and legends.
+- Component inventory: KPI cards including overview, judgment, goal execution, time-series, comparison analysis, horizontal/diagnostic variants, ranking/Top N/Pareto cards, composition/share/structure/market-share cards, decomposition/attribution/contribution/hierarchy cards, distribution/interval/density/quantile/boxplot cards, Analysis & Insight components, text summaries, Composite Panels, charts, tables, lists, task cards, alerts, comparison panels, controls, and legends.
 - Data intent: visible metric names, units, comparison baselines, dimensions, row grain, chart axes, table columns, status labels, and totals.
 - Interaction clues: clickable controls, active filters, selected tabs, highlighted marks, buttons, download/fullscreen/refresh/share actions, and disabled states.
 - Visual style: palette, typography scale, spacing, radius, shadow, density, contrast, and any brand/logo rules.
@@ -529,11 +529,10 @@ Default technical architecture:
 
 Template choice:
 
-- The four bundled templates now live under `report-prototype-template-management/assets/templates/`; use `topbar-light-scroll-dashboard-template`, `topbar-dark-scroll-dashboard-template`, `left-nav-analytics-workbench-template`, and `frozen-title-sci-fi-cockpit-template` as template asset ids, not as separate skills.
+- The three bundled templates now live under `report-prototype-template-management/assets/templates/`; use `topbar-light-scroll-dashboard-template`, `left-nav-analytics-workbench-template`, and `frozen-title-sci-fi-cockpit-template` as template asset ids, not as separate skills.
 
 - Report is a content form, not a template decision. A "报告/报表/复盘/诊断" request can use any template after judging content volume and usage.
 - Use `topbar-light-scroll-dashboard-template` for a compact focused office-readable report and detail/query-heavy handoff pages.
-- Use `topbar-dark-scroll-dashboard-template` for a compact focused dark Haier-branded overview or diagnosis cockpit that still scrolls.
 - Use `left-nav-analytics-workbench-template` for enterprise analytics reports, multi-chapter report suites, or dense workbenches with multiple pages/modules, and populate every `nav[]` page.
 - Use `frozen-title-sci-fi-cockpit-template` for fixed 1920x1080 big-screen cockpit, command-center, exhibition, or leadership presentation screens where full-screen visual impact matters more than daily office efficiency, and populate every retained `nav[]` page.
 - If the existing project already has a framework, follow the existing project patterns instead of forcing a template.
@@ -542,12 +541,12 @@ Template selection rules:
 
 | Situation | Choose | Why |
 | --- | --- | --- |
-| Primary type is analysis/diagnostic and the user does not explicitly ask for sidebar, multi-page suite, workbench, big screen, or fixed 1920x1080 cockpit | `topbar-light-scroll-dashboard-template` or `topbar-dark-scroll-dashboard-template` | Analysis pages should default to one focused reading flow; choose light for office readability and dark for cockpit atmosphere. |
-| Compact report: one decision question, usually 1-3 sections, roughly 4-12 components, no persistent page navigation, and users need a direct first-screen answer | `topbar-light-scroll-dashboard-template` or `topbar-dark-scroll-dashboard-template` | A topbar shell keeps the frame light and lets one 8*N content grid carry the report. |
+| Primary type is analysis/diagnostic and the user does not explicitly ask for sidebar, multi-page suite, workbench, big screen, or fixed 1920x1080 cockpit | `topbar-light-scroll-dashboard-template` | Analysis pages should default to one focused reading flow; use the light topbar template for office readability and handoff clarity. |
+| Compact report: one decision question, usually 1-3 sections, roughly 4-12 components, no persistent page navigation, and users need a direct first-screen answer | `topbar-light-scroll-dashboard-template` | A topbar shell keeps the frame light and lets one 8*N content grid carry the report. |
 | Large report: one report theme but multiple chapters, more than 3-4 sections, many components/tables, or separate views such as 总览 / 诊断 / 明细 / 任务 / 核对 | `left-nav-analytics-workbench-template` | Sidebar navigation can represent report chapters as well as different report modules, but each nav page must be substantial. |
 | Daily operational analysis, dense tables, repeated filtering, saved workbench behavior, or several related reports in one app | `left-nav-analytics-workbench-template` | It is optimized for enterprise work rather than showpiece display, provided the workbench pages are all populated. |
 | Large screen, monitoring wall, command center, exhibition, leadership cockpit, or presentation scenario | `frozen-title-sci-fi-cockpit-template` | It is optimized for fixed 1920x1080 full-screen viewing and high visual impact; retained nav pages must all be substantial. |
-| The user explicitly asks for 单页 / 顶部栏 / 无侧边栏 | topbar template | Respect the requested shell unless existing code forces another pattern. |
+| The user explicitly asks for 单页 / 顶部栏 / 无侧边栏 | `topbar-light-scroll-dashboard-template` | Respect the requested shell unless existing code forces another pattern. |
 | The user explicitly asks for 大屏 / 驾驶舱 / 指挥中心 / 科技风 | `frozen-title-sci-fi-cockpit-template` | These terms indicate presentation or monitoring display. |
 
 Selection priority:
